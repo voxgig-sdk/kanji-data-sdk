@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "reading": {
+      "READING00": {},
+      "READING01": {},
+      "READING02": {}
+    }
+  },
+  "new": {
+    "reading": {
+      "reading_ref01": {}
+    }
+  }
+}

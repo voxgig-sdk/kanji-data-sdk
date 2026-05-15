@@ -1,0 +1,335 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Kanji Data API",
+    "description": "This API provides JSON endpoints for accessing an extensive kanji dictionary with information on over 13,000 kanji. Users can retrieve data such as readings, meanings, and stroke counts to facilitate learning and application of kanji in various projects.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://kanjiapi.dev/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://kanjiapi.dev/api/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/kanji/{character}": {
+      "get": {
+        "summary": "Get kanji information",
+        "description": "Retrieves detailed information about a specific kanji character including readings, meanings, stroke count, and other related data.",
+        "operationId": "getKanji",
+        "tags": [
+          "Kanji"
+        ],
+        "parameters": [
+          {
+            "name": "character",
+            "in": "path",
+            "required": true,
+            "description": "The kanji character to retrieve information for",
+            "schema": {
+              "type": "string",
+              "example": "猫"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with kanji data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KanjiData"
+                },
+                "example": {
+                  "kanji": "猫",
+                  "grade": 8,
+                  "stroke_count": 11,
+                  "meanings": [
+                    "cat"
+                  ],
+                  "kun_readings": [
+                    "ねこ"
+                  ],
+                  "on_readings": [
+                    "ビョウ"
+                  ],
+                  "name_readings": [],
+                  "jlpt": 2,
+                  "unicode": "732b",
+                  "heisig_en": "cat"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Kanji character not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Kanji not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reading/{reading}": {
+      "get": {
+        "summary": "Get kanji by reading",
+        "description": "Retrieves a list of kanji characters that match the specified reading (hiragana or katakana).",
+        "operationId": "getKanjiByReading",
+        "tags": [
+          "Reading"
+        ],
+        "parameters": [
+          {
+            "name": "reading",
+            "in": "path",
+            "required": true,
+            "description": "The reading in hiragana or katakana to search for",
+            "schema": {
+              "type": "string",
+              "example": "ねこ"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of kanji",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  "猫"
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No kanji found for the specified reading",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/words/{character}": {
+      "get": {
+        "summary": "Get words containing kanji",
+        "description": "Retrieves a list of Japanese words that contain the specified kanji character.",
+        "operationId": "getWordsByKanji",
+        "tags": [
+          "Words"
+        ],
+        "parameters": [
+          {
+            "name": "character",
+            "in": "path",
+            "required": true,
+            "description": "The kanji character to find words for",
+            "schema": {
+              "type": "string",
+              "example": "猫"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of words",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Word"
+                  }
+                },
+                "example": [
+                  {
+                    "meanings": [
+                      {
+                        "glosses": [
+                          "cat"
+                        ]
+                      }
+                    ],
+                    "variants": [
+                      {
+                        "written": "猫",
+                        "pronounced": "ねこ",
+                        "priorities": [
+                          "ichi1",
+                          "news1",
+                          "nf09"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No words found for the specified kanji",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "KanjiData": {
+        "type": "object",
+        "properties": {
+          "kanji": {
+            "type": "string",
+            "description": "The kanji character"
+          },
+          "grade": {
+            "type": "integer",
+            "description": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
+            "nullable": true
+          },
+          "stroke_count": {
+            "type": "integer",
+            "description": "Number of strokes in the kanji"
+          },
+          "meanings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "English meanings of the kanji"
+          },
+          "kun_readings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Kun (Japanese) readings in hiragana"
+          },
+          "on_readings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "On (Chinese-derived) readings in katakana"
+          },
+          "name_readings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Readings used in names"
+          },
+          "jlpt": {
+            "type": "integer",
+            "description": "JLPT (Japanese Language Proficiency Test) level (1-5)",
+            "nullable": true
+          },
+          "unicode": {
+            "type": "string",
+            "description": "Unicode codepoint in hexadecimal"
+          },
+          "heisig_en": {
+            "type": "string",
+            "description": "Heisig keyword in English",
+            "nullable": true
+          }
+        }
+      },
+      "Word": {
+        "type": "object",
+        "properties": {
+          "meanings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "glosses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "English translations/meanings"
+                }
+              }
+            },
+            "description": "Meanings of the word"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "written": {
+                  "type": "string",
+                  "description": "Written form of the word"
+                },
+                "pronounced": {
+                  "type": "string",
+                  "description": "Pronunciation in hiragana/katakana"
+                },
+                "priorities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Priority/frequency indicators"
+                }
+              }
+            },
+            "description": "Different written and pronunciation variants"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Kanji",
+      "description": "Operations related to kanji character data"
+    },
+    {
+      "name": "Reading",
+      "description": "Operations for searching kanji by reading"
+    },
+    {
+      "name": "Words",
+      "description": "Operations for retrieving words containing specific kanji"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 3
+  metrics: count: method: 3
+
+  entity: kanji: {
+    path: "/kanji/{character}": {
+      rename: param: "character": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.kanji`")|top
+    }
+  }
+
+  entity: reading: {
+    path: "/reading/{reading}": {
+      rename: param: "reading": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: word: {
+    path: "/words/{character}": {
+      rename: param: "character": *"id"
+      op: load: method: *GET
+    }
+  }
+
+}

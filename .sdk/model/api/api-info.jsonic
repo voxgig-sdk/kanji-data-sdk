@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://kanjiapi.dev/"
+      }
+      description: "This API provides JSON endpoints for accessing an extensive kanji dictionary with information on over 13,000 kanji. Users can retrieve data such as readings, meanings, and stroke counts to facilitate learning and application of kanji in various projects."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://kanjiapi.dev/api/v1"
+        }
+      ]
+      title: "Kanji Data API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

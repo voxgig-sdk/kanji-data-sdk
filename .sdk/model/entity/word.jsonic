@@ -1,0 +1,65 @@
+# Entity: word
+
+main: kit: entity: word: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "meaning"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "variant"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "word"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "猫"
+                kind: "param"
+                name: "id"
+                orig: "character"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/words/{character}"
+          parts: [
+            "words"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              character: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

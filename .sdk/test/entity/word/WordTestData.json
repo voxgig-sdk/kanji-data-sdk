@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "word": {
+      "WORD00": {
+        "meaning": [],
+        "variant": []
+      },
+      "WORD01": {
+        "meaning": [],
+        "variant": []
+      },
+      "WORD02": {
+        "meaning": [],
+        "variant": []
+      }
+    }
+  },
+  "new": {
+    "word": {
+      "word_ref01": {
+        "meaning": [],
+        "variant": []
+      }
+    }
+  }
+}

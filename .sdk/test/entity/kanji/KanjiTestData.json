@@ -1,0 +1,58 @@
+{
+  "existing": {
+    "kanji": {
+      "KANJI00": {
+        "grade": "s64",
+        "heisig_en": "s65",
+        "jlpt": "s66",
+        "kanji": "s67",
+        "kun_reading": [],
+        "meaning": [],
+        "name_reading": [],
+        "on_reading": [],
+        "stroke_count": "s6c",
+        "unicode": "s6d"
+      },
+      "KANJI01": {
+        "grade": "sc8",
+        "heisig_en": "sc9",
+        "jlpt": "sca",
+        "kanji": "scb",
+        "kun_reading": [],
+        "meaning": [],
+        "name_reading": [],
+        "on_reading": [],
+        "stroke_count": "sd0",
+        "unicode": "sd1"
+      },
+      "KANJI02": {
+        "grade": "s12c",
+        "heisig_en": "s12d",
+        "jlpt": "s12e",
+        "kanji": "s12f",
+        "kun_reading": [],
+        "meaning": [],
+        "name_reading": [],
+        "on_reading": [],
+        "stroke_count": "s134",
+        "unicode": "s135"
+      }
+    }
+  },
+  "new": {
+    "kanji": {
+      "kanji_ref01": {
+        "grade": "s190",
+        "heisig_en": "s191",
+        "jlpt": "s192",
+        "kanji": "s193",
+        "kun_reading": [],
+        "meaning": [],
+        "name_reading": [],
+        "on_reading": [],
+        "stroke_count": "s198",
+        "unicode": "s199"
+      }
+    }
+  }
+}

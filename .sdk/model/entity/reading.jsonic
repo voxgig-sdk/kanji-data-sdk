@@ -1,0 +1,52 @@
+# Entity: reading
+
+main: kit: entity: reading: {
+
+  alias: field: {}
+
+  name: "reading"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "ねこ"
+                kind: "param"
+                name: "id"
+                orig: "reading"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/reading/{reading}"
+          parts: [
+            "reading"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              reading: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

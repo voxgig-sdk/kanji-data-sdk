@@ -1,0 +1,105 @@
+# Entity: kanji
+
+main: kit: entity: kanji: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "grade"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "heisig_en"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "jlpt"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "kanji"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "kun_reading"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "meaning"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name_reading"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "on_reading"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "stroke_count"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "unicode"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "kanji"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "猫"
+                kind: "param"
+                name: "id"
+                orig: "character"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/kanji/{character}"
+          parts: [
+            "kanji"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              character: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
