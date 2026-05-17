@@ -19,7 +19,7 @@ class KanjiDataConfig
         ],
             ],
             "options" => [
-                "base" => "https://kanjiapi.dev/api/v1",
+                "base" => "https://kanjiapi.dev/v1",
                 "auth" => [
                     "prefix" => "Bearer",
                 ],

@@ -12,7 +12,7 @@
         "servers": [
           {
             "description": "Production server",
-            "url": "https://kanjiapi.dev/api/v1"
+            "url": "https://kanjiapi.dev/v1"
           }
         ],
         "title": "Kanji Data API",

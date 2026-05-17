@@ -13,7 +13,7 @@ func MakeConfig() map[string]any {
 			},
 		},
 		"options": map[string]any{
-			"base": "https://kanjiapi.dev/api/v1",
+			"base": "https://kanjiapi.dev/v1",
 			"auth": map[string]any{
 				"prefix": "Bearer",
 			},
