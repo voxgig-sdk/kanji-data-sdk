@@ -1,9 +1,15 @@
 {
   "existing": {
     "reading": {
-      "READING00": {},
-      "READING01": {},
-      "READING02": {}
+      "READING00": {
+        "id": "READING00"
+      },
+      "READING01": {
+        "id": "READING01"
+      },
+      "READING02": {
+        "id": "READING02"
+      }
     }
   },
   "new": {

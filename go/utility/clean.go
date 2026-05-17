@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/kanji-data-sdk/core"
+import "github.com/voxgig-sdk/kanji-data-sdk/go/core"
 
 func cleanUtil(ctx *core.Context, val any) any {
 	return val

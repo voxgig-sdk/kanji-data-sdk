@@ -11,7 +11,8 @@
         "name_reading": [],
         "on_reading": [],
         "stroke_count": "s6c",
-        "unicode": "s6d"
+        "unicode": "s6d",
+        "id": "KANJI00"
       },
       "KANJI01": {
         "grade": "sc8",
@@ -23,7 +24,8 @@
         "name_reading": [],
         "on_reading": [],
         "stroke_count": "sd0",
-        "unicode": "sd1"
+        "unicode": "sd1",
+        "id": "KANJI01"
       },
       "KANJI02": {
         "grade": "s12c",
@@ -35,7 +37,8 @@
         "name_reading": [],
         "on_reading": [],
         "stroke_count": "s134",
-        "unicode": "s135"
+        "unicode": "s135",
+        "id": "KANJI02"
       }
     }
   },

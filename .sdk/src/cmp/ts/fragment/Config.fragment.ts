@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://kanjiapi.dev/api/v1',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 

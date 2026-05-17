@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/kanji-data-sdk"
-	"github.com/voxgig-sdk/kanji-data-sdk/core"
+	sdk "github.com/voxgig-sdk/kanji-data-sdk/go"
+	"github.com/voxgig-sdk/kanji-data-sdk/go/core"
 )
 
 func TestWordDirect(t *testing.T) {

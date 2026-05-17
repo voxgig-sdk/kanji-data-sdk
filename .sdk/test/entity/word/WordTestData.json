@@ -3,15 +3,18 @@
     "word": {
       "WORD00": {
         "meaning": [],
-        "variant": []
+        "variant": [],
+        "id": "WORD00"
       },
       "WORD01": {
         "meaning": [],
-        "variant": []
+        "variant": [],
+        "id": "WORD01"
       },
       "WORD02": {
         "meaning": [],
-        "variant": []
+        "variant": [],
+        "id": "WORD02"
       }
     }
   },

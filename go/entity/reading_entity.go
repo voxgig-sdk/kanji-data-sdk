@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/kanji-data-sdk/core"
+	"github.com/voxgig-sdk/kanji-data-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/kanji-data-sdk/go/utility/struct"
 )
 
 type ReadingEntity struct {

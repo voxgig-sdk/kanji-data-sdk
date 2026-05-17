@@ -1,10 +1,10 @@
 package voxgigkanjidatasdk
 
 import (
-	"github.com/voxgig-sdk/kanji-data-sdk/core"
-	"github.com/voxgig-sdk/kanji-data-sdk/entity"
-	"github.com/voxgig-sdk/kanji-data-sdk/feature"
-	_ "github.com/voxgig-sdk/kanji-data-sdk/utility"
+	"github.com/voxgig-sdk/kanji-data-sdk/go/core"
+	"github.com/voxgig-sdk/kanji-data-sdk/go/entity"
+	"github.com/voxgig-sdk/kanji-data-sdk/go/feature"
+	_ "github.com/voxgig-sdk/kanji-data-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

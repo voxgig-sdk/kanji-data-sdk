@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/kanji-data-sdk/core"
+	"github.com/voxgig-sdk/kanji-data-sdk/go/core"
 )
 
 type BaseFeature struct {
