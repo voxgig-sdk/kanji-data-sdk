@@ -26,9 +26,7 @@ loading a specific record.
 ```lua
 local sdk = require("kanji-data_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("KANJI-DATA_APIKEY"),
-})
+local client = sdk.new({})
 ```
 
 ### 3. Load a kanji
@@ -118,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 KANJI-DATA_TEST_LIVE=TRUE
-KANJI-DATA_APIKEY=<your-key>
 ```
 
 Then run:
@@ -141,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

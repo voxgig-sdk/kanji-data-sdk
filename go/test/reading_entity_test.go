@@ -117,7 +117,6 @@ func readingBasicSetup(extra map[string]any) *entityTestSetup {
 		"KANJIDATA_TEST_READING_ENTID": idmap,
 		"KANJIDATA_TEST_LIVE":      "FALSE",
 		"KANJIDATA_TEST_EXPLAIN":   "FALSE",
-		"KANJIDATA_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["KANJIDATA_TEST_READING_ENTID"])
@@ -128,7 +127,6 @@ func readingBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["KANJIDATA_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["KANJIDATA_APIKEY"],
 			},
 			extra,
 		})

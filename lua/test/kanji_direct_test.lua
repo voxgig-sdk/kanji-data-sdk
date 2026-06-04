@@ -70,14 +70,12 @@ function kanji_direct_setup(mockres)
   local env = runner.env_override({
     ["KANJIDATA_TEST_KANJI_ENTID"] = {},
     ["KANJIDATA_TEST_LIVE"] = "FALSE",
-    ["KANJIDATA_APIKEY"] = "NONE",
   })
 
   local live = env["KANJIDATA_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["KANJIDATA_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

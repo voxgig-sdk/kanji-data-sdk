@@ -82,7 +82,6 @@ def reading_basic_setup(extra)
     "KANJIDATA_TEST_READING_ENTID" => idmap,
     "KANJIDATA_TEST_LIVE" => "FALSE",
     "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-    "KANJIDATA_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +93,6 @@ def reading_basic_setup(extra)
   if env["KANJIDATA_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["KANJIDATA_APIKEY"],
       },
       extra || {},
     ])
