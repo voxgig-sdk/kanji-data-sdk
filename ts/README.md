@@ -10,7 +10,7 @@ The TypeScript SDK for the KanjiData API — a type-safe, entity-oriented client
 
 ## Install
 ```bash
-npm install kanji-data
+npm install @voxgig-sdk/kanji-data
 ```
 ## Tutorial: your first API call
 

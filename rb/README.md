@@ -10,13 +10,13 @@ The Ruby SDK for the KanjiData API — an entity-oriented client using idiomatic
 
 ## Install
 ```bash
-gem install kanji-data-sdk
+gem install voxgig-sdk-kanji-data
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "kanji-data-sdk"
+gem "voxgig-sdk-kanji-data"
 ```
 
 Then run:

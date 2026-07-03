@@ -10,7 +10,7 @@ The Lua SDK for the KanjiData API — an entity-oriented client using Lua conven
 
 ## Install
 ```bash
-luarocks install kanji-data-sdk
+luarocks install voxgig-sdk-kanji-data
 ```
 
 If the module is not yet published, add the source directory to

@@ -10,7 +10,7 @@ The PHP SDK for the KanjiData API — an entity-oriented client using PHP conven
 
 ## Install
 ```bash
-composer require voxgig/kanji-data-sdk
+composer require voxgig-sdk/kanji-data
 ```
 
 

@@ -10,7 +10,7 @@ The Python SDK for the KanjiData API — an entity-oriented client following Pyt
 
 ## Install
 ```bash
-pip install kanji-data-sdk
+pip install voxgig-sdk-kanji-data
 ```
 
 Or install from source:
