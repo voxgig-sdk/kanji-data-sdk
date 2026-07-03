@@ -91,6 +91,7 @@ def _word_basic_setup(extra):
         "KANJIDATA_TEST_WORD_ENTID": idmap,
         "KANJIDATA_TEST_LIVE": "FALSE",
         "KANJIDATA_TEST_EXPLAIN": "FALSE",
+        "KANJIDATA_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _word_basic_setup(extra):
     if env.get("KANJIDATA_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("KANJIDATA_APIKEY"),
             },
             extra or {},
         ])

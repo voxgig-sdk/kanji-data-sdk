@@ -1,20 +1,8 @@
 # KanjiData SDK
 
-Look up readings, meanings, and stroke counts for 13,000+ Japanese kanji over a simple JSON API
+Kanji Data API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Kanji Data API
-
-[KanjiAPI](https://kanjiapi.dev/) exposes Japanese kanji data as a modern JSON API. The service describes itself as "Kanji data, accessible as a modern JSON API" and covers over 13,000 kanji characters.
-
-What you get from the API:
-
-- Per-character kanji lookups via `https://kanjiapi.dev/v1/kanji/{character}`
-- Reading data and word entries grouped under the `/v1` namespace
-- Common fields such as readings (on/kun), English meanings, and stroke counts
-
-The API is served over HTTPS with CORS enabled, and the public catalogue listing reports no authentication or documented rate limits. Endpoints not surfaced in the fetched pages are intentionally omitted here.
 
 ## Try it
 
@@ -48,27 +36,31 @@ gem install kanji-data-sdk
 luarocks install kanji-data-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { KanjiDataSDK } from 'kanji-data'
 
-const client = new KanjiDataSDK({})
+const client = new KanjiDataSDK({
+  apikey: process.env.KANJI-DATA_APIKEY,
+})
 
+// Load kanji data
+const kanji = await client.Kanji().load({})
+console.log(kanji.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -98,9 +90,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Kanji** | A single Japanese kanji character resource, fetched per-character at `https://kanjiapi.dev/v1/kanji/{character}` and typically including readings, meanings, and stroke count. | `/kanji/{character}` |
-| **Reading** | Reading-centric lookups (on'yomi or kun'yomi) grouped under the `/v1` namespace of the API. | `/reading/{reading}` |
-| **Word** | Japanese word entries associated with kanji, served from the `/v1` namespace of the API. | `/words/{character}` |
+| **Kanji** |  | `/kanji/{character}` |
+| **Reading** |  | `/reading/{reading}` |
+| **Word** |  | `/words/{character}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -110,15 +102,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from kanjidata_sdk import KanjiDataSDK
 
-client = KanjiDataSDK({})
+client = KanjiDataSDK({
+    "apikey": os.environ.get("KANJI-DATA_APIKEY"),
+})
 
 
 # Load a specific kanji
-kanji, err = client.Kanji(None).load(
-    {"id": "example_id"}, None
-)
+kanji, err = client.Kanji().load({"id": "example_id"})
+print(kanji)
 ```
 
 ### PHP
@@ -127,13 +121,14 @@ kanji, err = client.Kanji(None).load(
 <?php
 require_once 'kanjidata_sdk.php';
 
-$client = new KanjiDataSDK([]);
+$client = new KanjiDataSDK([
+    "apikey" => getenv("KANJI-DATA_APIKEY"),
+]);
 
 
 // Load a specific kanji
-[$kanji, $err] = $client->Kanji(null)->load(
-    ["id" => "example_id"], null
-);
+[$kanji, $err] = $client->Kanji()->load(["id" => "example_id"]);
+print_r($kanji);
 ```
 
 ### Golang
@@ -141,8 +136,13 @@ $client = new KanjiDataSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/kanji-data-sdk/go"
 
-client := sdk.NewKanjiDataSDK(map[string]any{})
+client := sdk.NewKanjiDataSDK(map[string]any{
+    "apikey": os.Getenv("KANJI-DATA_APIKEY"),
+})
 
+// Load kanji data
+kanji, err := client.Kanji(nil).Load(map[string]any{}, nil)
+fmt.Println(kanji)
 ```
 
 ### Ruby
@@ -150,13 +150,14 @@ client := sdk.NewKanjiDataSDK(map[string]any{})
 ```ruby
 require_relative "KanjiData_sdk"
 
-client = KanjiDataSDK.new({})
+client = KanjiDataSDK.new({
+  "apikey" => ENV["KANJI-DATA_APIKEY"],
+})
 
 
 # Load a specific kanji
-kanji, err = client.Kanji(nil).load(
-  { "id" => "example_id" }, nil
-)
+kanji, err = client.Kanji().load({ "id" => "example_id" })
+puts kanji
 ```
 
 ### Lua
@@ -164,13 +165,14 @@ kanji, err = client.Kanji(nil).load(
 ```lua
 local sdk = require("kanji-data_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("KANJI-DATA_APIKEY"),
+})
 
 
 -- Load a specific kanji
-local kanji, err = client:Kanji(nil):load(
-  { id = "example_id" }, nil
-)
+local kanji, err = client:Kanji():load({ id = "example_id" })
+print(kanji)
 ```
 
 ## Unit testing in offline mode
@@ -189,25 +191,21 @@ const result = await client.Kanji().load({ id: 'test01' })
 ### Python
 
 ```python
-client = KanjiDataSDK.test(None, None)
-result, err = client.Kanji(None).load(
-    {"id": "test01"}, None
-)
+client = KanjiDataSDK.test()
+result, err = client.Kanji().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = KanjiDataSDK::test(null, null);
-[$result, $err] = $client->Kanji(null)->load(
-    ["id" => "test01"], null
-);
+$client = KanjiDataSDK::test();
+[$result, $err] = $client->Kanji()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Kanji(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -216,19 +214,15 @@ result, err := client.Kanji(nil).Load(
 ### Ruby
 
 ```ruby
-client = KanjiDataSDK.test(nil, nil)
-result, err = client.Kanji(nil).load(
-  { "id" => "test01" }, nil
-)
+client = KanjiDataSDK.test
+result, err = client.Kanji().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Kanji(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Kanji():load({ id = "test01" })
 ```
 
 ## How it works
@@ -332,10 +326,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Kanji Data API
-
-- Upstream: [https://kanjiapi.dev/](https://kanjiapi.dev/)
 
 ---
 

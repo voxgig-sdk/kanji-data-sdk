@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -117,7 +117,7 @@ local kanji = client:Kanji(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Kanji(nil):load({ id = "kanji_id" }, nil)
+local result, err = client:Kanji():load({ id = "kanji_id" })
 ```
 
 ### Common Methods
@@ -163,7 +163,7 @@ local reading = client:Reading(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Reading(nil):load({ id = "reading_id" }, nil)
+local result, err = client:Reading():load({ id = "reading_id" })
 ```
 
 ### Common Methods
@@ -216,7 +216,7 @@ local word = client:Word(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Word(nil):load({ id = "word_id" }, nil)
+local result, err = client:Word():load({ id = "word_id" })
 ```
 
 ### Common Methods

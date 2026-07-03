@@ -75,12 +75,14 @@ function kanji_direct_setup($mockres)
     $env = Runner::env_override([
         "KANJIDATA_TEST_KANJI_ENTID" => [],
         "KANJIDATA_TEST_LIVE" => "FALSE",
+        "KANJIDATA_APIKEY" => "NONE",
     ]);
 
     $live = $env["KANJIDATA_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["KANJIDATA_APIKEY"],
         ];
         $client = new KanjiDataSDK($merged_opts);
         return [

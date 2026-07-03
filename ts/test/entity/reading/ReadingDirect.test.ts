@@ -79,12 +79,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'KANJIDATA_TEST_READING_ENTID': {},
     'KANJIDATA_TEST_LIVE': 'FALSE',
+    'KANJIDATA_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.KANJIDATA_TEST_LIVE
 
   if (live) {
     const client = new KanjiDataSDK({
+      apikey: env.KANJIDATA_APIKEY,
     })
 
     let idmap: any = env['KANJIDATA_TEST_READING_ENTID']

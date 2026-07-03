@@ -66,12 +66,14 @@ def _kanji_direct_setup(mockres):
     env = runner.env_override({
         "KANJIDATA_TEST_KANJI_ENTID": {},
         "KANJIDATA_TEST_LIVE": "FALSE",
+        "KANJIDATA_APIKEY": "NONE",
     })
 
     live = env.get("KANJIDATA_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("KANJIDATA_APIKEY"),
         }
         client = KanjiDataSDK(merged_opts)
         return {

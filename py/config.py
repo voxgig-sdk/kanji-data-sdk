@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://kanjiapi.dev/v1",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -28,92 +31,94 @@ def make_config():
       "kanji": {
         "fields": [
           {
+            "active": True,
             "name": "grade",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "heisig_en",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "jlpt",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "kanji",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "kun_reading",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "meaning",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "name_reading",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "on_reading",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "stroke_count",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 8,
           },
           {
+            "active": True,
             "name": "unicode",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 9,
           },
         ],
         "name": "kanji",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "猫",
                       "kind": "param",
                       "name": "id",
                       "orig": "character",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -135,13 +140,11 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body`",
+                  "res": "`body.kanji`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -154,19 +157,21 @@ def make_config():
         "name": "reading",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "ねこ",
                       "kind": "param",
                       "name": "id",
                       "orig": "reading",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -190,11 +195,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -205,36 +208,38 @@ def make_config():
       "word": {
         "fields": [
           {
+            "active": True,
             "name": "meaning",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "variant",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 1,
           },
         ],
         "name": "word",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "猫",
                       "kind": "param",
                       "name": "id",
                       "orig": "character",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -258,11 +263,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },

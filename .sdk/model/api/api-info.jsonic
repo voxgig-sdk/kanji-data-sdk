@@ -16,24 +16,7 @@ main: {
       ]
       title: "Kanji Data API"
       version: "1.0.0"
-      tagline: "Look up readings, meanings, and stroke counts for 13,000+ Japanese kanji over a simple JSON API"
-      homepage: "https://kanjiapi.dev/"
-      docs_url: "https://kanjiapi.dev/"
-      about_md: `[KanjiAPI](https://kanjiapi.dev/) exposes Japanese kanji data as a modern JSON API. The service describes itself as "Kanji data, accessible as a modern JSON API" and covers over 13,000 kanji characters.
-
-What you get from the API:
-
-- Per-character kanji lookups via \`https://kanjiapi.dev/v1/kanji/{character}\`
-- Reading data and word entries grouped under the \`/v1\` namespace
-- Common fields such as readings (on/kun), English meanings, and stroke counts
-
-The API is served over HTTPS with CORS enabled, and the public catalogue listing reports no authentication or documented rate limits. Endpoints not surfaced in the fetched pages are intentionally omitted here.`
-      entity_desc: {
-        kanji: "A single Japanese kanji character resource, fetched per-character at `https://kanjiapi.dev/v1/kanji/{character}` and typically including readings, meanings, and stroke count."
-        reading: "Reading-centric lookups (on'yomi or kun'yomi) grouped under the `/v1` namespace of the API."
-        word: "Japanese word entries associated with kanji, served from the `/v1` namespace of the API."
-      }
-      auth: false
     }
   }
 }
+

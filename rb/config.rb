@@ -15,6 +15,9 @@ module KanjiDataConfig
       },
       "options" => {
         "base" => "https://kanjiapi.dev/v1",
+        "auth" => {
+          "prefix" => "Bearer",
+        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -28,92 +31,94 @@ module KanjiDataConfig
         "kanji" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "grade",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "heisig_en",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "jlpt",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "kanji",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "kun_reading",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 4,
             },
             {
+              "active" => true,
               "name" => "meaning",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 5,
             },
             {
+              "active" => true,
               "name" => "name_reading",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 6,
             },
             {
+              "active" => true,
               "name" => "on_reading",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 7,
             },
             {
+              "active" => true,
               "name" => "stroke_count",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 8,
             },
             {
+              "active" => true,
               "name" => "unicode",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 9,
             },
           ],
           "name" => "kanji",
           "op" => {
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => "猫",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "character",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -135,13 +140,11 @@ module KanjiDataConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.kanji`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
           },
@@ -154,19 +157,21 @@ module KanjiDataConfig
           "name" => "reading",
           "op" => {
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => "ねこ",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "reading",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -190,11 +195,9 @@ module KanjiDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
           },
@@ -205,36 +208,38 @@ module KanjiDataConfig
         "word" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "meaning",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "variant",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 1,
             },
           ],
           "name" => "word",
           "op" => {
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => "猫",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "character",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -258,11 +263,9 @@ module KanjiDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
           },
