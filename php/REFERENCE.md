@@ -93,7 +93,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## KanjiEntity
 
 ```php
-$kanji = $client->kanji();
+$kanji = $client->Kanji();
 ```
 
 ### Fields
@@ -118,7 +118,7 @@ $kanji = $client->kanji();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->kanji()->load(["id" => "kanji_id"]);
+$result = $client->Kanji()->load(["id" => "kanji_id"]);
 ```
 
 ### Common Methods
@@ -154,7 +154,7 @@ Return the entity name.
 ## ReadingEntity
 
 ```php
-$reading = $client->reading();
+$reading = $client->Reading();
 ```
 
 ### Operations
@@ -164,7 +164,7 @@ $reading = $client->reading();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->reading()->load(["id" => "reading_id"]);
+$result = $client->Reading()->load(["id" => "reading_id"]);
 ```
 
 ### Common Methods
@@ -200,7 +200,7 @@ Return the entity name.
 ## WordEntity
 
 ```php
-$word = $client->word();
+$word = $client->Word();
 ```
 
 ### Fields
@@ -217,7 +217,7 @@ $word = $client->word();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->word()->load(["id" => "word_id"]);
+$result = $client->Word()->load(["id" => "word_id"]);
 ```
 
 ### Common Methods

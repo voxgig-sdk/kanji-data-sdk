@@ -171,7 +171,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body.kanji`"
+                "res": "`body`"
               },
               "index$": 0
             }

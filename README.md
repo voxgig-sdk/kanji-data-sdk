@@ -26,9 +26,9 @@ import { KanjiDataSDK } from '@voxgig-sdk/kanji-data'
 
 const client = new KanjiDataSDK()
 
-// Load kanji data
-const kanji = await client.kanji.load({})
-console.log(kanji.data)
+// Load kanji data (returns a Kanji)
+const kanji = await client.Kanji().load()
+console.log(kanji)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -86,8 +86,8 @@ from kanjidata_sdk import KanjiDataSDK
 client = KanjiDataSDK()
 
 
-# Load a specific kanji
-kanji = client.kanji.load({"id": "example_id"})
+# Load a specific kanji (returns the record, raises on error)
+kanji = client.Kanji().load({"id": "example_id"})
 print(kanji)
 ```
 
@@ -100,8 +100,8 @@ require_once 'kanjidata_sdk.php';
 $client = new KanjiDataSDK();
 
 
-// Load a specific kanji
-$kanji = $client->kanji()->load(["id" => "example_id"]);
+// Load a specific kanji (returns the bare record; throws on error)
+$kanji = $client->Kanji()->load(["id" => "example_id"]);
 print_r($kanji);
 ```
 
@@ -125,8 +125,8 @@ require_relative "KanjiData_sdk"
 client = KanjiDataSDK.new
 
 
-# Load a specific kanji
-kanji = client.kanji.load({ "id" => "example_id" })
+# Load a specific kanji (returns the bare record; raises on error)
+kanji = client.Kanji.load({ "id" => "example_id" })
 puts kanji
 ```
 
@@ -139,7 +139,7 @@ local client = sdk.new()
 
 
 -- Load a specific kanji
-local kanji, err = client:kanji():load({ id = "example_id" })
+local kanji, err = client:Kanji():load({ id = "example_id" })
 print(kanji)
 ```
 
@@ -152,22 +152,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = KanjiDataSDK.test()
-const result = await client.kanji.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const kanji = await client.Kanji().load({ id: 'test01' })
+// kanji is a bare Kanji populated with mock data
+console.log(kanji)
 ```
 
 ### Python
 
 ```python
 client = KanjiDataSDK.test()
-result = client.kanji.load({"id": "test01"})
+kanji = client.Kanji().load({"id": "test01"})
+print(kanji)
 ```
 
 ### PHP
 
 ```php
-$client = KanjiDataSDK::test();
-$result = $client->kanji()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = KanjiDataSDK::test([
+    "entity" => ["kanji" => ["test01" => ["id" => "test01"]]],
+]);
+$kanji = $client->Kanji()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -182,15 +187,18 @@ result, err := client.Kanji(nil).Load(
 ### Ruby
 
 ```ruby
-client = KanjiDataSDK.test
-result = client.kanji.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = KanjiDataSDK.test({
+  "entity" => { "kanji" => { "test01" => { "id" => "test01" } } },
+})
+kanji = client.Kanji.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:kanji():load({ id = "test01" })
+local result, err = client:Kanji():load({ id = "test01" })
 ```
 
 ## How it works
@@ -238,6 +246,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

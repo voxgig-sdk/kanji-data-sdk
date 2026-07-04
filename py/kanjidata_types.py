@@ -4,49 +4,47 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Kanji:
-    grade: Optional[int] = None
-    heisig_en: Optional[str] = None
-    jlpt: Optional[int] = None
-    kanji: Optional[str] = None
-    kun_reading: Optional[list] = None
-    meaning: Optional[list] = None
-    name_reading: Optional[list] = None
-    on_reading: Optional[list] = None
-    stroke_count: Optional[int] = None
-    unicode: Optional[str] = None
+class Kanji(TypedDict, total=False):
+    grade: int
+    heisig_en: str
+    jlpt: int
+    kanji: str
+    kun_reading: list
+    meaning: list
+    name_reading: list
+    on_reading: list
+    stroke_count: int
+    unicode: str
 
 
-@dataclass
-class KanjiLoadMatch:
+class KanjiLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Reading:
+class Reading(TypedDict):
     pass
 
 
-@dataclass
-class ReadingLoadMatch:
+class ReadingLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Word:
-    meaning: Optional[list] = None
-    variant: Optional[list] = None
+class Word(TypedDict, total=False):
+    meaning: list
+    variant: list
 
 
-@dataclass
-class WordLoadMatch:
+class WordLoadMatch(TypedDict):
     id: str
-

@@ -233,10 +233,10 @@ class KanjiDataSDK
 
     private $_kanji = null;
 
-    // Idiomatic facade: $client->kanji()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Kanji() (PHP method
-    // names are case-insensitive).
-    public function kanji($data = null)
+    // Canonical facade: $client->Kanji()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->kanji()
+    // resolves here too.
+    public function Kanji($data = null)
     {
         require_once __DIR__ . '/entity/kanji_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class KanjiDataSDK
 
     private $_reading = null;
 
-    // Idiomatic facade: $client->reading()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Reading() (PHP method
-    // names are case-insensitive).
-    public function reading($data = null)
+    // Canonical facade: $client->Reading()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->reading()
+    // resolves here too.
+    public function Reading($data = null)
     {
         require_once __DIR__ . '/entity/reading_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class KanjiDataSDK
 
     private $_word = null;
 
-    // Idiomatic facade: $client->word()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Word() (PHP method
-    // names are case-insensitive).
-    public function word($data = null)
+    // Canonical facade: $client->Word()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->word()
+    // resolves here too.
+    public function Word($data = null)
     {
         require_once __DIR__ . '/entity/word_entity.php';
         if ($data === null) {

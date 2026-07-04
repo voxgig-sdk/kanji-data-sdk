@@ -133,7 +133,7 @@ Alias for `KanjiDataSDK.test()`.
 ## KanjiEntity
 
 ```ts
-const kanji = client.kanji
+const kanji = client.Kanji()
 ```
 
 ### Fields
@@ -158,7 +158,7 @@ const kanji = client.kanji
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.kanji.load({ id: 'kanji_id' })
+const result = await client.Kanji().load({ id: 'kanji_id' })
 ```
 
 ### Common Methods
@@ -192,7 +192,7 @@ Return a copy of the entity options.
 ## ReadingEntity
 
 ```ts
-const reading = client.reading
+const reading = client.Reading()
 ```
 
 ### Operations
@@ -202,7 +202,7 @@ const reading = client.reading
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.reading.load({ id: 'reading_id' })
+const result = await client.Reading().load({ id: 'reading_id' })
 ```
 
 ### Common Methods
@@ -236,7 +236,7 @@ Return a copy of the entity options.
 ## WordEntity
 
 ```ts
-const word = client.word
+const word = client.Word()
 ```
 
 ### Fields
@@ -253,7 +253,7 @@ const word = client.word
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.word.load({ id: 'word_id' })
+const result = await client.Word().load({ id: 'word_id' })
 ```
 
 ### Common Methods

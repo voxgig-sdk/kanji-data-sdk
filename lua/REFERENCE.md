@@ -91,7 +91,7 @@ same parameters as `direct()`.
 ## KanjiEntity
 
 ```lua
-local kanji = client:kanji(nil)
+local kanji = client:Kanji(nil)
 ```
 
 ### Fields
@@ -116,7 +116,7 @@ local kanji = client:kanji(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:kanji():load({ id = "kanji_id" })
+local result, err = client:Kanji():load({ id = "kanji_id" })
 ```
 
 ### Common Methods
@@ -152,7 +152,7 @@ Return the entity name.
 ## ReadingEntity
 
 ```lua
-local reading = client:reading(nil)
+local reading = client:Reading(nil)
 ```
 
 ### Operations
@@ -162,7 +162,7 @@ local reading = client:reading(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:reading():load({ id = "reading_id" })
+local result, err = client:Reading():load({ id = "reading_id" })
 ```
 
 ### Common Methods
@@ -198,7 +198,7 @@ Return the entity name.
 ## WordEntity
 
 ```lua
-local word = client:word(nil)
+local word = client:Word(nil)
 ```
 
 ### Fields
@@ -215,7 +215,7 @@ local word = client:word(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:word():load({ id = "word_id" })
+local result, err = client:Word():load({ id = "word_id" })
 ```
 
 ### Common Methods

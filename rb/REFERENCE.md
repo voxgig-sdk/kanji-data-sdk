@@ -94,7 +94,7 @@ same parameters as `direct()`. Raises on error.
 ## KanjiEntity
 
 ```ruby
-kanji = client.kanji
+kanji = client.Kanji
 ```
 
 ### Fields
@@ -119,7 +119,7 @@ kanji = client.kanji
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.kanji.load({ "id" => "kanji_id" })
+result = client.Kanji.load({ "id" => "kanji_id" })
 ```
 
 ### Common Methods
@@ -155,7 +155,7 @@ Return the entity name.
 ## ReadingEntity
 
 ```ruby
-reading = client.reading
+reading = client.Reading
 ```
 
 ### Operations
@@ -165,7 +165,7 @@ reading = client.reading
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.reading.load({ "id" => "reading_id" })
+result = client.Reading.load({ "id" => "reading_id" })
 ```
 
 ### Common Methods
@@ -201,7 +201,7 @@ Return the entity name.
 ## WordEntity
 
 ```ruby
-word = client.word
+word = client.Word
 ```
 
 ### Fields
@@ -218,7 +218,7 @@ word = client.word
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.word.load({ "id" => "word_id" })
+result = client.Word.load({ "id" => "word_id" })
 ```
 
 ### Common Methods

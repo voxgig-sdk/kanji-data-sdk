@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:kanji():list() / client:kanji():load({ id = ... })
-function KanjiDataSDK:kanji(data)
+-- Idiomatic facade: client:Kanji():list() / client:Kanji():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function KanjiDataSDK:Kanji(data)
   local EntityMod = require("entity.kanji_entity")
   if data == nil then
     if self._kanji == nil then
@@ -256,15 +257,10 @@ function KanjiDataSDK:kanji(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:kanji() instead.
-function KanjiDataSDK:Kanji(data)
-  local EntityMod = require("entity.kanji_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:reading():list() / client:reading():load({ id = ... })
-function KanjiDataSDK:reading(data)
+-- Idiomatic facade: client:Reading():list() / client:Reading():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function KanjiDataSDK:Reading(data)
   local EntityMod = require("entity.reading_entity")
   if data == nil then
     if self._reading == nil then
@@ -275,15 +271,10 @@ function KanjiDataSDK:reading(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:reading() instead.
-function KanjiDataSDK:Reading(data)
-  local EntityMod = require("entity.reading_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:word():list() / client:word():load({ id = ... })
-function KanjiDataSDK:word(data)
+-- Idiomatic facade: client:Word():list() / client:Word():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function KanjiDataSDK:Word(data)
   local EntityMod = require("entity.word_entity")
   if data == nil then
     if self._word == nil then
@@ -291,12 +282,6 @@ function KanjiDataSDK:word(data)
     end
     return self._word
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:word() instead.
-function KanjiDataSDK:Word(data)
-  local EntityMod = require("entity.word_entity")
   return EntityMod.new(self, data)
 end
 

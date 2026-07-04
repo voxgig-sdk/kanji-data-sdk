@@ -33,10 +33,12 @@ client = KanjiDataSDK()
 
 ### 3. Load a kanji
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.kanji.load({"id": "example_id"})
-    print(result)
+    kanji = client.Kanji().load({"id": "example_id"})
+    print(kanji)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -84,8 +86,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = KanjiDataSDK.test()
 
-result = client.kanji.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+kanji = client.Kanji().load({"id": "test01"})
+# kanji contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -249,7 +252,7 @@ API path: `/words/{character}`
 
 ### Kanji
 
-Create an instance: `const kanji = client.kanji`
+Create an instance: `kanji = client.Kanji()`
 
 #### Operations
 
@@ -274,14 +277,14 @@ Create an instance: `const kanji = client.kanji`
 
 #### Example: Load
 
-```ts
-const kanji = await client.kanji.load({ id: 'kanji_id' })
+```python
+kanji = client.Kanji().load({"id": "kanji_id"})
 ```
 
 
 ### Reading
 
-Create an instance: `const reading = client.reading`
+Create an instance: `reading = client.Reading()`
 
 #### Operations
 
@@ -291,14 +294,14 @@ Create an instance: `const reading = client.reading`
 
 #### Example: Load
 
-```ts
-const reading = await client.reading.load({ id: 'reading_id' })
+```python
+reading = client.Reading().load({"id": "reading_id"})
 ```
 
 
 ### Word
 
-Create an instance: `const word = client.word`
+Create an instance: `word = client.Word()`
 
 #### Operations
 
@@ -315,8 +318,8 @@ Create an instance: `const word = client.word`
 
 #### Example: Load
 
-```ts
-const word = await client.word.load({ id: 'word_id' })
+```python
+word = client.Word().load({"id": "word_id"})
 ```
 
 
@@ -390,7 +393,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-kanji = client.kanji
+kanji = client.Kanji()
 kanji.load({"id": "example_id"})
 
 # kanji.data_get() now returns the loaded kanji data

@@ -208,39 +208,21 @@ class KanjiDataSDK
   end
 
 
-  # Idiomatic facade: client.kanji.list / client.kanji.load({ "id" => ... })
-  def kanji
-    require_relative 'entity/kanji_entity'
-    @kanji ||= KanjiEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.kanji instead.
+  # Canonical facade: client.Kanji.list / client.Kanji.load({ "id" => ... })
   def Kanji(data = nil)
     require_relative 'entity/kanji_entity'
     KanjiEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.reading.list / client.reading.load({ "id" => ... })
-  def reading
-    require_relative 'entity/reading_entity'
-    @reading ||= ReadingEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.reading instead.
+  # Canonical facade: client.Reading.list / client.Reading.load({ "id" => ... })
   def Reading(data = nil)
     require_relative 'entity/reading_entity'
     ReadingEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.word.list / client.word.load({ "id" => ... })
-  def word
-    require_relative 'entity/word_entity'
-    @word ||= WordEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.word instead.
+  # Canonical facade: client.Word.list / client.Word.load({ "id" => ... })
   def Word(data = nil)
     require_relative 'entity/word_entity'
     WordEntity.new(self, data)

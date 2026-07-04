@@ -220,57 +220,27 @@ class KanjiDataSDK:
         }
 
 
-    @property
-    def kanji(self):
-        """Idiomatic facade: client.kanji.list() / client.kanji.load({"id": ...})."""
-        from entity.kanji_entity import KanjiEntity
-        cached = getattr(self, "_kanji", None)
-        if cached is None:
-            cached = KanjiEntity(self, None)
-            self._kanji = cached
-        return cached
-
-    def Kanji(self, data=None):
-        # Deprecated: use client.kanji instead.
+    def Kanji(self, data=None) -> "KanjiEntity":
+        """Entity factory: client.Kanji().list({}) / client.Kanji().load({"id": ...})."""
         from entity.kanji_entity import KanjiEntity
         return KanjiEntity(self, data)
 
 
-    @property
-    def reading(self):
-        """Idiomatic facade: client.reading.list() / client.reading.load({"id": ...})."""
-        from entity.reading_entity import ReadingEntity
-        cached = getattr(self, "_reading", None)
-        if cached is None:
-            cached = ReadingEntity(self, None)
-            self._reading = cached
-        return cached
-
-    def Reading(self, data=None):
-        # Deprecated: use client.reading instead.
+    def Reading(self, data=None) -> "ReadingEntity":
+        """Entity factory: client.Reading().list({}) / client.Reading().load({"id": ...})."""
         from entity.reading_entity import ReadingEntity
         return ReadingEntity(self, data)
 
 
-    @property
-    def word(self):
-        """Idiomatic facade: client.word.list() / client.word.load({"id": ...})."""
-        from entity.word_entity import WordEntity
-        cached = getattr(self, "_word", None)
-        if cached is None:
-            cached = WordEntity(self, None)
-            self._word = cached
-        return cached
-
-    def Word(self, data=None):
-        # Deprecated: use client.word instead.
+    def Word(self, data=None) -> "WordEntity":
+        """Entity factory: client.Word().list({}) / client.Word().load({"id": ...})."""
         from entity.word_entity import WordEntity
         return WordEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "KanjiDataSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class KanjiDataSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.kanji_entity import KanjiEntity
+    from entity.reading_entity import ReadingEntity
+    from entity.word_entity import WordEntity
