@@ -20,9 +20,6 @@ class KanjiDataConfig
             ],
             "options" => [
                 "base" => "https://kanjiapi.dev/v1",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -124,6 +121,7 @@ class KanjiDataConfig
                         'orig' => 'character',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -177,6 +175,7 @@ class KanjiDataConfig
                         'orig' => 'reading',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -245,6 +244,7 @@ class KanjiDataConfig
                         'orig' => 'character',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

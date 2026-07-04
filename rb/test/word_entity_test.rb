@@ -42,8 +42,7 @@ class WordEntityTest < Minitest::Test
     # LOAD
     word_ref01_ent = client.Word(nil)
     word_ref01_match_dt0 = {}
-    word_ref01_data_dt0_loaded, err = word_ref01_ent.load(word_ref01_match_dt0, nil)
-    assert_nil err
+    word_ref01_data_dt0_loaded = word_ref01_ent.load(word_ref01_match_dt0, nil)
     assert !word_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def word_basic_setup(extra)
     "KANJIDATA_TEST_WORD_ENTID" => idmap,
     "KANJIDATA_TEST_LIVE" => "FALSE",
     "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-    "KANJIDATA_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def word_basic_setup(extra)
   if env["KANJIDATA_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["KANJIDATA_APIKEY"],
       },
       extra || {},
     ])

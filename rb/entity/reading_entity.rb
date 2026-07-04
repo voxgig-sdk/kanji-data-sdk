@@ -45,6 +45,7 @@ class ReadingEntity
     end
   end
 
+  # @return [Reading, Hash] the current Reading data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ReadingEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Reading fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Reading.
+  #
+  # @param reqmatch [ReadingLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Reading, Hash] the loaded Reading; raises KanjiDataError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

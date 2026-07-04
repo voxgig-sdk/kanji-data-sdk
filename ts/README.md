@@ -9,9 +9,12 @@ The TypeScript SDK for the KanjiData API — a type-safe, entity-oriented client
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/kanji-data
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/kanji-data-sdk/releases](https://github.com/voxgig-sdk/kanji-data-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { KanjiDataSDK } from 'kanji-data'
+import { KanjiDataSDK } from '@voxgig-sdk/kanji-data'
 
-const client = new KanjiDataSDK({
-  apikey: process.env.KANJI-DATA_APIKEY,
-})
+const client = new KanjiDataSDK()
 ```
 
 ### 3. Load a kanji
 
 ```ts
-const result = await client.Kanji().load({ id: 'example_id' })
+const result = await client.kanji.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = KanjiDataSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.kanji.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new KanjiDataSDK({ apikey: '...' })
+const client = new KanjiDataSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.kanji
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new KanjiDataSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -133,8 +133,7 @@ const client = new KanjiDataSDK({
 Create a `.env.local` file at the project root:
 
 ```
-KANJI-DATA_TEST_LIVE=TRUE
-KANJI-DATA_APIKEY=<your-key>
+KANJI_DATA_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new KanjiDataSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new KanjiDataSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -297,7 +294,7 @@ API path: `/words/{character}`
 
 ### Kanji
 
-Create an instance: `const kanji = client.Kanji()`
+Create an instance: `const kanji = client.kanji`
 
 #### Operations
 
@@ -323,13 +320,13 @@ Create an instance: `const kanji = client.Kanji()`
 #### Example: Load
 
 ```ts
-const kanji = await client.Kanji().load({ id: 'kanji_id' })
+const kanji = await client.kanji.load({ id: 'kanji_id' })
 ```
 
 
 ### Reading
 
-Create an instance: `const reading = client.Reading()`
+Create an instance: `const reading = client.reading`
 
 #### Operations
 
@@ -340,13 +337,13 @@ Create an instance: `const reading = client.Reading()`
 #### Example: Load
 
 ```ts
-const reading = await client.Reading().load({ id: 'reading_id' })
+const reading = await client.reading.load({ id: 'reading_id' })
 ```
 
 
 ### Word
 
-Create an instance: `const word = client.Word()`
+Create an instance: `const word = client.word`
 
 #### Operations
 
@@ -364,7 +361,7 @@ Create an instance: `const word = client.Word()`
 #### Example: Load
 
 ```ts
-const word = await client.Word().load({ id: 'word_id' })
+const word = await client.word.load({ id: 'word_id' })
 ```
 
 
@@ -425,7 +422,7 @@ kanji-data/
 Import the SDK from the package root:
 
 ```ts
-import { KanjiDataSDK } from 'kanji-data'
+import { KanjiDataSDK } from '@voxgig-sdk/kanji-data'
 ```
 
 ### Entity state
@@ -435,11 +432,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const kanji = client.kanji
+await kanji.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// kanji.data() now returns the loaded kanji data
+// kanji.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

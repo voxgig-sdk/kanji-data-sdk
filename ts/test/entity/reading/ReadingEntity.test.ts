@@ -111,7 +111,6 @@ function basicSetup(extra?: any) {
     'KANJI_DATA_TEST_READING_ENTID': idmap,
     'KANJI_DATA_TEST_LIVE': 'FALSE',
     'KANJI_DATA_TEST_EXPLAIN': 'FALSE',
-    'KANJI_DATA_APIKEY': 'NONE',
   })
 
   idmap = env['KANJI_DATA_TEST_READING_ENTID']
@@ -121,7 +120,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new KanjiDataSDK(merge([
       {
-        apikey: env.KANJI_DATA_APIKEY,
       },
       extra
     ]))

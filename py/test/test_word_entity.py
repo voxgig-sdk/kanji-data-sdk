@@ -49,8 +49,7 @@ class TestWordEntity:
         # LOAD
         word_ref01_ent = client.Word(None)
         word_ref01_match_dt0 = {}
-        word_ref01_data_dt0_loaded, err = word_ref01_ent.load(word_ref01_match_dt0, None)
-        assert err is None
+        word_ref01_data_dt0_loaded = word_ref01_ent.load(word_ref01_match_dt0, None)
         assert word_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _word_basic_setup(extra):
         "KANJIDATA_TEST_WORD_ENTID": idmap,
         "KANJIDATA_TEST_LIVE": "FALSE",
         "KANJIDATA_TEST_EXPLAIN": "FALSE",
-        "KANJIDATA_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _word_basic_setup(extra):
     if env.get("KANJIDATA_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("KANJIDATA_APIKEY"),
             },
             extra or {},
         ])

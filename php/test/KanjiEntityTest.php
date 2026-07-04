@@ -49,8 +49,7 @@ class KanjiEntityTest extends TestCase
         // LOAD
         $kanji_ref01_ent = $client->Kanji(null);
         $kanji_ref01_match_dt0 = [];
-        [$kanji_ref01_data_dt0_loaded, $err] = $kanji_ref01_ent->load($kanji_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $kanji_ref01_data_dt0_loaded = $kanji_ref01_ent->load($kanji_ref01_match_dt0, null);
         $this->assertNotNull($kanji_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function kanji_basic_setup($extra)
         "KANJIDATA_TEST_KANJI_ENTID" => $idmap,
         "KANJIDATA_TEST_LIVE" => "FALSE",
         "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-        "KANJIDATA_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function kanji_basic_setup($extra)
     if ($env["KANJIDATA_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["KANJIDATA_APIKEY"],
             ],
             $extra ?? [],
         ]);

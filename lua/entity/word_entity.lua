@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch WordLoadMatch
+---@param ctrl? table
+---@return Word
+---@return string? err
 function WordEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

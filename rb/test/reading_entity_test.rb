@@ -42,8 +42,7 @@ class ReadingEntityTest < Minitest::Test
     # LOAD
     reading_ref01_ent = client.Reading(nil)
     reading_ref01_match_dt0 = {}
-    reading_ref01_data_dt0_loaded, err = reading_ref01_ent.load(reading_ref01_match_dt0, nil)
-    assert_nil err
+    reading_ref01_data_dt0_loaded = reading_ref01_ent.load(reading_ref01_match_dt0, nil)
     assert !reading_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def reading_basic_setup(extra)
     "KANJIDATA_TEST_READING_ENTID" => idmap,
     "KANJIDATA_TEST_LIVE" => "FALSE",
     "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-    "KANJIDATA_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def reading_basic_setup(extra)
   if env["KANJIDATA_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["KANJIDATA_APIKEY"],
       },
       extra || {},
     ])

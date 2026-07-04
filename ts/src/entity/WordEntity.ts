@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Word,
+  WordLoadMatch,
+} from '../KanjiDataTypes'
 
 // TODO: needs Entity superclass
-class WordEntity extends KanjiDataEntityBase {
+class WordEntity extends KanjiDataEntityBase<Word> {
 
   constructor(client: KanjiDataSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class WordEntity extends KanjiDataEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: WordLoadMatch, ctrl?: Control): Promise<Word> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class WordEntity extends KanjiDataEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Word> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

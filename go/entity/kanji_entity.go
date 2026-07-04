@@ -85,6 +85,27 @@ func (e *KanjiEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Kanji; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *KanjiEntity) DataTyped(data ...Kanji) Kanji {
+	if len(data) > 0 {
+		return typedFrom[Kanji](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Kanji](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Kanji (all fields
+// optional at the wire level).
+func (e *KanjiEntity) MatchTyped(match ...Kanji) Kanji {
+	if len(match) > 0 {
+		return typedFrom[Kanji](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Kanji](e.Match())
+}
+
 
 func (e *KanjiEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *KanjiEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, e
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// KanjiLoadMatch and returns an Kanji. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *KanjiEntity) LoadTyped(reqmatch KanjiLoadMatch, ctrl map[string]any) (Kanji, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Kanji{}, err
+	}
+	return typedFrom[Kanji](res), nil
 }
 
 

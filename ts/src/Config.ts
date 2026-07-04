@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://kanjiapi.dev/v1',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -152,7 +148,8 @@ class Config {
                     "name": "id",
                     "orig": "character",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -205,7 +202,8 @@ class Config {
                     "name": "id",
                     "orig": "reading",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -273,7 +271,8 @@ class Config {
                     "name": "id",
                     "orig": "character",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

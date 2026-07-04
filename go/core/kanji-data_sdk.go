@@ -245,16 +245,25 @@ func (sdk *KanjiDataSDK) Direct(fetchargs map[string]any) (map[string]any, error
 }
 
 
+// Kanji returns a Kanji entity bound to this client.
+// Idiomatic usage: client.Kanji(nil).List(nil, nil) or
+// client.Kanji(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *KanjiDataSDK) Kanji(data map[string]any) KanjiDataEntity {
 	return NewKanjiEntityFunc(sdk, data)
 }
 
 
+// Reading returns a Reading entity bound to this client.
+// Idiomatic usage: client.Reading(nil).List(nil, nil) or
+// client.Reading(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *KanjiDataSDK) Reading(data map[string]any) KanjiDataEntity {
 	return NewReadingEntityFunc(sdk, data)
 }
 
 
+// Word returns a Word entity bound to this client.
+// Idiomatic usage: client.Word(nil).List(nil, nil) or
+// client.Word(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *KanjiDataSDK) Word(data map[string]any) KanjiDataEntity {
 	return NewWordEntityFunc(sdk, data)
 }

@@ -49,8 +49,7 @@ class ReadingEntityTest extends TestCase
         // LOAD
         $reading_ref01_ent = $client->Reading(null);
         $reading_ref01_match_dt0 = [];
-        [$reading_ref01_data_dt0_loaded, $err] = $reading_ref01_ent->load($reading_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $reading_ref01_data_dt0_loaded = $reading_ref01_ent->load($reading_ref01_match_dt0, null);
         $this->assertNotNull($reading_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function reading_basic_setup($extra)
         "KANJIDATA_TEST_READING_ENTID" => $idmap,
         "KANJIDATA_TEST_LIVE" => "FALSE",
         "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-        "KANJIDATA_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function reading_basic_setup($extra)
     if ($env["KANJIDATA_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["KANJIDATA_APIKEY"],
             ],
             $extra ?? [],
         ]);

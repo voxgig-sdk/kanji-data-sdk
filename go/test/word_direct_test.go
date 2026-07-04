@@ -110,14 +110,12 @@ func wordDirectSetup(mockres any) *wordDirectSetupResult {
 	env := envOverride(map[string]any{
 		"KANJIDATA_TEST_WORD_ENTID": map[string]any{},
 		"KANJIDATA_TEST_LIVE":    "FALSE",
-		"KANJIDATA_APIKEY":       "NONE",
 	})
 
 	live := env["KANJIDATA_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["KANJIDATA_APIKEY"],
 		}
 		client := sdk.NewKanjiDataSDK(mergedOpts)
 

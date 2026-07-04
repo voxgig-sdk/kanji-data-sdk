@@ -49,8 +49,7 @@ class WordEntityTest extends TestCase
         // LOAD
         $word_ref01_ent = $client->Word(null);
         $word_ref01_match_dt0 = [];
-        [$word_ref01_data_dt0_loaded, $err] = $word_ref01_ent->load($word_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $word_ref01_data_dt0_loaded = $word_ref01_ent->load($word_ref01_match_dt0, null);
         $this->assertNotNull($word_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function word_basic_setup($extra)
         "KANJIDATA_TEST_WORD_ENTID" => $idmap,
         "KANJIDATA_TEST_LIVE" => "FALSE",
         "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-        "KANJIDATA_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function word_basic_setup($extra)
     if ($env["KANJIDATA_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["KANJIDATA_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -134,7 +133,7 @@ Alias for `KanjiDataSDK.test()`.
 ## KanjiEntity
 
 ```ts
-const kanji = client.Kanji()
+const kanji = client.kanji
 ```
 
 ### Fields
@@ -159,7 +158,7 @@ const kanji = client.Kanji()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Kanji().load({ id: 'kanji_id' })
+const result = await client.kanji.load({ id: 'kanji_id' })
 ```
 
 ### Common Methods
@@ -193,7 +192,7 @@ Return a copy of the entity options.
 ## ReadingEntity
 
 ```ts
-const reading = client.Reading()
+const reading = client.reading
 ```
 
 ### Operations
@@ -203,7 +202,7 @@ const reading = client.Reading()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Reading().load({ id: 'reading_id' })
+const result = await client.reading.load({ id: 'reading_id' })
 ```
 
 ### Common Methods
@@ -237,7 +236,7 @@ Return a copy of the entity options.
 ## WordEntity
 
 ```ts
-const word = client.Word()
+const word = client.word
 ```
 
 ### Fields
@@ -254,7 +253,7 @@ const word = client.Word()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Word().load({ id: 'word_id' })
+const result = await client.word.load({ id: 'word_id' })
 ```
 
 ### Common Methods

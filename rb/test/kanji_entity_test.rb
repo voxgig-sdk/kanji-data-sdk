@@ -42,8 +42,7 @@ class KanjiEntityTest < Minitest::Test
     # LOAD
     kanji_ref01_ent = client.Kanji(nil)
     kanji_ref01_match_dt0 = {}
-    kanji_ref01_data_dt0_loaded, err = kanji_ref01_ent.load(kanji_ref01_match_dt0, nil)
-    assert_nil err
+    kanji_ref01_data_dt0_loaded = kanji_ref01_ent.load(kanji_ref01_match_dt0, nil)
     assert !kanji_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def kanji_basic_setup(extra)
     "KANJIDATA_TEST_KANJI_ENTID" => idmap,
     "KANJIDATA_TEST_LIVE" => "FALSE",
     "KANJIDATA_TEST_EXPLAIN" => "FALSE",
-    "KANJIDATA_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def kanji_basic_setup(extra)
   if env["KANJIDATA_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["KANJIDATA_APIKEY"],
       },
       extra || {},
     ])

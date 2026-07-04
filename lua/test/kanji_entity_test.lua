@@ -91,7 +91,6 @@ function kanji_basic_setup(extra)
     ["KANJIDATA_TEST_KANJI_ENTID"] = idmap,
     ["KANJIDATA_TEST_LIVE"] = "FALSE",
     ["KANJIDATA_TEST_EXPLAIN"] = "FALSE",
-    ["KANJIDATA_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ function kanji_basic_setup(extra)
   if env["KANJIDATA_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["KANJIDATA_APIKEY"],
       },
       extra or {},
     })

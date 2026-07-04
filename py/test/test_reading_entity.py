@@ -49,8 +49,7 @@ class TestReadingEntity:
         # LOAD
         reading_ref01_ent = client.Reading(None)
         reading_ref01_match_dt0 = {}
-        reading_ref01_data_dt0_loaded, err = reading_ref01_ent.load(reading_ref01_match_dt0, None)
-        assert err is None
+        reading_ref01_data_dt0_loaded = reading_ref01_ent.load(reading_ref01_match_dt0, None)
         assert reading_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _reading_basic_setup(extra):
         "KANJIDATA_TEST_READING_ENTID": idmap,
         "KANJIDATA_TEST_LIVE": "FALSE",
         "KANJIDATA_TEST_EXPLAIN": "FALSE",
-        "KANJIDATA_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _reading_basic_setup(extra):
     if env.get("KANJIDATA_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("KANJIDATA_APIKEY"),
             },
             extra or {},
         ])

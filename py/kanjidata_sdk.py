@@ -144,16 +144,23 @@ class KanjiDataSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class KanjiDataSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class KanjiDataSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def kanji(self):
+        """Idiomatic facade: client.kanji.list() / client.kanji.load({"id": ...})."""
+        from entity.kanji_entity import KanjiEntity
+        cached = getattr(self, "_kanji", None)
+        if cached is None:
+            cached = KanjiEntity(self, None)
+            self._kanji = cached
+        return cached
 
     def Kanji(self, data=None):
+        # Deprecated: use client.kanji instead.
         from entity.kanji_entity import KanjiEntity
         return KanjiEntity(self, data)
 
 
+    @property
+    def reading(self):
+        """Idiomatic facade: client.reading.list() / client.reading.load({"id": ...})."""
+        from entity.reading_entity import ReadingEntity
+        cached = getattr(self, "_reading", None)
+        if cached is None:
+            cached = ReadingEntity(self, None)
+            self._reading = cached
+        return cached
+
     def Reading(self, data=None):
+        # Deprecated: use client.reading instead.
         from entity.reading_entity import ReadingEntity
         return ReadingEntity(self, data)
 
 
+    @property
+    def word(self):
+        """Idiomatic facade: client.word.list() / client.word.load({"id": ...})."""
+        from entity.word_entity import WordEntity
+        cached = getattr(self, "_word", None)
+        if cached is None:
+            cached = WordEntity(self, None)
+            self._word = cached
+        return cached
+
     def Word(self, data=None):
+        # Deprecated: use client.word instead.
         from entity.word_entity import WordEntity
         return WordEntity(self, data)
 

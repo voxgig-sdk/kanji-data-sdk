@@ -4,6 +4,8 @@ import { KanjiEntity } from './entity/KanjiEntity'
 import { ReadingEntity } from './entity/ReadingEntity'
 import { WordEntity } from './entity/WordEntity'
 
+export type * from './KanjiDataTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -204,18 +206,42 @@ class KanjiDataSDK {
 
 
 
+  _kanji?: KanjiEntity
+
+  // Idiomatic facade: `client.kanji.list()` / `client.kanji.load({ id })`.
+  get kanji(): KanjiEntity {
+    return (this._kanji ??= new KanjiEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.kanji` instead. */
   Kanji(data?: any) {
     const self = this
     return new KanjiEntity(self,data)
   }
 
 
+  _reading?: ReadingEntity
+
+  // Idiomatic facade: `client.reading.list()` / `client.reading.load({ id })`.
+  get reading(): ReadingEntity {
+    return (this._reading ??= new ReadingEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.reading` instead. */
   Reading(data?: any) {
     const self = this
     return new ReadingEntity(self,data)
   }
 
 
+  _word?: WordEntity
+
+  // Idiomatic facade: `client.word.list()` / `client.word.load({ id })`.
+  get word(): WordEntity {
+    return (this._word ??= new WordEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.word` instead. */
   Word(data?: any) {
     const self = this
     return new WordEntity(self,data)

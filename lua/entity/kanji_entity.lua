@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch KanjiLoadMatch
+---@param ctrl? table
+---@return Kanji
+---@return string? err
 function KanjiEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

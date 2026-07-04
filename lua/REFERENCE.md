@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -92,7 +91,7 @@ same parameters as `direct()`.
 ## KanjiEntity
 
 ```lua
-local kanji = client:Kanji(nil)
+local kanji = client:kanji(nil)
 ```
 
 ### Fields
@@ -117,7 +116,7 @@ local kanji = client:Kanji(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Kanji():load({ id = "kanji_id" })
+local result, err = client:kanji():load({ id = "kanji_id" })
 ```
 
 ### Common Methods
@@ -153,7 +152,7 @@ Return the entity name.
 ## ReadingEntity
 
 ```lua
-local reading = client:Reading(nil)
+local reading = client:reading(nil)
 ```
 
 ### Operations
@@ -163,7 +162,7 @@ local reading = client:Reading(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Reading():load({ id = "reading_id" })
+local result, err = client:reading():load({ id = "reading_id" })
 ```
 
 ### Common Methods
@@ -199,7 +198,7 @@ Return the entity name.
 ## WordEntity
 
 ```lua
-local word = client:Word(nil)
+local word = client:word(nil)
 ```
 
 ### Fields
@@ -216,7 +215,7 @@ local word = client:Word(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Word():load({ id = "word_id" })
+local result, err = client:word():load({ id = "word_id" })
 ```
 
 ### Common Methods

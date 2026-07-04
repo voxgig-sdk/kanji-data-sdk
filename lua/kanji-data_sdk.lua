@@ -244,18 +244,57 @@ end
 
 
 
+-- Idiomatic facade: client:kanji():list() / client:kanji():load({ id = ... })
+function KanjiDataSDK:kanji(data)
+  local EntityMod = require("entity.kanji_entity")
+  if data == nil then
+    if self._kanji == nil then
+      self._kanji = EntityMod.new(self, nil)
+    end
+    return self._kanji
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:kanji() instead.
 function KanjiDataSDK:Kanji(data)
   local EntityMod = require("entity.kanji_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:reading():list() / client:reading():load({ id = ... })
+function KanjiDataSDK:reading(data)
+  local EntityMod = require("entity.reading_entity")
+  if data == nil then
+    if self._reading == nil then
+      self._reading = EntityMod.new(self, nil)
+    end
+    return self._reading
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:reading() instead.
 function KanjiDataSDK:Reading(data)
   local EntityMod = require("entity.reading_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:word():list() / client:word():load({ id = ... })
+function KanjiDataSDK:word(data)
+  local EntityMod = require("entity.word_entity")
+  if data == nil then
+    if self._word == nil then
+      self._word = EntityMod.new(self, nil)
+    end
+    return self._word
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:word() instead.
 function KanjiDataSDK:Word(data)
   local EntityMod = require("entity.word_entity")
   return EntityMod.new(self, data)
