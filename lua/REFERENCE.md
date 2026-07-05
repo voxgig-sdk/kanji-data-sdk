@@ -98,16 +98,16 @@ local kanji = client:Kanji(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | ``$INTEGER`` | No |  |
-| `heisig_en` | ``$STRING`` | No |  |
-| `jlpt` | ``$INTEGER`` | No |  |
-| `kanji` | ``$STRING`` | No |  |
-| `kun_reading` | ``$ARRAY`` | No |  |
-| `meaning` | ``$ARRAY`` | No |  |
-| `name_reading` | ``$ARRAY`` | No |  |
-| `on_reading` | ``$ARRAY`` | No |  |
-| `stroke_count` | ``$INTEGER`` | No |  |
-| `unicode` | ``$STRING`` | No |  |
+| `grade` | `number` | No |  |
+| `heisig_en` | `string` | No |  |
+| `jlpt` | `number` | No |  |
+| `kanji` | `string` | No |  |
+| `kun_reading` | `table` | No |  |
+| `meaning` | `table` | No |  |
+| `name_reading` | `table` | No |  |
+| `on_reading` | `table` | No |  |
+| `stroke_count` | `number` | No |  |
+| `unicode` | `string` | No |  |
 
 ### Operations
 
@@ -205,8 +205,8 @@ local word = client:Word(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | ``$ARRAY`` | No |  |
-| `variant` | ``$ARRAY`` | No |  |
+| `meaning` | `table` | No |  |
+| `variant` | `table` | No |  |
 
 ### Operations
 

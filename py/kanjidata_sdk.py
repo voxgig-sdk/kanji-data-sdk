@@ -221,19 +221,19 @@ class KanjiDataSDK:
 
 
     def Kanji(self, data=None) -> "KanjiEntity":
-        """Entity factory: client.Kanji().list({}) / client.Kanji().load({"id": ...})."""
+        """Entity factory: client.Kanji().list() / client.Kanji().load({"id": ...})."""
         from entity.kanji_entity import KanjiEntity
         return KanjiEntity(self, data)
 
 
     def Reading(self, data=None) -> "ReadingEntity":
-        """Entity factory: client.Reading().list({}) / client.Reading().load({"id": ...})."""
+        """Entity factory: client.Reading().list() / client.Reading().load({"id": ...})."""
         from entity.reading_entity import ReadingEntity
         return ReadingEntity(self, data)
 
 
     def Word(self, data=None) -> "WordEntity":
-        """Entity factory: client.Word().list({}) / client.Word().load({"id": ...})."""
+        """Entity factory: client.Word().list() / client.Word().load({"id": ...})."""
         from entity.word_entity import WordEntity
         return WordEntity(self, data)
 

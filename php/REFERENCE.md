@@ -8,7 +8,7 @@ Complete API reference for the KanjiData PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/kanji-data_sdk.php';
+require_once __DIR__ . '/kanjidata_sdk.php';
 
 $client = new KanjiDataSDK($options);
 ```
@@ -53,11 +53,11 @@ Create a new `ReadingEntity` instance. Pass `null` for no initial data.
 
 Create a new `WordEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): KanjiDataUtility`
 
 Return a copy of the SDK utility object.
 
@@ -100,16 +100,16 @@ $kanji = $client->Kanji();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | ``$INTEGER`` | No |  |
-| `heisig_en` | ``$STRING`` | No |  |
-| `jlpt` | ``$INTEGER`` | No |  |
-| `kanji` | ``$STRING`` | No |  |
-| `kun_reading` | ``$ARRAY`` | No |  |
-| `meaning` | ``$ARRAY`` | No |  |
-| `name_reading` | ``$ARRAY`` | No |  |
-| `on_reading` | ``$ARRAY`` | No |  |
-| `stroke_count` | ``$INTEGER`` | No |  |
-| `unicode` | ``$STRING`` | No |  |
+| `grade` | `int` | No |  |
+| `heisig_en` | `string` | No |  |
+| `jlpt` | `int` | No |  |
+| `kanji` | `string` | No |  |
+| `kun_reading` | `array` | No |  |
+| `meaning` | `array` | No |  |
+| `name_reading` | `array` | No |  |
+| `on_reading` | `array` | No |  |
+| `stroke_count` | `int` | No |  |
+| `unicode` | `string` | No |  |
 
 ### Operations
 
@@ -123,19 +123,19 @@ $result = $client->Kanji()->load(["id" => "kanji_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -144,7 +144,7 @@ Set the entity match criteria.
 Create a new `KanjiEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -169,19 +169,19 @@ $result = $client->Reading()->load(["id" => "reading_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -190,7 +190,7 @@ Set the entity match criteria.
 Create a new `ReadingEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -207,8 +207,8 @@ $word = $client->Word();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | ``$ARRAY`` | No |  |
-| `variant` | ``$ARRAY`` | No |  |
+| `meaning` | `array` | No |  |
+| `variant` | `array` | No |  |
 
 ### Operations
 
@@ -222,19 +222,19 @@ $result = $client->Word()->load(["id" => "word_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -243,7 +243,7 @@ Set the entity match criteria.
 Create a new `WordEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

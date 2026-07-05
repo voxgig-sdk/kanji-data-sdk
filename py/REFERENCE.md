@@ -8,7 +8,7 @@ Complete API reference for the KanjiData Python SDK.
 ### Constructor
 
 ```python
-from kanji-data_sdk import KanjiDataSDK
+from kanjidata_sdk import KanjiDataSDK
 
 client = KanjiDataSDK(options)
 ```
@@ -95,16 +95,16 @@ kanji = client.Kanji()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | ``$INTEGER`` | No |  |
-| `heisig_en` | ``$STRING`` | No |  |
-| `jlpt` | ``$INTEGER`` | No |  |
-| `kanji` | ``$STRING`` | No |  |
-| `kun_reading` | ``$ARRAY`` | No |  |
-| `meaning` | ``$ARRAY`` | No |  |
-| `name_reading` | ``$ARRAY`` | No |  |
-| `on_reading` | ``$ARRAY`` | No |  |
-| `stroke_count` | ``$INTEGER`` | No |  |
-| `unicode` | ``$STRING`` | No |  |
+| `grade` | `int` | No |  |
+| `heisig_en` | `str` | No |  |
+| `jlpt` | `int` | No |  |
+| `kanji` | `str` | No |  |
+| `kun_reading` | `list` | No |  |
+| `meaning` | `list` | No |  |
+| `name_reading` | `list` | No |  |
+| `on_reading` | `list` | No |  |
+| `stroke_count` | `int` | No |  |
+| `unicode` | `str` | No |  |
 
 ### Operations
 
@@ -200,8 +200,8 @@ word = client.Word()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | ``$ARRAY`` | No |  |
-| `variant` | ``$ARRAY`` | No |  |
+| `meaning` | `list` | No |  |
+| `variant` | `list` | No |  |
 
 ### Operations
 

@@ -8,7 +8,7 @@ Complete API reference for the KanjiData Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'kanji-data_sdk'
+require_relative 'KanjiData_sdk'
 
 client = KanjiDataSDK.new(options)
 ```
@@ -101,16 +101,16 @@ kanji = client.Kanji
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | ``$INTEGER`` | No |  |
-| `heisig_en` | ``$STRING`` | No |  |
-| `jlpt` | ``$INTEGER`` | No |  |
-| `kanji` | ``$STRING`` | No |  |
-| `kun_reading` | ``$ARRAY`` | No |  |
-| `meaning` | ``$ARRAY`` | No |  |
-| `name_reading` | ``$ARRAY`` | No |  |
-| `on_reading` | ``$ARRAY`` | No |  |
-| `stroke_count` | ``$INTEGER`` | No |  |
-| `unicode` | ``$STRING`` | No |  |
+| `grade` | `Integer` | No |  |
+| `heisig_en` | `String` | No |  |
+| `jlpt` | `Integer` | No |  |
+| `kanji` | `String` | No |  |
+| `kun_reading` | `Array` | No |  |
+| `meaning` | `Array` | No |  |
+| `name_reading` | `Array` | No |  |
+| `on_reading` | `Array` | No |  |
+| `stroke_count` | `Integer` | No |  |
+| `unicode` | `String` | No |  |
 
 ### Operations
 
@@ -208,8 +208,8 @@ word = client.Word
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | ``$ARRAY`` | No |  |
-| `variant` | ``$ARRAY`` | No |  |
+| `meaning` | `Array` | No |  |
+| `variant` | `Array` | No |  |
 
 ### Operations
 

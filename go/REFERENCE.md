@@ -105,16 +105,16 @@ kanji := client.Kanji(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | ``$INTEGER`` | No |  |
-| `heisig_en` | ``$STRING`` | No |  |
-| `jlpt` | ``$INTEGER`` | No |  |
-| `kanji` | ``$STRING`` | No |  |
-| `kun_reading` | ``$ARRAY`` | No |  |
-| `meaning` | ``$ARRAY`` | No |  |
-| `name_reading` | ``$ARRAY`` | No |  |
-| `on_reading` | ``$ARRAY`` | No |  |
-| `stroke_count` | ``$INTEGER`` | No |  |
-| `unicode` | ``$STRING`` | No |  |
+| `grade` | `int` | No |  |
+| `heisig_en` | `string` | No |  |
+| `jlpt` | `int` | No |  |
+| `kanji` | `string` | No |  |
+| `kun_reading` | `[]any` | No |  |
+| `meaning` | `[]any` | No |  |
+| `name_reading` | `[]any` | No |  |
+| `on_reading` | `[]any` | No |  |
+| `stroke_count` | `int` | No |  |
+| `unicode` | `string` | No |  |
 
 ### Operations
 
@@ -200,8 +200,8 @@ word := client.Word(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | ``$ARRAY`` | No |  |
-| `variant` | ``$ARRAY`` | No |  |
+| `meaning` | `[]any` | No |  |
+| `variant` | `[]any` | No |  |
 
 ### Operations
 
