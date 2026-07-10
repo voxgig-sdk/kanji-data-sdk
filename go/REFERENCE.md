@@ -99,6 +99,7 @@ same parameters as `Direct()`.
 
 ```go
 kanji := client.Kanji(nil)
+fmt.Println(kanji.GetName()) // "kanji"
 ```
 
 ### Fields
@@ -124,6 +125,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Kanji(nil).Load(map[string]any{"id": "kanji_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -154,6 +159,7 @@ Return the entity name.
 
 ```go
 reading := client.Reading(nil)
+fmt.Println(reading.GetName()) // "reading"
 ```
 
 ### Operations
@@ -164,6 +170,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Reading(nil).Load(map[string]any{"id": "reading_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -194,6 +204,7 @@ Return the entity name.
 
 ```go
 word := client.Word(nil)
+fmt.Println(word.GetName()) // "word"
 ```
 
 ### Fields
@@ -211,6 +222,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Word(nil).Load(map[string]any{"id": "word_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

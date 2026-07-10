@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single kanji — the value is the loaded record.
-    kanji, err := client.Kanji(nil).Load(map[string]any{"id": "example"}, nil)
+    kanji, err := client.Kanji(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }

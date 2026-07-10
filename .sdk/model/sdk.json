@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -459,14 +456,17 @@
           "url": "https://kanjiapi.dev/"
         },
         "description": "This API provides JSON endpoints for accessing an extensive kanji dictionary with information on over 13,000 kanji. Users can retrieve data such as readings, meanings, and stroke counts to facilitate learning and application of kanji in various projects.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://kanjiapi.dev/v1"
           }
         ],
+        "summary": "This API provides JSON endpoints for accessing an extensive kanji dictionary with information on over 13,000 kanji.",
         "title": "Kanji Data API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://kanjiapi.dev"
       },
       "option": {},
       "target": {
@@ -519,6 +519,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -569,6 +572,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
