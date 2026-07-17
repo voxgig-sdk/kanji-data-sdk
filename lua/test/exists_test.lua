@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- KanjiData SDK exists test
 
 local sdk = require("kanji-data_sdk")
 
