@@ -110,10 +110,10 @@ fmt.Println(kanji.GetName()) // "kanji"
 | `heisig_en` | `string` | No |  |
 | `jlpt` | `int` | No |  |
 | `kanji` | `string` | No |  |
-| `kun_reading` | `[]any` | No |  |
-| `meaning` | `[]any` | No |  |
-| `name_reading` | `[]any` | No |  |
-| `on_reading` | `[]any` | No |  |
+| `kun_readings` | `[]any` | No |  |
+| `meanings` | `[]any` | No |  |
+| `name_readings` | `[]any` | No |  |
+| `on_readings` | `[]any` | No |  |
 | `stroke_count` | `int` | No |  |
 | `unicode` | `string` | No |  |
 
@@ -211,8 +211,8 @@ fmt.Println(word.GetName()) // "word"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | `[]any` | No |  |
-| `variant` | `[]any` | No |  |
+| `meanings` | `[]any` | No |  |
+| `variants` | `[]any` | No |  |
 
 ### Operations
 

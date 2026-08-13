@@ -99,10 +99,10 @@ kanji = client.Kanji()
 | `heisig_en` | `str` | No |  |
 | `jlpt` | `int` | No |  |
 | `kanji` | `str` | No |  |
-| `kun_reading` | `list` | No |  |
-| `meaning` | `list` | No |  |
-| `name_reading` | `list` | No |  |
-| `on_reading` | `list` | No |  |
+| `kun_readings` | `list` | No |  |
+| `meanings` | `list` | No |  |
+| `name_readings` | `list` | No |  |
+| `on_readings` | `list` | No |  |
 | `stroke_count` | `int` | No |  |
 | `unicode` | `str` | No |  |
 
@@ -200,8 +200,8 @@ word = client.Word()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | `list` | No |  |
-| `variant` | `list` | No |  |
+| `meanings` | `list` | No |  |
+| `variants` | `list` | No |  |
 
 ### Operations
 

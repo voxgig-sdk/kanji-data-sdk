@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-kanji, err := client.Kanji(nil).Load(map[string]any{"id": "example_id"}, nil)
+word, err := client.Word(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = kanji
+_ = word
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-kanji, err := client.Kanji(nil).Load(
+word, err := client.Word(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(kanji) // the returned mock data
+fmt.Println(word) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -264,10 +264,10 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"heisig_en"` |  |
 | `"jlpt"` |  |
 | `"kanji"` |  |
-| `"kun_reading"` |  |
-| `"meaning"` |  |
-| `"name_reading"` |  |
-| `"on_reading"` |  |
+| `"kun_readings"` |  |
+| `"meanings"` |  |
+| `"name_readings"` |  |
+| `"on_readings"` |  |
 | `"stroke_count"` |  |
 | `"unicode"` |  |
 
@@ -288,8 +288,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `"meaning"` |  |
-| `"variant"` |  |
+| `"meanings"` |  |
+| `"variants"` |  |
 
 Operations: Load.
 
@@ -318,10 +318,10 @@ Create an instance: `kanji := client.Kanji(nil)`
 | `heisig_en` | `string` |  |
 | `jlpt` | `int` |  |
 | `kanji` | `string` |  |
-| `kun_reading` | `[]any` |  |
-| `meaning` | `[]any` |  |
-| `name_reading` | `[]any` |  |
-| `on_reading` | `[]any` |  |
+| `kun_readings` | `[]any` |  |
+| `meanings` | `[]any` |  |
+| `name_readings` | `[]any` |  |
+| `on_readings` | `[]any` |  |
 | `stroke_count` | `int` |  |
 | `unicode` | `string` |  |
 
@@ -371,8 +371,8 @@ Create an instance: `word := client.Word(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meaning` | `[]any` |  |
-| `variant` | `[]any` |  |
+| `meanings` | `[]any` |  |
+| `variants` | `[]any` |  |
 
 #### Example: Load
 
@@ -458,11 +458,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-kanji := client.Kanji(nil)
-kanji.Load(map[string]any{"id": "example_id"}, nil)
+word := client.Word(nil)
+word.Load(map[string]any{"id": "example_id"}, nil)
 
-// kanji.Data() now returns the kanji data from the last load
-// kanji.Match() returns the last match criteria
+// word.Data() now returns the word data from the last load
+// word.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

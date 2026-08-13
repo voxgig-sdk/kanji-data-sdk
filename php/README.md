@@ -35,7 +35,7 @@ $client = new KanjiDataSDK();
 
 ```php
 try {
-    // load() returns the bare Kanji record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Kanji record (throws on error).
     $kanji = $client->Kanji()->load(["id" => "example_id"]);
     print_r($kanji);
 } catch (\Throwable $err) {
@@ -51,7 +51,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $kanji = $client->Kanji()->load(["id" => "example_id"]);
+    $word = $client->Word()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -123,12 +123,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = KanjiDataSDK::test([
-    "entity" => ["kanji" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["word" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
-$kanji = $client->Kanji()->load(["id" => "test01"]);
-print_r($kanji);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$word = $client->Word()->load(["id" => "test01"]);
+print_r($word);
 ```
 
 ### Use a custom fetch function
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -253,10 +254,10 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `heisig_en` |  |
 | `jlpt` |  |
 | `kanji` |  |
-| `kun_reading` |  |
-| `meaning` |  |
-| `name_reading` |  |
-| `on_reading` |  |
+| `kun_readings` |  |
+| `meanings` |  |
+| `name_readings` |  |
+| `on_readings` |  |
 | `stroke_count` |  |
 | `unicode` |  |
 
@@ -277,8 +278,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meaning` |  |
-| `variant` |  |
+| `meanings` |  |
+| `variants` |  |
 
 Operations: Load.
 
@@ -307,17 +308,17 @@ Create an instance: `$kanji = $client->Kanji();`
 | `heisig_en` | `string` |  |
 | `jlpt` | `int` |  |
 | `kanji` | `string` |  |
-| `kun_reading` | `array` |  |
-| `meaning` | `array` |  |
-| `name_reading` | `array` |  |
-| `on_reading` | `array` |  |
+| `kun_readings` | `array` |  |
+| `meanings` | `array` |  |
+| `name_readings` | `array` |  |
+| `on_readings` | `array` |  |
 | `stroke_count` | `int` |  |
 | `unicode` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Kanji record (throws on error).
+// load() returns the ENTITY — call data_get() for the Kanji record (throws on error).
 $kanji = $client->Kanji()->load(["id" => "kanji_id"]);
 ```
 
@@ -335,7 +336,7 @@ Create an instance: `$reading = $client->Reading();`
 #### Example: Load
 
 ```php
-// load() returns the bare Reading record (throws on error).
+// load() returns the ENTITY — call data_get() for the Reading record (throws on error).
 $reading = $client->Reading()->load(["id" => "reading_id"]);
 ```
 
@@ -354,13 +355,13 @@ Create an instance: `$word = $client->Word();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meaning` | `array` |  |
-| `variant` | `array` |  |
+| `meanings` | `array` |  |
+| `variants` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Word record (throws on error).
+// load() returns the ENTITY — call data_get() for the Word record (throws on error).
 $word = $client->Word()->load(["id" => "word_id"]);
 ```
 
@@ -441,11 +442,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$kanji = $client->Kanji();
-$kanji->load(["id" => "example_id"]);
+$word = $client->Word();
+$word->load(["id" => "example_id"]);
 
-// $kanji->data_get() now returns the kanji data from the last load
-// $kanji->match_get() returns the last match criteria
+// $word->data_get() now returns the word data from the last load
+// $word->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -16,11 +16,11 @@
 import pytest
 
 from kanjidata_sdk import KanjiDataSDK
-from core.error import KanjiDataError
-from core.result import KanjiDataResult
-from core.response import KanjiDataResponse
-from core.spec import KanjiDataSpec
-from feature.base_feature import KanjiDataBaseFeature
+from kanjidata_sdk.core.error import KanjiDataError
+from kanjidata_sdk.core.result import KanjiDataResult
+from kanjidata_sdk.core.response import KanjiDataResponse
+from kanjidata_sdk.core.spec import KanjiDataSpec
+from kanjidata_sdk.feature.base_feature import KanjiDataBaseFeature
 
 
 def _client():

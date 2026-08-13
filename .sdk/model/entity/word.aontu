@@ -6,12 +6,12 @@ main: kit: entity: word: {
 
   fields: [
     {
-      name: "meaning"
+      name: "meanings"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "variant"
+      name: "variants"
       req: false
       type: "`$ARRAY`"
     }

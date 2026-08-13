@@ -23,7 +23,7 @@ support (`load`):
 
 ```ts
 const client = new KanjiDataSDK()
-const kanji = await client.Kanji().load()
+const kanji = await client.Kanji().load({ id: "example_id" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = KanjiDataSDK.test()
-const kanji = await client.Kanji().load({ id: 'test01' })
-// kanji is a bare Kanji populated with mock data
-console.log(kanji)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = KanjiDataSDK.test({
+  entity: {
+    word: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const word = await client.Word().load({ id: 'test01' })
+// word is the Word entity, populated with mock data
+// — call word.data() for the record itself
+console.log(word)
 ```
 
 ### Python
 
 ```python
 client = KanjiDataSDK.test()
-kanji = client.Kanji().load({"id": "test01"})
-print(kanji)
+word = client.Word().load({"id": "test01"})
+print(word)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(kanji)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = KanjiDataSDK::test([
-    "entity" => ["kanji" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["word" => ["test01" => ["id" => "test01"]]],
 ]);
-$kanji = $client->Kanji()->load(["id" => "test01"]);
+$word = $client->Word()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Kanji(nil).Load(
+result, err := client.Word(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Kanji(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = KanjiDataSDK.test({
-  "entity" => { "kanji" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "word" => { "test01" => { "id" => "test01" } } },
 })
-kanji = client.Kanji.load({ "id" => "test01" })
+word = client.Word.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Kanji():load({ id = "test01" })
+local result, err = client:Word():load({ id = "test01" })
 ```
 
 ## Packages
@@ -184,7 +193,7 @@ require_once 'kanjidata_sdk.php';
 $client = new KanjiDataSDK();
 
 
-// Load a specific kanji (returns the bare record; throws on error)
+// Load a specific kanji (returns the ENTITY; call data_get() for the record; throws on error)
 $kanji = $client->Kanji()->load(["id" => "example_id"]);
 print_r($kanji);
 ```
@@ -212,7 +221,7 @@ require_relative "KanjiData_sdk"
 client = KanjiDataSDK.new
 
 
-# Load a specific kanji (returns the bare record; raises on error)
+# Load a specific kanji (returns the ENTITY; call data_get for the record)
 kanji = client.Kanji.load({ "id" => "example_id" })
 puts kanji
 ```
@@ -346,6 +355,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://kanjiapi.dev/](https://kanjiapi.dev/)
 

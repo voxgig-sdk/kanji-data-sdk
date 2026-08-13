@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ KanjiDataUtility.registrar = ->(u) {
   u.prepare_params = KanjiDataUtilities::PrepareParams
   u.prepare_path = KanjiDataUtilities::PreparePath
   u.prepare_query = KanjiDataUtilities::PrepareQuery
+  u.graphql_body = KanjiDataUtilities::GraphqlBody
+  u.graphql_errors = KanjiDataUtilities::GraphqlErrors
   u.result_basic = KanjiDataUtilities::ResultBasic
   u.result_body = KanjiDataUtilities::ResultBody
   u.result_headers = KanjiDataUtilities::ResultHeaders

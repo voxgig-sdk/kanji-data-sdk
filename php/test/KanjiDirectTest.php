@@ -73,11 +73,11 @@ function kanji_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "KANJIDATA_TEST_KANJI_ENTID" => [],
-        "KANJIDATA_TEST_LIVE" => "FALSE",
+        "KANJI_DATA_TEST_KANJI_ENTID" => [],
+        "KANJI_DATA_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["KANJIDATA_TEST_LIVE"] === "TRUE";
+    $live = $env["KANJI_DATA_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

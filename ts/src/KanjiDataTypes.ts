@@ -10,10 +10,10 @@ export interface Kanji {
   heisig_en?: string
   jlpt?: number
   kanji?: string
-  kun_reading?: any[]
-  meaning?: any[]
-  name_reading?: any[]
-  on_reading?: any[]
+  kun_readings?: any[]
+  meanings?: any[]
+  name_readings?: any[]
+  on_readings?: any[]
   stroke_count?: number
   unicode?: string
 }
@@ -30,8 +30,8 @@ export interface ReadingLoadMatch {
 }
 
 export interface Word {
-  meaning?: any[]
-  variant?: any[]
+  meanings?: any[]
+  variants?: any[]
 }
 
 export interface WordLoadMatch {

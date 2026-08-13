@@ -34,7 +34,7 @@ client = KanjiDataSDK.new
 
 ```ruby
 begin
-  # load returns the bare Kanji record (raises on error).
+  # load returns the ENTITY — call data_get for the Kanji record (raises on error).
   kanji = client.Kanji.load({ "id" => "example_id" })
   puts kanji
 rescue => err
@@ -49,7 +49,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  kanji = client.Kanji.load({ "id" => "example_id" })
+  word = client.Word.load({ "id" => "example_id" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -117,12 +117,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = KanjiDataSDK.test({
-  "entity" => { "kanji" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "word" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
-kanji = client.Kanji.load({ "id" => "test01" })
-puts kanji
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+word = client.Word.load({ "id" => "test01" })
+puts word
 ```
 
 ### Use a custom fetch function
@@ -243,10 +244,10 @@ returns a result `Hash` with these keys:
 | `heisig_en` |  |
 | `jlpt` |  |
 | `kanji` |  |
-| `kun_reading` |  |
-| `meaning` |  |
-| `name_reading` |  |
-| `on_reading` |  |
+| `kun_readings` |  |
+| `meanings` |  |
+| `name_readings` |  |
+| `on_readings` |  |
 | `stroke_count` |  |
 | `unicode` |  |
 
@@ -267,8 +268,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meaning` |  |
-| `variant` |  |
+| `meanings` |  |
+| `variants` |  |
 
 Operations: Load.
 
@@ -297,17 +298,17 @@ Create an instance: `kanji = client.Kanji`
 | `heisig_en` | `String` |  |
 | `jlpt` | `Integer` |  |
 | `kanji` | `String` |  |
-| `kun_reading` | `Array` |  |
-| `meaning` | `Array` |  |
-| `name_reading` | `Array` |  |
-| `on_reading` | `Array` |  |
+| `kun_readings` | `Array` |  |
+| `meanings` | `Array` |  |
+| `name_readings` | `Array` |  |
+| `on_readings` | `Array` |  |
 | `stroke_count` | `Integer` |  |
 | `unicode` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Kanji record (raises on error).
+# load returns the ENTITY — call data_get for the Kanji record (raises on error).
 kanji = client.Kanji.load({ "id" => "kanji_id" })
 ```
 
@@ -325,7 +326,7 @@ Create an instance: `reading = client.Reading`
 #### Example: Load
 
 ```ruby
-# load returns the bare Reading record (raises on error).
+# load returns the ENTITY — call data_get for the Reading record (raises on error).
 reading = client.Reading.load({ "id" => "reading_id" })
 ```
 
@@ -344,13 +345,13 @@ Create an instance: `word = client.Word`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meaning` | `Array` |  |
-| `variant` | `Array` |  |
+| `meanings` | `Array` |  |
+| `variants` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Word record (raises on error).
+# load returns the ENTITY — call data_get for the Word record (raises on error).
 word = client.Word.load({ "id" => "word_id" })
 ```
 
@@ -431,11 +432,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-kanji = client.Kanji
-kanji.load({ "id" => "example_id" })
+word = client.Word
+word.load({ "id" => "example_id" })
 
-# kanji.data_get now returns the kanji data from the last load
-# kanji.match_get returns the last match criteria
+# word.data_get now returns the word data from the last load
+# word.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

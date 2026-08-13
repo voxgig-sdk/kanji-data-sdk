@@ -22,16 +22,16 @@
 # @!attribute [rw] kanji
 #   @return [String, nil]
 #
-# @!attribute [rw] kun_reading
+# @!attribute [rw] kun_readings
 #   @return [Array, nil]
 #
-# @!attribute [rw] meaning
+# @!attribute [rw] meanings
 #   @return [Array, nil]
 #
-# @!attribute [rw] name_reading
+# @!attribute [rw] name_readings
 #   @return [Array, nil]
 #
-# @!attribute [rw] on_reading
+# @!attribute [rw] on_readings
 #   @return [Array, nil]
 #
 # @!attribute [rw] stroke_count
@@ -44,10 +44,10 @@ Kanji = Struct.new(
   :heisig_en,
   :jlpt,
   :kanji,
-  :kun_reading,
-  :meaning,
-  :name_reading,
-  :on_reading,
+  :kun_readings,
+  :meanings,
+  :name_readings,
+  :on_readings,
   :stroke_count,
   :unicode,
   keyword_init: true
@@ -77,14 +77,14 @@ ReadingLoadMatch = Struct.new(
 
 # Word entity data model.
 #
-# @!attribute [rw] meaning
+# @!attribute [rw] meanings
 #   @return [Array, nil]
 #
-# @!attribute [rw] variant
+# @!attribute [rw] variants
 #   @return [Array, nil]
 Word = Struct.new(
-  :meaning,
-  :variant,
+  :meanings,
+  :variants,
   keyword_init: true
 )
 

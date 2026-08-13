@@ -26,22 +26,22 @@ main: kit: entity: kanji: {
       type: "`$STRING`"
     }
     {
-      name: "kun_reading"
+      name: "kun_readings"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "meaning"
+      name: "meanings"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "name_reading"
+      name: "name_readings"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "on_reading"
+      name: "on_readings"
       req: false
       type: "`$ARRAY`"
     }

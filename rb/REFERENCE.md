@@ -105,10 +105,10 @@ kanji = client.Kanji
 | `heisig_en` | `String` | No |  |
 | `jlpt` | `Integer` | No |  |
 | `kanji` | `String` | No |  |
-| `kun_reading` | `Array` | No |  |
-| `meaning` | `Array` | No |  |
-| `name_reading` | `Array` | No |  |
-| `on_reading` | `Array` | No |  |
+| `kun_readings` | `Array` | No |  |
+| `meanings` | `Array` | No |  |
+| `name_readings` | `Array` | No |  |
+| `on_readings` | `Array` | No |  |
 | `stroke_count` | `Integer` | No |  |
 | `unicode` | `String` | No |  |
 
@@ -208,8 +208,8 @@ word = client.Word
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | `Array` | No |  |
-| `variant` | `Array` | No |  |
+| `meanings` | `Array` | No |  |
+| `variants` | `Array` | No |  |
 
 ### Operations
 

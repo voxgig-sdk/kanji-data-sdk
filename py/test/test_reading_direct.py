@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from kanjidata_sdk.utility.voxgig_struct import voxgig_struct as vs
 from kanjidata_sdk import KanjiDataSDK
-from core import helpers
+from kanjidata_sdk.core import helpers
 from test import runner
 
 
@@ -63,11 +63,11 @@ def _reading_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "KANJIDATA_TEST_READING_ENTID": {},
-        "KANJIDATA_TEST_LIVE": "FALSE",
+        "KANJI_DATA_TEST_READING_ENTID": {},
+        "KANJI_DATA_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("KANJIDATA_TEST_LIVE") == "TRUE"
+    live = env.get("KANJI_DATA_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

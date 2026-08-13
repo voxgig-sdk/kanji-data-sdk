@@ -33,7 +33,7 @@ class WordEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set KANJIDATA_TEST_WORD_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set KANJI_DATA_TEST_WORD_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -77,22 +77,22 @@ function word_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("KANJIDATA_TEST_WORD_ENTID");
+    $entid_env_raw = getenv("KANJI_DATA_TEST_WORD_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "KANJIDATA_TEST_WORD_ENTID" => $idmap,
-        "KANJIDATA_TEST_LIVE" => "FALSE",
-        "KANJIDATA_TEST_EXPLAIN" => "FALSE",
+        "KANJI_DATA_TEST_WORD_ENTID" => $idmap,
+        "KANJI_DATA_TEST_LIVE" => "FALSE",
+        "KANJI_DATA_TEST_EXPLAIN" => "FALSE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["KANJIDATA_TEST_WORD_ENTID"]);
+        $env["KANJI_DATA_TEST_WORD_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["KANJIDATA_TEST_LIVE"] === "TRUE") {
+    if ($env["KANJI_DATA_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
             ],
@@ -101,13 +101,13 @@ function word_basic_setup($extra)
         $client = new KanjiDataSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["KANJIDATA_TEST_LIVE"] === "TRUE";
+    $live = $env["KANJI_DATA_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["KANJIDATA_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["KANJI_DATA_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

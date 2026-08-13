@@ -23,8 +23,8 @@ module KanjiDataTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("KANJIDATA_TEST_LIVE")
-    override = getenv("KANJIDATA_TEST_OVERRIDE")
+    live = getenv("KANJI_DATA_TEST_LIVE")
+    override = getenv("KANJI_DATA_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module KanjiDataTestRunner
       end
     end
 
-    explain = getenv("KANJIDATA_TEST_EXPLAIN")
-    m["KANJIDATA_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("KANJI_DATA_TEST_EXPLAIN")
+    m["KANJI_DATA_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

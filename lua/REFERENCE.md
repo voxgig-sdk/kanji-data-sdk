@@ -102,10 +102,10 @@ local kanji = client:Kanji(nil)
 | `heisig_en` | `string` | No |  |
 | `jlpt` | `number` | No |  |
 | `kanji` | `string` | No |  |
-| `kun_reading` | `table` | No |  |
-| `meaning` | `table` | No |  |
-| `name_reading` | `table` | No |  |
-| `on_reading` | `table` | No |  |
+| `kun_readings` | `table` | No |  |
+| `meanings` | `table` | No |  |
+| `name_readings` | `table` | No |  |
+| `on_readings` | `table` | No |  |
 | `stroke_count` | `number` | No |  |
 | `unicode` | `string` | No |  |
 
@@ -205,8 +205,8 @@ local word = client:Word(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | `table` | No |  |
-| `variant` | `table` | No |  |
+| `meanings` | `table` | No |  |
+| `variants` | `table` | No |  |
 
 ### Operations
 

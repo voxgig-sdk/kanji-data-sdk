@@ -56,28 +56,28 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "kun_reading",
+            ["name"] = "kun_readings",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 4,
           },
           {
             ["active"] = true,
-            ["name"] = "meaning",
+            ["name"] = "meanings",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 5,
           },
           {
             ["active"] = true,
-            ["name"] = "name_reading",
+            ["name"] = "name_readings",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 6,
           },
           {
             ["active"] = true,
-            ["name"] = "on_reading",
+            ["name"] = "on_readings",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 7,
@@ -119,6 +119,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/kanji/{character}",
                 ["parts"] = {
@@ -173,6 +174,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/reading/{reading}",
                 ["parts"] = {
@@ -207,14 +209,14 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "meaning",
+            ["name"] = "meanings",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "variant",
+            ["name"] = "variants",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 1,
@@ -242,6 +244,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/words/{character}",
                 ["parts"] = {

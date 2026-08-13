@@ -144,10 +144,10 @@ const kanji = client.Kanji()
 | `heisig_en` | `string` | No |  |
 | `jlpt` | `number` | No |  |
 | `kanji` | `string` | No |  |
-| `kun_reading` | `any[]` | No |  |
-| `meaning` | `any[]` | No |  |
-| `name_reading` | `any[]` | No |  |
-| `on_reading` | `any[]` | No |  |
+| `kun_readings` | `any[]` | No |  |
+| `meanings` | `any[]` | No |  |
+| `name_readings` | `any[]` | No |  |
+| `on_readings` | `any[]` | No |  |
 | `stroke_count` | `number` | No |  |
 | `unicode` | `string` | No |  |
 
@@ -243,8 +243,8 @@ const word = client.Word()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | `any[]` | No |  |
-| `variant` | `any[]` | No |  |
+| `meanings` | `any[]` | No |  |
+| `variants` | `any[]` | No |  |
 
 ### Operations
 

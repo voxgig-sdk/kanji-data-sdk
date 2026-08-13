@@ -48,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local kanji, err = client:Kanji():load({ id = "example_id" })
+local word, err = client:Word():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Kanji():load({ id = "test01" })
+local result, err = client:Word():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -231,10 +231,10 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `heisig_en` |  |
 | `jlpt` |  |
 | `kanji` |  |
-| `kun_reading` |  |
-| `meaning` |  |
-| `name_reading` |  |
-| `on_reading` |  |
+| `kun_readings` |  |
+| `meanings` |  |
+| `name_readings` |  |
+| `on_readings` |  |
 | `stroke_count` |  |
 | `unicode` |  |
 
@@ -255,8 +255,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meaning` |  |
-| `variant` |  |
+| `meanings` |  |
+| `variants` |  |
 
 Operations: Load.
 
@@ -285,10 +285,10 @@ Create an instance: `local kanji = client:Kanji(nil)`
 | `heisig_en` | `string` |  |
 | `jlpt` | `number` |  |
 | `kanji` | `string` |  |
-| `kun_reading` | `table` |  |
-| `meaning` | `table` |  |
-| `name_reading` | `table` |  |
-| `on_reading` | `table` |  |
+| `kun_readings` | `table` |  |
+| `meanings` | `table` |  |
+| `name_readings` | `table` |  |
+| `on_readings` | `table` |  |
 | `stroke_count` | `number` |  |
 | `unicode` | `string` |  |
 
@@ -330,8 +330,8 @@ Create an instance: `local word = client:Word(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meaning` | `table` |  |
-| `variant` | `table` |  |
+| `meanings` | `table` |  |
+| `variants` | `table` |  |
 
 #### Example: Load
 
@@ -416,11 +416,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local kanji = client:Kanji()
-kanji:load({ id = "example_id" })
+local word = client:Word()
+word:load({ id = "example_id" })
 
--- kanji:data_get() now returns the kanji data from the last load
--- kanji:match_get() returns the last match criteria
+-- word:data_get() now returns the word data from the last load
+-- word:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

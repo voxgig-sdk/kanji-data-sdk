@@ -38,7 +38,7 @@ client = KanjiDataSDK()
 
 ### 3. Load a kanji
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -55,8 +55,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    kanji = client.Kanji().load({"id": "example_id"})
-    print(kanji)
+    word = client.Word().load({"id": "example_id"})
+    print(word)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = KanjiDataSDK.test()
 
-# Entity ops return the bare record and raise on error.
-kanji = client.Kanji().load({"id": "test01"})
-# kanji contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+word = client.Word().load({"id": "test01"})
+# word contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -220,7 +221,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -246,10 +247,10 @@ On error, `ok` is `False` and `err` contains the error value.
 | `heisig_en` |  |
 | `jlpt` |  |
 | `kanji` |  |
-| `kun_reading` |  |
-| `meaning` |  |
-| `name_reading` |  |
-| `on_reading` |  |
+| `kun_readings` |  |
+| `meanings` |  |
+| `name_readings` |  |
+| `on_readings` |  |
 | `stroke_count` |  |
 | `unicode` |  |
 
@@ -270,8 +271,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meaning` |  |
-| `variant` |  |
+| `meanings` |  |
+| `variants` |  |
 
 Operations: Load.
 
@@ -300,10 +301,10 @@ Create an instance: `kanji = client.Kanji()`
 | `heisig_en` | `str` |  |
 | `jlpt` | `int` |  |
 | `kanji` | `str` |  |
-| `kun_reading` | `list` |  |
-| `meaning` | `list` |  |
-| `name_reading` | `list` |  |
-| `on_reading` | `list` |  |
+| `kun_readings` | `list` |  |
+| `meanings` | `list` |  |
+| `name_readings` | `list` |  |
+| `on_readings` | `list` |  |
 | `stroke_count` | `int` |  |
 | `unicode` | `str` |  |
 
@@ -345,8 +346,8 @@ Create an instance: `word = client.Word()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meaning` | `list` |  |
-| `variant` | `list` |  |
+| `meanings` | `list` |  |
+| `variants` | `list` |  |
 
 #### Example: Load
 
@@ -430,11 +431,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-kanji = client.Kanji()
-kanji.load({"id": "example_id"})
+word = client.Word()
+word.load({"id": "example_id"})
 
-# kanji.data_get() now returns the kanji data from the last load
-# kanji.match_get() returns the last match criteria
+# word.data_get() now returns the word data from the last load
+# word.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

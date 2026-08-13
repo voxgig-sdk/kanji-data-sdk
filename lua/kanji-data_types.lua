@@ -11,10 +11,10 @@
 ---@field heisig_en? string
 ---@field jlpt? number
 ---@field kanji? string
----@field kun_reading? table
----@field meaning? table
----@field name_reading? table
----@field on_reading? table
+---@field kun_readings? table
+---@field meanings? table
+---@field name_readings? table
+---@field on_readings? table
 ---@field stroke_count? number
 ---@field unicode? string
 
@@ -27,8 +27,8 @@
 ---@field id string
 
 ---@class Word
----@field meaning? table
----@field variant? table
+---@field meanings? table
+---@field variants? table
 
 ---@class WordLoadMatch
 ---@field id string

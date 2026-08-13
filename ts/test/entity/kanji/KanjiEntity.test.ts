@@ -26,8 +26,8 @@ import {
 describe('KanjiEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when KANJIDATA_TEST_LIVE=TRUE.
-  afterEach(liveDelay('KANJIDATA_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when KANJI_DATA_TEST_LIVE=TRUE.
+  afterEach(liveDelay('KANJI_DATA_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = KanjiDataSDK.test()

@@ -2,18 +2,18 @@
   "existing": {
     "word": {
       "WORD00": {
-        "meaning": [],
-        "variant": [],
+        "meanings": [],
+        "variants": [],
         "id": "WORD00"
       },
       "WORD01": {
-        "meaning": [],
-        "variant": [],
+        "meanings": [],
+        "variants": [],
         "id": "WORD01"
       },
       "WORD02": {
-        "meaning": [],
-        "variant": [],
+        "meanings": [],
+        "variants": [],
         "id": "WORD02"
       }
     }
@@ -21,8 +21,8 @@
   "new": {
     "word": {
       "word_ref01": {
-        "meaning": [],
-        "variant": []
+        "meanings": [],
+        "variants": []
       }
     }
   }

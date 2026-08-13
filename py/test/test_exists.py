@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# KanjiData SDK exists test
 
 import pytest
 from kanjidata_sdk import KanjiDataSDK

@@ -53,8 +53,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const kanji = await client.Kanji().load({ id: "example_id" })
-  console.log(kanji)
+  const word = await client.Word().load({ id: "example_id" })
+  console.log(word)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -120,9 +120,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = KanjiDataSDK.test()
 
-const kanji = await client.Kanji().load({ id: 'test01' })
-// kanji is a bare entity populated with mock response data
-console.log(kanji)
+const word = await client.Word().load({ id: 'test01' })
+// word is the entity, populated with mock response data
+// — call word.data() for the record itself
+console.log(word)
 ```
 
 You can also use the instance method:
@@ -137,7 +138,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Kanji()
+const entity = client.Word()
 
 // First call runs the operation and stores its result
 await entity.load({ id: 'example' })
@@ -290,10 +291,10 @@ The `prepare()` method returns:
 | `heisig_en` |  |
 | `jlpt` |  |
 | `kanji` |  |
-| `kun_reading` |  |
-| `meaning` |  |
-| `name_reading` |  |
-| `on_reading` |  |
+| `kun_readings` |  |
+| `meanings` |  |
+| `name_readings` |  |
+| `on_readings` |  |
 | `stroke_count` |  |
 | `unicode` |  |
 
@@ -314,8 +315,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meaning` |  |
-| `variant` |  |
+| `meanings` |  |
+| `variants` |  |
 
 Operations: load.
 
@@ -344,10 +345,10 @@ Create an instance: `const kanji = client.Kanji()`
 | `heisig_en` | `string` |  |
 | `jlpt` | `number` |  |
 | `kanji` | `string` |  |
-| `kun_reading` | `any[]` |  |
-| `meaning` | `any[]` |  |
-| `name_reading` | `any[]` |  |
-| `on_reading` | `any[]` |  |
+| `kun_readings` | `any[]` |  |
+| `meanings` | `any[]` |  |
+| `name_readings` | `any[]` |  |
+| `on_readings` | `any[]` |  |
 | `stroke_count` | `number` |  |
 | `unicode` | `string` |  |
 
@@ -389,8 +390,8 @@ Create an instance: `const word = client.Word()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meaning` | `any[]` |  |
-| `variant` | `any[]` |  |
+| `meanings` | `any[]` |  |
+| `variants` | `any[]` |  |
 
 #### Example: Load
 
@@ -468,11 +469,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const kanji = client.Kanji()
-await kanji.load({ id: "example_id" })
+const word = client.Word()
+await word.load({ id: "example_id" })
 
-// kanji.data() now returns the kanji data from the last `load`
-// kanji.match() returns { id: "example_id" }
+// word.data() now returns the word data from the last `load`
+// word.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

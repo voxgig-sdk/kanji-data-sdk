@@ -104,10 +104,10 @@ $kanji = $client->Kanji();
 | `heisig_en` | `string` | No |  |
 | `jlpt` | `int` | No |  |
 | `kanji` | `string` | No |  |
-| `kun_reading` | `array` | No |  |
-| `meaning` | `array` | No |  |
-| `name_reading` | `array` | No |  |
-| `on_reading` | `array` | No |  |
+| `kun_readings` | `array` | No |  |
+| `meanings` | `array` | No |  |
+| `name_readings` | `array` | No |  |
+| `on_readings` | `array` | No |  |
 | `stroke_count` | `int` | No |  |
 | `unicode` | `string` | No |  |
 
@@ -207,8 +207,8 @@ $word = $client->Word();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meaning` | `array` | No |  |
-| `variant` | `array` | No |  |
+| `meanings` | `array` | No |  |
+| `variants` | `array` | No |  |
 
 ### Operations
 

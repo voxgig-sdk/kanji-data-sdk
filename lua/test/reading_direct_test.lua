@@ -68,11 +68,11 @@ function reading_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["KANJIDATA_TEST_READING_ENTID"] = {},
-    ["KANJIDATA_TEST_LIVE"] = "FALSE",
+    ["KANJI_DATA_TEST_READING_ENTID"] = {},
+    ["KANJI_DATA_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["KANJIDATA_TEST_LIVE"] == "TRUE"
+  local live = env["KANJI_DATA_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

@@ -19,10 +19,10 @@ class Kanji
     public ?string $heisig_en = null;
     public ?int $jlpt = null;
     public ?string $kanji = null;
-    public ?array $kun_reading = null;
-    public ?array $meaning = null;
-    public ?array $name_reading = null;
-    public ?array $on_reading = null;
+    public ?array $kun_readings = null;
+    public ?array $meanings = null;
+    public ?array $name_readings = null;
+    public ?array $on_readings = null;
     public ?int $stroke_count = null;
     public ?string $unicode = null;
 }
@@ -47,8 +47,8 @@ class ReadingLoadMatch
 /** Word entity data model. */
 class Word
 {
-    public ?array $meaning = null;
-    public ?array $variant = null;
+    public ?array $meanings = null;
+    public ?array $variants = null;
 }
 
 /** Request payload for Word#load. */
