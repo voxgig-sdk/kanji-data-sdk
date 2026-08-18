@@ -40,7 +40,7 @@ class KanjiDataSDK
         $utility = new KanjiDataUtility();
         $this->_utility = $utility;
 
-        $config = KanjiDataConfig::make_config();
+        $config = KanjiDataConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

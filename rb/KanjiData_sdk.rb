@@ -28,7 +28,7 @@ class KanjiDataSDK
     utility = KanjiDataUtility.new
     @_utility = utility
 
-    config = KanjiDataConfig.make_config
+    config = KanjiDataConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

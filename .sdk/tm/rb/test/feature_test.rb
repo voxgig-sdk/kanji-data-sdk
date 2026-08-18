@@ -15,7 +15,7 @@ require_relative "../KanjiData_sdk"
 module KanjiDataFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = KanjiDataConfig.make_config["feature"]
+    f = KanjiDataConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

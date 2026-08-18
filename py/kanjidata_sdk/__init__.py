@@ -23,8 +23,8 @@ class KanjiDataSDK:
         utility = KanjiDataUtility()
         self._utility = utility
 
-        from kanjidata_sdk.config import make_config
-        config = make_config()
+        from kanjidata_sdk.config import shared_config
+        config = shared_config()
 
         self._rootctx = utility.make_context({
             "client": self,
