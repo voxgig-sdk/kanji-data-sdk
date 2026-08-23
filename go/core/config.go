@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "KanjiData",
+			"slug": "kanji-data",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -35,42 +38,52 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "grade",
+						"short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "heisig_en",
+						"short": "Heisig keyword in English",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "jlpt",
+						"short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "kanji",
+						"short": "The kanji character",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "kun_readings",
+						"short": "Kun (Japanese) readings in hiragana",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "meanings",
+						"short": "English meanings of the kanji",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "name_readings",
+						"short": "Readings used in names",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "on_readings",
+						"short": "On (Chinese-derived) readings in katakana",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "stroke_count",
+						"short": "Number of strokes in the kanji",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "unicode",
+						"short": "Unicode codepoint in hexadecimal",
 						"type": "`$STRING`",
 					},
 				},
@@ -176,10 +189,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "meanings",
+						"short": "Meanings of the word",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "variants",
+						"short": "Different written and pronunciation variants",
 						"type": "`$ARRAY`",
 					},
 				},

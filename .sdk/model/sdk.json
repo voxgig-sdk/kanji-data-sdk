@@ -36,60 +36,70 @@
               "active": true,
               "name": "grade",
               "req": false,
+              "short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "heisig_en",
               "req": false,
+              "short": "Heisig keyword in English",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "jlpt",
               "req": false,
+              "short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "kanji",
               "req": false,
+              "short": "The kanji character",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "kun_readings",
               "req": false,
+              "short": "Kun (Japanese) readings in hiragana",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "meanings",
               "req": false,
+              "short": "English meanings of the kanji",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "name_readings",
               "req": false,
+              "short": "Readings used in names",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "on_readings",
               "req": false,
+              "short": "On (Chinese-derived) readings in katakana",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "stroke_count",
               "req": false,
+              "short": "Number of strokes in the kanji",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "unicode",
               "req": false,
+              "short": "Unicode codepoint in hexadecimal",
               "type": "`$STRING`"
             }
           ],
@@ -209,12 +219,14 @@
               "active": true,
               "name": "meanings",
               "req": false,
+              "short": "Meanings of the word",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "variants",
               "req": false,
+              "short": "Different written and pronunciation variants",
               "type": "`$ARRAY`"
             }
           ],

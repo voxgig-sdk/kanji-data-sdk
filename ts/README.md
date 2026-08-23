@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -287,16 +287,16 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `grade` |  |
-| `heisig_en` |  |
-| `jlpt` |  |
-| `kanji` |  |
-| `kun_readings` |  |
-| `meanings` |  |
-| `name_readings` |  |
-| `on_readings` |  |
-| `stroke_count` |  |
-| `unicode` |  |
+| `grade` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | Heisig keyword in English |
+| `jlpt` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | The kanji character |
+| `kun_readings` | Kun (Japanese) readings in hiragana |
+| `meanings` | English meanings of the kanji |
+| `name_readings` | Readings used in names |
+| `on_readings` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | Number of strokes in the kanji |
+| `unicode` | Unicode codepoint in hexadecimal |
 
 Operations: load.
 
@@ -315,8 +315,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meanings` |  |
-| `variants` |  |
+| `meanings` | Meanings of the word |
+| `variants` | Different written and pronunciation variants |
 
 Operations: load.
 
@@ -341,16 +341,16 @@ Create an instance: `const kanji = client.Kanji()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `grade` | `number` |  |
-| `heisig_en` | `string` |  |
-| `jlpt` | `number` |  |
-| `kanji` | `string` |  |
-| `kun_readings` | `any[]` |  |
-| `meanings` | `any[]` |  |
-| `name_readings` | `any[]` |  |
-| `on_readings` | `any[]` |  |
-| `stroke_count` | `number` |  |
-| `unicode` | `string` |  |
+| `grade` | `number` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `string` | Heisig keyword in English |
+| `jlpt` | `number` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `string` | The kanji character |
+| `kun_readings` | `any[]` | Kun (Japanese) readings in hiragana |
+| `meanings` | `any[]` | English meanings of the kanji |
+| `name_readings` | `any[]` | Readings used in names |
+| `on_readings` | `any[]` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `number` | Number of strokes in the kanji |
+| `unicode` | `string` | Unicode codepoint in hexadecimal |
 
 #### Example: Load
 
@@ -390,8 +390,8 @@ Create an instance: `const word = client.Word()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meanings` | `any[]` |  |
-| `variants` | `any[]` |  |
+| `meanings` | `any[]` | Meanings of the word |
+| `variants` | `any[]` | Different written and pronunciation variants |
 
 #### Example: Load
 

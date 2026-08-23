@@ -33,6 +33,9 @@ class KanjiDataConfig
         return [
             "main" => [
                 "name" => "KanjiData",
+                "slug" => "kanji-data",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -57,42 +60,52 @@ class KanjiDataConfig
           'fields' => [
             [
               'name' => 'grade',
+              'short' => 'School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'heisig_en',
+              'short' => 'Heisig keyword in English',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'jlpt',
+              'short' => 'JLPT (Japanese Language Proficiency Test) level (1-5)',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'kanji',
+              'short' => 'The kanji character',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'kun_readings',
+              'short' => 'Kun (Japanese) readings in hiragana',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'meanings',
+              'short' => 'English meanings of the kanji',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'name_readings',
+              'short' => 'Readings used in names',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'on_readings',
+              'short' => 'On (Chinese-derived) readings in katakana',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'stroke_count',
+              'short' => 'Number of strokes in the kanji',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'unicode',
+              'short' => 'Unicode codepoint in hexadecimal',
               'type' => '`$STRING`',
             ],
           ],
@@ -198,10 +211,12 @@ class KanjiDataConfig
           'fields' => [
             [
               'name' => 'meanings',
+              'short' => 'Meanings of the word',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'variants',
+              'short' => 'Different written and pronunciation variants',
               'type' => '`$ARRAY`',
             ],
           ],

@@ -240,16 +240,16 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `grade` |  |
-| `heisig_en` |  |
-| `jlpt` |  |
-| `kanji` |  |
-| `kun_readings` |  |
-| `meanings` |  |
-| `name_readings` |  |
-| `on_readings` |  |
-| `stroke_count` |  |
-| `unicode` |  |
+| `grade` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | Heisig keyword in English |
+| `jlpt` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | The kanji character |
+| `kun_readings` | Kun (Japanese) readings in hiragana |
+| `meanings` | English meanings of the kanji |
+| `name_readings` | Readings used in names |
+| `on_readings` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | Number of strokes in the kanji |
+| `unicode` | Unicode codepoint in hexadecimal |
 
 Operations: Load.
 
@@ -268,8 +268,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meanings` |  |
-| `variants` |  |
+| `meanings` | Meanings of the word |
+| `variants` | Different written and pronunciation variants |
 
 Operations: Load.
 
@@ -294,16 +294,16 @@ Create an instance: `kanji = client.Kanji`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `grade` | `Integer` |  |
-| `heisig_en` | `String` |  |
-| `jlpt` | `Integer` |  |
-| `kanji` | `String` |  |
-| `kun_readings` | `Array` |  |
-| `meanings` | `Array` |  |
-| `name_readings` | `Array` |  |
-| `on_readings` | `Array` |  |
-| `stroke_count` | `Integer` |  |
-| `unicode` | `String` |  |
+| `grade` | `Integer` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `String` | Heisig keyword in English |
+| `jlpt` | `Integer` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `String` | The kanji character |
+| `kun_readings` | `Array` | Kun (Japanese) readings in hiragana |
+| `meanings` | `Array` | English meanings of the kanji |
+| `name_readings` | `Array` | Readings used in names |
+| `on_readings` | `Array` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `Integer` | Number of strokes in the kanji |
+| `unicode` | `String` | Unicode codepoint in hexadecimal |
 
 #### Example: Load
 
@@ -345,8 +345,8 @@ Create an instance: `word = client.Word`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meanings` | `Array` |  |
-| `variants` | `Array` |  |
+| `meanings` | `Array` | Meanings of the word |
+| `variants` | `Array` | Different written and pronunciation variants |
 
 #### Example: Load
 

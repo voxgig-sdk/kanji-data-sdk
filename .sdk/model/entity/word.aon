@@ -8,11 +8,13 @@ main: kit: entity: word: {
     {
       name: "meanings"
       req: false
+      short: "Meanings of the word"
       type: "`$ARRAY`"
     }
     {
       name: "variants"
       req: false
+      short: "Different written and pronunciation variants"
       type: "`$ARRAY`"
     }
   ]

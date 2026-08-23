@@ -98,16 +98,16 @@ local kanji = client:Kanji(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | `number` | No |  |
-| `heisig_en` | `string` | No |  |
-| `jlpt` | `number` | No |  |
-| `kanji` | `string` | No |  |
-| `kun_readings` | `table` | No |  |
-| `meanings` | `table` | No |  |
-| `name_readings` | `table` | No |  |
-| `on_readings` | `table` | No |  |
-| `stroke_count` | `number` | No |  |
-| `unicode` | `string` | No |  |
+| `grade` | `number` | No | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `string` | No | Heisig keyword in English |
+| `jlpt` | `number` | No | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `string` | No | The kanji character |
+| `kun_readings` | `table` | No | Kun (Japanese) readings in hiragana |
+| `meanings` | `table` | No | English meanings of the kanji |
+| `name_readings` | `table` | No | Readings used in names |
+| `on_readings` | `table` | No | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `number` | No | Number of strokes in the kanji |
+| `unicode` | `string` | No | Unicode codepoint in hexadecimal |
 
 ### Operations
 
@@ -205,8 +205,8 @@ local word = client:Word(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meanings` | `table` | No |  |
-| `variants` | `table` | No |  |
+| `meanings` | `table` | No | Meanings of the word |
+| `variants` | `table` | No | Different written and pronunciation variants |
 
 ### Operations
 

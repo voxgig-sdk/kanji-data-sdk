@@ -100,16 +100,16 @@ $kanji = $client->Kanji();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | `int` | No |  |
-| `heisig_en` | `string` | No |  |
-| `jlpt` | `int` | No |  |
-| `kanji` | `string` | No |  |
-| `kun_readings` | `array` | No |  |
-| `meanings` | `array` | No |  |
-| `name_readings` | `array` | No |  |
-| `on_readings` | `array` | No |  |
-| `stroke_count` | `int` | No |  |
-| `unicode` | `string` | No |  |
+| `grade` | `int` | No | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `string` | No | Heisig keyword in English |
+| `jlpt` | `int` | No | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `string` | No | The kanji character |
+| `kun_readings` | `array` | No | Kun (Japanese) readings in hiragana |
+| `meanings` | `array` | No | English meanings of the kanji |
+| `name_readings` | `array` | No | Readings used in names |
+| `on_readings` | `array` | No | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `int` | No | Number of strokes in the kanji |
+| `unicode` | `string` | No | Unicode codepoint in hexadecimal |
 
 ### Operations
 
@@ -207,8 +207,8 @@ $word = $client->Word();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meanings` | `array` | No |  |
-| `variants` | `array` | No |  |
+| `meanings` | `array` | No | Meanings of the word |
+| `variants` | `array` | No | Different written and pronunciation variants |
 
 ### Operations
 

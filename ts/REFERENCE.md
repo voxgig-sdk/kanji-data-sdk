@@ -140,16 +140,16 @@ const kanji = client.Kanji()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `grade` | `number` | No |  |
-| `heisig_en` | `string` | No |  |
-| `jlpt` | `number` | No |  |
-| `kanji` | `string` | No |  |
-| `kun_readings` | `any[]` | No |  |
-| `meanings` | `any[]` | No |  |
-| `name_readings` | `any[]` | No |  |
-| `on_readings` | `any[]` | No |  |
-| `stroke_count` | `number` | No |  |
-| `unicode` | `string` | No |  |
+| `grade` | `number` | No | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `string` | No | Heisig keyword in English |
+| `jlpt` | `number` | No | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `string` | No | The kanji character |
+| `kun_readings` | `any[]` | No | Kun (Japanese) readings in hiragana |
+| `meanings` | `any[]` | No | English meanings of the kanji |
+| `name_readings` | `any[]` | No | Readings used in names |
+| `on_readings` | `any[]` | No | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `number` | No | Number of strokes in the kanji |
+| `unicode` | `string` | No | Unicode codepoint in hexadecimal |
 
 ### Operations
 
@@ -243,8 +243,8 @@ const word = client.Word()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `meanings` | `any[]` | No |  |
-| `variants` | `any[]` | No |  |
+| `meanings` | `any[]` | No | Meanings of the word |
+| `variants` | `any[]` | No | Different written and pronunciation variants |
 
 ### Operations
 

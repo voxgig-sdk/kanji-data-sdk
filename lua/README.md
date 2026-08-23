@@ -227,16 +227,16 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `grade` |  |
-| `heisig_en` |  |
-| `jlpt` |  |
-| `kanji` |  |
-| `kun_readings` |  |
-| `meanings` |  |
-| `name_readings` |  |
-| `on_readings` |  |
-| `stroke_count` |  |
-| `unicode` |  |
+| `grade` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | Heisig keyword in English |
+| `jlpt` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | The kanji character |
+| `kun_readings` | Kun (Japanese) readings in hiragana |
+| `meanings` | English meanings of the kanji |
+| `name_readings` | Readings used in names |
+| `on_readings` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | Number of strokes in the kanji |
+| `unicode` | Unicode codepoint in hexadecimal |
 
 Operations: Load.
 
@@ -255,8 +255,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meanings` |  |
-| `variants` |  |
+| `meanings` | Meanings of the word |
+| `variants` | Different written and pronunciation variants |
 
 Operations: Load.
 
@@ -281,16 +281,16 @@ Create an instance: `local kanji = client:Kanji(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `grade` | `number` |  |
-| `heisig_en` | `string` |  |
-| `jlpt` | `number` |  |
-| `kanji` | `string` |  |
-| `kun_readings` | `table` |  |
-| `meanings` | `table` |  |
-| `name_readings` | `table` |  |
-| `on_readings` | `table` |  |
-| `stroke_count` | `number` |  |
-| `unicode` | `string` |  |
+| `grade` | `number` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `string` | Heisig keyword in English |
+| `jlpt` | `number` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `string` | The kanji character |
+| `kun_readings` | `table` | Kun (Japanese) readings in hiragana |
+| `meanings` | `table` | English meanings of the kanji |
+| `name_readings` | `table` | Readings used in names |
+| `on_readings` | `table` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `number` | Number of strokes in the kanji |
+| `unicode` | `string` | Unicode codepoint in hexadecimal |
 
 #### Example: Load
 
@@ -330,8 +330,8 @@ Create an instance: `local word = client:Word(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meanings` | `table` |  |
-| `variants` | `table` |  |
+| `meanings` | `table` | Meanings of the word |
+| `variants` | `table` | Different written and pronunciation variants |
 
 #### Example: Load
 

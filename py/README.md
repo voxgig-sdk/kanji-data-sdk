@@ -243,16 +243,16 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `grade` |  |
-| `heisig_en` |  |
-| `jlpt` |  |
-| `kanji` |  |
-| `kun_readings` |  |
-| `meanings` |  |
-| `name_readings` |  |
-| `on_readings` |  |
-| `stroke_count` |  |
-| `unicode` |  |
+| `grade` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | Heisig keyword in English |
+| `jlpt` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | The kanji character |
+| `kun_readings` | Kun (Japanese) readings in hiragana |
+| `meanings` | English meanings of the kanji |
+| `name_readings` | Readings used in names |
+| `on_readings` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | Number of strokes in the kanji |
+| `unicode` | Unicode codepoint in hexadecimal |
 
 Operations: Load.
 
@@ -271,8 +271,8 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `meanings` |  |
-| `variants` |  |
+| `meanings` | Meanings of the word |
+| `variants` | Different written and pronunciation variants |
 
 Operations: Load.
 
@@ -297,16 +297,16 @@ Create an instance: `kanji = client.Kanji()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `grade` | `int` |  |
-| `heisig_en` | `str` |  |
-| `jlpt` | `int` |  |
-| `kanji` | `str` |  |
-| `kun_readings` | `list` |  |
-| `meanings` | `list` |  |
-| `name_readings` | `list` |  |
-| `on_readings` | `list` |  |
-| `stroke_count` | `int` |  |
-| `unicode` | `str` |  |
+| `grade` | `int` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
+| `heisig_en` | `str` | Heisig keyword in English |
+| `jlpt` | `int` | JLPT (Japanese Language Proficiency Test) level (1-5) |
+| `kanji` | `str` | The kanji character |
+| `kun_readings` | `list` | Kun (Japanese) readings in hiragana |
+| `meanings` | `list` | English meanings of the kanji |
+| `name_readings` | `list` | Readings used in names |
+| `on_readings` | `list` | On (Chinese-derived) readings in katakana |
+| `stroke_count` | `int` | Number of strokes in the kanji |
+| `unicode` | `str` | Unicode codepoint in hexadecimal |
 
 #### Example: Load
 
@@ -346,8 +346,8 @@ Create an instance: `word = client.Word()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `meanings` | `list` |  |
-| `variants` | `list` |  |
+| `meanings` | `list` | Meanings of the word |
+| `variants` | `list` | Different written and pronunciation variants |
 
 #### Example: Load
 
