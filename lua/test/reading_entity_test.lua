@@ -44,10 +44,14 @@ describe("ReadingEntity", function()
 
     -- LOAD
     local reading_ref01_ent = client:Reading(nil)
-    local reading_ref01_match_dt0 = {}
+    local reading_ref01_match_dt0 = {
+      id = reading_ref01_data["id"],
+    }
     local reading_ref01_data_dt0_loaded, err = reading_ref01_ent:load(reading_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(reading_ref01_data_dt0_loaded)
+    local reading_ref01_data_dt0_load_result = helpers.to_map(type(reading_ref01_data_dt0_loaded) == 'table' and reading_ref01_data_dt0_loaded.data_get and reading_ref01_data_dt0_loaded:data_get() or reading_ref01_data_dt0_loaded)
+    assert.is_not_nil(reading_ref01_data_dt0_load_result)
+    assert.are.equal(reading_ref01_data_dt0_load_result["id"], reading_ref01_data["id"])
 
   end)
 end)

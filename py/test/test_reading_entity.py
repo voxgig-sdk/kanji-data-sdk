@@ -48,9 +48,13 @@ class TestReadingEntity:
 
         # LOAD
         reading_ref01_ent = client.Reading(None)
-        reading_ref01_match_dt0 = {}
+        reading_ref01_match_dt0 = {
+            "id": reading_ref01_data["id"],
+        }
         reading_ref01_data_dt0_loaded = reading_ref01_ent.load(reading_ref01_match_dt0, None)
-        assert reading_ref01_data_dt0_loaded is not None
+        reading_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(reading_ref01_data_dt0_loaded))
+        assert reading_ref01_data_dt0_load_result is not None
+        assert reading_ref01_data_dt0_load_result["id"] == reading_ref01_data["id"]
 
 
 

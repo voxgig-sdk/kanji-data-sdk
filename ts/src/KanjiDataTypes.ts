@@ -8,6 +8,7 @@
 export interface Kanji {
   grade?: number
   heisig_en?: string
+  id?: string
   jlpt?: number
   kanji?: string
   kun_readings?: any[]
@@ -23,6 +24,7 @@ export interface KanjiLoadMatch {
 }
 
 export interface Reading {
+  id?: string
 }
 
 export interface ReadingLoadMatch {
@@ -30,6 +32,7 @@ export interface ReadingLoadMatch {
 }
 
 export interface Word {
+  id?: string
   meanings?: any[]
   variants?: any[]
 }

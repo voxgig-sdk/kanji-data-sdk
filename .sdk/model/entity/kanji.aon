@@ -18,6 +18,11 @@ main: kit: entity: kanji: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "jlpt"
       req: false
       short: "JLPT (Japanese Language Proficiency Test) level (1-5)"
@@ -66,6 +71,11 @@ main: kit: entity: kanji: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "kanji"
   op: {

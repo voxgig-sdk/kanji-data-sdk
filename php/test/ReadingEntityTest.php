@@ -48,9 +48,13 @@ class ReadingEntityTest extends TestCase
 
         // LOAD
         $reading_ref01_ent = $client->Reading(null);
-        $reading_ref01_match_dt0 = [];
+        $reading_ref01_match_dt0 = [
+            "id" => $reading_ref01_data["id"],
+        ];
         $reading_ref01_data_dt0_loaded = $reading_ref01_ent->load($reading_ref01_match_dt0, null);
-        $this->assertNotNull($reading_ref01_data_dt0_loaded);
+        $reading_ref01_data_dt0_load_result = Helpers::to_map(is_object($reading_ref01_data_dt0_loaded) && method_exists($reading_ref01_data_dt0_loaded, 'data_get') ? $reading_ref01_data_dt0_loaded->data_get() : $reading_ref01_data_dt0_loaded);
+        $this->assertNotNull($reading_ref01_data_dt0_load_result);
+        $this->assertEquals($reading_ref01_data_dt0_load_result["id"], $reading_ref01_data["id"]);
 
     }
 }

@@ -28,6 +28,7 @@ module KanjiDataConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -52,6 +53,10 @@ module KanjiDataConfig
             {
               "name" => "heisig_en",
               "short" => "Heisig keyword in English",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {
@@ -144,7 +149,12 @@ module KanjiDataConfig
           },
         },
         "reading" => {
-          "fields" => [],
+          "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+          ],
           "name" => "reading",
           "op" => {
             "load" => {
@@ -195,6 +205,10 @@ module KanjiDataConfig
         },
         "word" => {
           "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
             {
               "name" => "meanings",
               "short" => "Meanings of the word",

@@ -16,6 +16,9 @@
 # @!attribute [rw] heisig_en
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] jlpt
 #   @return [Integer, nil]
 #
@@ -42,6 +45,7 @@
 Kanji = Struct.new(
   :grade,
   :heisig_en,
+  :id,
   :jlpt,
   :kanji,
   :kun_readings,
@@ -63,8 +67,13 @@ KanjiLoadMatch = Struct.new(
 )
 
 # Reading entity data model.
-class Reading
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+Reading = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for Reading#load.
 #
@@ -77,12 +86,16 @@ ReadingLoadMatch = Struct.new(
 
 # Word entity data model.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] meanings
 #   @return [Array, nil]
 #
 # @!attribute [rw] variants
 #   @return [Array, nil]
 Word = Struct.new(
+  :id,
   :meanings,
   :variants,
   keyword_init: true

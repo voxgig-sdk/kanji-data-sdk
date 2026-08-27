@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -79,6 +80,10 @@ class Config {
         {
           "name": "heisig_en",
           "short": "Heisig keyword in English",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "id",
           "type": "`$STRING`"
         },
         {
@@ -171,7 +176,12 @@ class Config {
       }
     },
     "reading": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
       "name": "reading",
       "op": {
         "load": {
@@ -222,6 +232,10 @@ class Config {
     },
     "word": {
       "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        },
         {
           "name": "meanings",
           "short": "Meanings of the word",

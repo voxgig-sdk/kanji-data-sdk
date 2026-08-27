@@ -48,9 +48,13 @@ class KanjiEntityTest extends TestCase
 
         // LOAD
         $kanji_ref01_ent = $client->Kanji(null);
-        $kanji_ref01_match_dt0 = [];
+        $kanji_ref01_match_dt0 = [
+            "id" => $kanji_ref01_data["id"],
+        ];
         $kanji_ref01_data_dt0_loaded = $kanji_ref01_ent->load($kanji_ref01_match_dt0, null);
-        $this->assertNotNull($kanji_ref01_data_dt0_loaded);
+        $kanji_ref01_data_dt0_load_result = Helpers::to_map(is_object($kanji_ref01_data_dt0_loaded) && method_exists($kanji_ref01_data_dt0_loaded, 'data_get') ? $kanji_ref01_data_dt0_loaded->data_get() : $kanji_ref01_data_dt0_loaded);
+        $this->assertNotNull($kanji_ref01_data_dt0_load_result);
+        $this->assertEquals($kanji_ref01_data_dt0_load_result["id"], $kanji_ref01_data["id"]);
 
     }
 }

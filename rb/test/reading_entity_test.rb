@@ -41,9 +41,13 @@ class ReadingEntityTest < Minitest::Test
 
     # LOAD
     reading_ref01_ent = client.Reading(nil)
-    reading_ref01_match_dt0 = {}
+    reading_ref01_match_dt0 = {
+      "id" => reading_ref01_data["id"],
+    }
     reading_ref01_data_dt0_loaded = reading_ref01_ent.load(reading_ref01_match_dt0, nil)
-    assert !reading_ref01_data_dt0_loaded.nil?
+    reading_ref01_data_dt0_load_result = Helpers.to_map(reading_ref01_data_dt0_loaded.respond_to?(:data_get) ? reading_ref01_data_dt0_loaded.data_get : reading_ref01_data_dt0_loaded)
+    assert !reading_ref01_data_dt0_load_result.nil?
+    assert_equal reading_ref01_data_dt0_load_result["id"], reading_ref01_data["id"]
 
   end
 end

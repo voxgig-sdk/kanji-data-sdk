@@ -61,13 +61,19 @@ func TestKanjiEntity(t *testing.T) {
 
 		// LOAD
 		kanjiRef01Ent := client.Kanji(nil)
-		kanjiRef01MatchDt0 := map[string]any{}
+		kanjiRef01MatchDt0 := map[string]any{
+			"id": kanjiRef01Data["id"],
+		}
 		kanjiRef01DataDt0Loaded, err := kanjiRef01Ent.Load(kanjiRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if kanjiRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		kanjiRef01DataDt0LoadResult := core.ToMapAny(entityData(kanjiRef01DataDt0Loaded))
+		if kanjiRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if kanjiRef01DataDt0LoadResult["id"] != kanjiRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

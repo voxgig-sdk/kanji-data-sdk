@@ -59,9 +59,12 @@ describe('ReadingEntity', async () => {
 
     let reading_ref01_data = Object.values(setup.data.existing.reading)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const reading_ref01_ent = client.Reading()
+    const reading_ref01_match_dt0: any = {}
+    reading_ref01_match_dt0.id = reading_ref01_data.id
+    const reading_ref01_data_dt0 = (await reading_ref01_ent.load(reading_ref01_match_dt0)).data()
+    assert(reading_ref01_data_dt0.id === reading_ref01_data.id)
 
 
   })

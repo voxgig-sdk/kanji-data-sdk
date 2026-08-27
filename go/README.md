@@ -262,6 +262,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | --- | --- |
 | `"grade"` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `"heisig_en"` | Heisig keyword in English |
+| `"id"` |  |
 | `"jlpt"` | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `"kanji"` | The kanji character |
 | `"kun_readings"` | Kun (Japanese) readings in hiragana |
@@ -279,6 +280,7 @@ API path: `/kanji/{character}`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 
 Operations: Load.
 
@@ -288,6 +290,7 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"meanings"` | Meanings of the word |
 | `"variants"` | Different written and pronunciation variants |
 
@@ -316,6 +319,7 @@ Create an instance: `kanji := client.Kanji(nil)`
 | --- | --- | --- |
 | `grade` | `int` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `heisig_en` | `string` | Heisig keyword in English |
+| `id` | `string` |  |
 | `jlpt` | `int` | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `kanji` | `string` | The kanji character |
 | `kun_readings` | `[]any` | Kun (Japanese) readings in hiragana |
@@ -346,6 +350,12 @@ Create an instance: `reading := client.Reading(nil)`
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+
 #### Example: Load
 
 ```go
@@ -371,6 +381,7 @@ Create an instance: `word := client.Word(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `meanings` | `[]any` | Meanings of the word |
 | `variants` | `[]any` | Different written and pronunciation variants |
 

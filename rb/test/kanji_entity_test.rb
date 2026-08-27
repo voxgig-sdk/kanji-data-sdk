@@ -41,9 +41,13 @@ class KanjiEntityTest < Minitest::Test
 
     # LOAD
     kanji_ref01_ent = client.Kanji(nil)
-    kanji_ref01_match_dt0 = {}
+    kanji_ref01_match_dt0 = {
+      "id" => kanji_ref01_data["id"],
+    }
     kanji_ref01_data_dt0_loaded = kanji_ref01_ent.load(kanji_ref01_match_dt0, nil)
-    assert !kanji_ref01_data_dt0_loaded.nil?
+    kanji_ref01_data_dt0_load_result = Helpers.to_map(kanji_ref01_data_dt0_loaded.respond_to?(:data_get) ? kanji_ref01_data_dt0_loaded.data_get : kanji_ref01_data_dt0_loaded)
+    assert !kanji_ref01_data_dt0_load_result.nil?
+    assert_equal kanji_ref01_data_dt0_load_result["id"], kanji_ref01_data["id"]
 
   end
 end

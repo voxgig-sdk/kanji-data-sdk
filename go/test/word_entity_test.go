@@ -61,13 +61,19 @@ func TestWordEntity(t *testing.T) {
 
 		// LOAD
 		wordRef01Ent := client.Word(nil)
-		wordRef01MatchDt0 := map[string]any{}
+		wordRef01MatchDt0 := map[string]any{
+			"id": wordRef01Data["id"],
+		}
 		wordRef01DataDt0Loaded, err := wordRef01Ent.Load(wordRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if wordRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		wordRef01DataDt0LoadResult := core.ToMapAny(entityData(wordRef01DataDt0Loaded))
+		if wordRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if wordRef01DataDt0LoadResult["id"] != wordRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

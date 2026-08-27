@@ -16,6 +16,7 @@ import (
 type Kanji struct {
 	Grade *int `json:"grade,omitempty"`
 	HeisigEn *string `json:"heisig_en,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Jlpt *int `json:"jlpt,omitempty"`
 	Kanji *string `json:"kanji,omitempty"`
 	KunReadings *[]any `json:"kun_readings,omitempty"`
@@ -33,6 +34,7 @@ type KanjiLoadMatch struct {
 
 // Reading is the typed data model for the reading entity.
 type Reading struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // ReadingLoadMatch is the typed request payload for Reading.LoadTyped.
@@ -42,6 +44,7 @@ type ReadingLoadMatch struct {
 
 // Word is the typed data model for the word entity.
 type Word struct {
+	Id *string `json:"id,omitempty"`
 	Meanings *[]any `json:"meanings,omitempty"`
 	Variants *[]any `json:"variants,omitempty"`
 }

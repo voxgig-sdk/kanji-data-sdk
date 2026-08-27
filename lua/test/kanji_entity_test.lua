@@ -44,10 +44,14 @@ describe("KanjiEntity", function()
 
     -- LOAD
     local kanji_ref01_ent = client:Kanji(nil)
-    local kanji_ref01_match_dt0 = {}
+    local kanji_ref01_match_dt0 = {
+      id = kanji_ref01_data["id"],
+    }
     local kanji_ref01_data_dt0_loaded, err = kanji_ref01_ent:load(kanji_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(kanji_ref01_data_dt0_loaded)
+    local kanji_ref01_data_dt0_load_result = helpers.to_map(type(kanji_ref01_data_dt0_loaded) == 'table' and kanji_ref01_data_dt0_loaded.data_get and kanji_ref01_data_dt0_loaded:data_get() or kanji_ref01_data_dt0_loaded)
+    assert.is_not_nil(kanji_ref01_data_dt0_load_result)
+    assert.are.equal(kanji_ref01_data_dt0_load_result["id"], kanji_ref01_data["id"])
 
   end)
 end)

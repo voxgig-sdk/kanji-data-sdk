@@ -9,6 +9,7 @@
 ---@class Kanji
 ---@field grade? number
 ---@field heisig_en? string
+---@field id? string
 ---@field jlpt? number
 ---@field kanji? string
 ---@field kun_readings? table
@@ -22,11 +23,13 @@
 ---@field id string
 
 ---@class Reading
+---@field id? string
 
 ---@class ReadingLoadMatch
 ---@field id string
 
 ---@class Word
+---@field id? string
 ---@field meanings? table
 ---@field variants? table
 

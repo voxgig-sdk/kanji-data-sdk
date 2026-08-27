@@ -20,6 +20,7 @@ func MakeConfig() map[string]any {
 				"options": map[string]any{
 					"active": false,
 				},
+				"transport": "base",
 			},
 		},
 		"options": map[string]any{
@@ -44,6 +45,10 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "heisig_en",
 						"short": "Heisig keyword in English",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -136,7 +141,12 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"reading": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
 				"name": "reading",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -187,6 +197,10 @@ func MakeConfig() map[string]any {
 			},
 			"word": map[string]any{
 				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
 					map[string]any{
 						"name": "meanings",
 						"short": "Meanings of the word",

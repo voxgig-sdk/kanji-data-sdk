@@ -59,9 +59,12 @@ describe('WordEntity', async () => {
 
     let word_ref01_data = Object.values(setup.data.existing.word)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const word_ref01_ent = client.Word()
+    const word_ref01_match_dt0: any = {}
+    word_ref01_match_dt0.id = word_ref01_data.id
+    const word_ref01_data_dt0 = (await word_ref01_ent.load(word_ref01_match_dt0)).data()
+    assert(word_ref01_data_dt0.id === word_ref01_data.id)
 
 
   })

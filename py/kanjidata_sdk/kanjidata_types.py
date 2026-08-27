@@ -19,6 +19,7 @@ from typing import TypedDict, Any
 class Kanji(TypedDict, total=False):
     grade: int
     heisig_en: str
+    id: str
     jlpt: int
     kanji: str
     kun_readings: list
@@ -33,8 +34,8 @@ class KanjiLoadMatch(TypedDict):
     id: str
 
 
-class Reading(TypedDict):
-    pass
+class Reading(TypedDict, total=False):
+    id: str
 
 
 class ReadingLoadMatch(TypedDict):
@@ -42,6 +43,7 @@ class ReadingLoadMatch(TypedDict):
 
 
 class Word(TypedDict, total=False):
+    id: str
     meanings: list
     variants: list
 

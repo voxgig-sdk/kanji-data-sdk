@@ -37,6 +37,7 @@ def make_config():
         "options": {
           "active": False,
         },
+        "transport": "base",
       },
         },
         "options": {
@@ -61,6 +62,10 @@ def make_config():
           {
             "name": "heisig_en",
             "short": "Heisig keyword in English",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "id",
             "type": "`$STRING`",
           },
           {
@@ -153,7 +158,12 @@ def make_config():
         },
       },
       "reading": {
-        "fields": [],
+        "fields": [
+          {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+        ],
         "name": "reading",
         "op": {
           "load": {
@@ -204,6 +214,10 @@ def make_config():
       },
       "word": {
         "fields": [
+          {
+            "name": "id",
+            "type": "`$STRING`",
+          },
           {
             "name": "meanings",
             "short": "Meanings of the word",

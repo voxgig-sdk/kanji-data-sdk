@@ -48,9 +48,13 @@ class TestWordEntity:
 
         # LOAD
         word_ref01_ent = client.Word(None)
-        word_ref01_match_dt0 = {}
+        word_ref01_match_dt0 = {
+            "id": word_ref01_data["id"],
+        }
         word_ref01_data_dt0_loaded = word_ref01_ent.load(word_ref01_match_dt0, None)
-        assert word_ref01_data_dt0_loaded is not None
+        word_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(word_ref01_data_dt0_loaded))
+        assert word_ref01_data_dt0_load_result is not None
+        assert word_ref01_data_dt0_load_result["id"] == word_ref01_data["id"]
 
 
 

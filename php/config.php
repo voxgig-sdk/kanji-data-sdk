@@ -42,6 +42,7 @@ class KanjiDataConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -66,6 +67,10 @@ class KanjiDataConfig
             [
               'name' => 'heisig_en',
               'short' => 'Heisig keyword in English',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [
@@ -158,7 +163,12 @@ class KanjiDataConfig
           ],
         ],
         'reading' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+          ],
           'name' => 'reading',
           'op' => [
             'load' => [
@@ -209,6 +219,10 @@ class KanjiDataConfig
         ],
         'word' => [
           'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
             [
               'name' => 'meanings',
               'short' => 'Meanings of the word',

@@ -102,6 +102,7 @@ $kanji = $client->Kanji();
 | --- | --- | --- | --- |
 | `grade` | `int` | No | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `heisig_en` | `string` | No | Heisig keyword in English |
+| `id` | `string` | No |  |
 | `jlpt` | `int` | No | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `kanji` | `string` | No | The kanji character |
 | `kun_readings` | `array` | No | Kun (Japanese) readings in hiragana |
@@ -157,6 +158,12 @@ Return the entity name.
 $reading = $client->Reading();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -207,6 +214,7 @@ $word = $client->Word();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `meanings` | `array` | No | Meanings of the word |
 | `variants` | `array` | No | Different written and pronunciation variants |
 

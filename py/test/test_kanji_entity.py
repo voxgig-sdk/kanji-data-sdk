@@ -48,9 +48,13 @@ class TestKanjiEntity:
 
         # LOAD
         kanji_ref01_ent = client.Kanji(None)
-        kanji_ref01_match_dt0 = {}
+        kanji_ref01_match_dt0 = {
+            "id": kanji_ref01_data["id"],
+        }
         kanji_ref01_data_dt0_loaded = kanji_ref01_ent.load(kanji_ref01_match_dt0, None)
-        assert kanji_ref01_data_dt0_loaded is not None
+        kanji_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(kanji_ref01_data_dt0_loaded))
+        assert kanji_ref01_data_dt0_load_result is not None
+        assert kanji_ref01_data_dt0_load_result["id"] == kanji_ref01_data["id"]
 
 
 

@@ -59,9 +59,12 @@ describe('KanjiEntity', async () => {
 
     let kanji_ref01_data = Object.values(setup.data.existing.kanji)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const kanji_ref01_ent = client.Kanji()
+    const kanji_ref01_match_dt0: any = {}
+    kanji_ref01_match_dt0.id = kanji_ref01_data.id
+    const kanji_ref01_data_dt0 = (await kanji_ref01_ent.load(kanji_ref01_match_dt0)).data()
+    assert(kanji_ref01_data_dt0.id === kanji_ref01_data.id)
 
 
   })

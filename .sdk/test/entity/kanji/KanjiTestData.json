@@ -2,59 +2,59 @@
   "existing": {
     "kanji": {
       "KANJI00": {
-        "grade": "s64",
-        "heisig_en": "s65",
-        "jlpt": "s66",
-        "kanji": "s67",
+        "grade": "s6e",
+        "heisig_en": "s6f",
+        "id": "KANJI00",
+        "jlpt": "s71",
+        "kanji": "s72",
         "kun_readings": [],
         "meanings": [],
         "name_readings": [],
         "on_readings": [],
-        "stroke_count": "s6c",
-        "unicode": "s6d",
-        "id": "KANJI00"
+        "stroke_count": "s77",
+        "unicode": "s78"
       },
       "KANJI01": {
-        "grade": "sc8",
-        "heisig_en": "sc9",
-        "jlpt": "sca",
-        "kanji": "scb",
+        "grade": "sdc",
+        "heisig_en": "sdd",
+        "id": "KANJI01",
+        "jlpt": "sdf",
+        "kanji": "se0",
         "kun_readings": [],
         "meanings": [],
         "name_readings": [],
         "on_readings": [],
-        "stroke_count": "sd0",
-        "unicode": "sd1",
-        "id": "KANJI01"
+        "stroke_count": "se5",
+        "unicode": "se6"
       },
       "KANJI02": {
-        "grade": "s12c",
-        "heisig_en": "s12d",
-        "jlpt": "s12e",
-        "kanji": "s12f",
+        "grade": "s14a",
+        "heisig_en": "s14b",
+        "id": "KANJI02",
+        "jlpt": "s14d",
+        "kanji": "s14e",
         "kun_readings": [],
         "meanings": [],
         "name_readings": [],
         "on_readings": [],
-        "stroke_count": "s134",
-        "unicode": "s135",
-        "id": "KANJI02"
+        "stroke_count": "s153",
+        "unicode": "s154"
       }
     }
   },
   "new": {
     "kanji": {
       "kanji_ref01": {
-        "grade": "s190",
-        "heisig_en": "s191",
-        "jlpt": "s192",
-        "kanji": "s193",
+        "grade": "s1b8",
+        "heisig_en": "s1b9",
+        "jlpt": "s1bb",
+        "kanji": "s1bc",
         "kun_readings": [],
         "meanings": [],
         "name_readings": [],
         "on_readings": [],
-        "stroke_count": "s198",
-        "unicode": "s199"
+        "stroke_count": "s1c1",
+        "unicode": "s1c2"
       }
     }
   }

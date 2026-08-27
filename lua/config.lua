@@ -16,6 +16,7 @@ local function make_config()
         ["options"] = {
           ["active"] = false,
         },
+        ["transport"] = "base",
       },
     },
     options = {
@@ -40,6 +41,10 @@ local function make_config()
           {
             ["name"] = "heisig_en",
             ["short"] = "Heisig keyword in English",
+            ["type"] = "`$STRING`",
+          },
+          {
+            ["name"] = "id",
             ["type"] = "`$STRING`",
           },
           {
@@ -132,7 +137,12 @@ local function make_config()
         },
       },
       ["reading"] = {
-        ["fields"] = {},
+        ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+        },
         ["name"] = "reading",
         ["op"] = {
           ["load"] = {
@@ -183,6 +193,10 @@ local function make_config()
       },
       ["word"] = {
         ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
           {
             ["name"] = "meanings",
             ["short"] = "Meanings of the word",

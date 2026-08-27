@@ -252,6 +252,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | --- | --- |
 | `grade` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `heisig_en` | Heisig keyword in English |
+| `id` |  |
 | `jlpt` | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `kanji` | The kanji character |
 | `kun_readings` | Kun (Japanese) readings in hiragana |
@@ -269,6 +270,7 @@ API path: `/kanji/{character}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Load.
 
@@ -278,6 +280,7 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `meanings` | Meanings of the word |
 | `variants` | Different written and pronunciation variants |
 
@@ -306,6 +309,7 @@ Create an instance: `$kanji = $client->Kanji();`
 | --- | --- | --- |
 | `grade` | `int` | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `heisig_en` | `string` | Heisig keyword in English |
+| `id` | `string` |  |
 | `jlpt` | `int` | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `kanji` | `string` | The kanji character |
 | `kun_readings` | `array` | Kun (Japanese) readings in hiragana |
@@ -333,6 +337,12 @@ Create an instance: `$reading = $client->Reading();`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+
 #### Example: Load
 
 ```php
@@ -355,6 +365,7 @@ Create an instance: `$word = $client->Word();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `meanings` | `array` | Meanings of the word |
 | `variants` | `array` | Different written and pronunciation variants |
 

@@ -17,6 +17,7 @@ class Kanji
 {
     public ?int $grade = null;
     public ?string $heisig_en = null;
+    public ?string $id = null;
     public ?int $jlpt = null;
     public ?string $kanji = null;
     public ?array $kun_readings = null;
@@ -36,6 +37,7 @@ class KanjiLoadMatch
 /** Reading entity data model. */
 class Reading
 {
+    public ?string $id = null;
 }
 
 /** Request payload for Reading#load. */
@@ -47,6 +49,7 @@ class ReadingLoadMatch
 /** Word entity data model. */
 class Word
 {
+    public ?string $id = null;
     public ?array $meanings = null;
     public ?array $variants = null;
 }

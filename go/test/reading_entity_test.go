@@ -61,13 +61,19 @@ func TestReadingEntity(t *testing.T) {
 
 		// LOAD
 		readingRef01Ent := client.Reading(nil)
-		readingRef01MatchDt0 := map[string]any{}
+		readingRef01MatchDt0 := map[string]any{
+			"id": readingRef01Data["id"],
+		}
 		readingRef01DataDt0Loaded, err := readingRef01Ent.Load(readingRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if readingRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		readingRef01DataDt0LoadResult := core.ToMapAny(entityData(readingRef01DataDt0Loaded))
+		if readingRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if readingRef01DataDt0LoadResult["id"] != readingRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

@@ -103,6 +103,7 @@ kanji = client.Kanji
 | --- | --- | --- | --- |
 | `grade` | `Integer` | No | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `heisig_en` | `String` | No | Heisig keyword in English |
+| `id` | `String` | No |  |
 | `jlpt` | `Integer` | No | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `kanji` | `String` | No | The kanji character |
 | `kun_readings` | `Array` | No | Kun (Japanese) readings in hiragana |
@@ -158,6 +159,12 @@ Return the entity name.
 reading = client.Reading
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -208,6 +215,7 @@ word = client.Word
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `String` | No |  |
 | `meanings` | `Array` | No | Meanings of the word |
 | `variants` | `Array` | No | Different written and pronunciation variants |
 

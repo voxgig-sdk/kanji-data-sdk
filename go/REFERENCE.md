@@ -108,6 +108,7 @@ fmt.Println(kanji.GetName()) // "kanji"
 | --- | --- | --- | --- |
 | `grade` | `int` | No | School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji) |
 | `heisig_en` | `string` | No | Heisig keyword in English |
+| `id` | `string` | No |  |
 | `jlpt` | `int` | No | JLPT (Japanese Language Proficiency Test) level (1-5) |
 | `kanji` | `string` | No | The kanji character |
 | `kun_readings` | `[]any` | No | Kun (Japanese) readings in hiragana |
@@ -162,6 +163,12 @@ reading := client.Reading(nil)
 fmt.Println(reading.GetName()) // "reading"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -211,6 +218,7 @@ fmt.Println(word.GetName()) // "word"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `meanings` | `[]any` | No | Meanings of the word |
 | `variants` | `[]any` | No | Different written and pronunciation variants |
 

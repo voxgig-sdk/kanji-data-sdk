@@ -44,10 +44,14 @@ describe("WordEntity", function()
 
     -- LOAD
     local word_ref01_ent = client:Word(nil)
-    local word_ref01_match_dt0 = {}
+    local word_ref01_match_dt0 = {
+      id = word_ref01_data["id"],
+    }
     local word_ref01_data_dt0_loaded, err = word_ref01_ent:load(word_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(word_ref01_data_dt0_loaded)
+    local word_ref01_data_dt0_load_result = helpers.to_map(type(word_ref01_data_dt0_loaded) == 'table' and word_ref01_data_dt0_loaded.data_get and word_ref01_data_dt0_loaded:data_get() or word_ref01_data_dt0_loaded)
+    assert.is_not_nil(word_ref01_data_dt0_load_result)
+    assert.are.equal(word_ref01_data_dt0_load_result["id"], word_ref01_data["id"])
 
   end)
 end)

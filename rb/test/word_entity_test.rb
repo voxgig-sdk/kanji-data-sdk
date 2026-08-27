@@ -41,9 +41,13 @@ class WordEntityTest < Minitest::Test
 
     # LOAD
     word_ref01_ent = client.Word(nil)
-    word_ref01_match_dt0 = {}
+    word_ref01_match_dt0 = {
+      "id" => word_ref01_data["id"],
+    }
     word_ref01_data_dt0_loaded = word_ref01_ent.load(word_ref01_match_dt0, nil)
-    assert !word_ref01_data_dt0_loaded.nil?
+    word_ref01_data_dt0_load_result = Helpers.to_map(word_ref01_data_dt0_loaded.respond_to?(:data_get) ? word_ref01_data_dt0_loaded.data_get : word_ref01_data_dt0_loaded)
+    assert !word_ref01_data_dt0_load_result.nil?
+    assert_equal word_ref01_data_dt0_load_result["id"], word_ref01_data["id"]
 
   end
 end
