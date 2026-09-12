@@ -97,15 +97,19 @@ main: kit: entity: kanji: {
           }
           method: "GET"
           orig: "/kanji/{character}"
-          parts: [
-            "kanji"
-            "{id}"
-          ]
           rename: {
             param: {
               character: "id"
             }
           }
+          segments: [
+            {
+              lit: "kanji"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

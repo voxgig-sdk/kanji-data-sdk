@@ -1,0 +1,210 @@
+import { BaseFeature } from './feature/base/BaseFeature';
+declare const FEATURE_PLUGINS: Record<string, any[]>;
+declare class Config {
+    makeFeature(this: any, fn: string): BaseFeature;
+    hasFeature(this: any, fn: string): boolean;
+    main: {
+        name: string;
+        slug: string;
+        version: string;
+        target: string;
+    };
+    feature: {
+        test: {
+            options: {
+                active: boolean;
+            };
+            transport: string;
+        };
+    };
+    options: {
+        base: string;
+        headers: {
+            "content-type": string;
+        };
+        entity: {
+            kanji: {};
+            reading: {};
+            word: {};
+        };
+    };
+    entity: {
+        kanji: {
+            fields: ({
+                name: string;
+                short: string;
+                type: string;
+            } | {
+                name: string;
+                type: string;
+                short?: undefined;
+            })[];
+            id: {
+                field: string;
+                name: string;
+            };
+            name: string;
+            op: {
+                load: {
+                    input: string;
+                    name: string;
+                    points: {
+                        args: {
+                            params: {
+                                example: string;
+                                kind: string;
+                                name: string;
+                                orig: string;
+                                reqd: boolean;
+                                type: string;
+                            }[];
+                        };
+                        kind: string;
+                        method: string;
+                        orig: string;
+                        rename: {
+                            param: {
+                                character: string;
+                            };
+                        };
+                        segments: ({
+                            lit: string;
+                            var?: undefined;
+                        } | {
+                            var: string;
+                            lit?: undefined;
+                        })[];
+                        select: {
+                            exist: string[];
+                        };
+                        transform: {
+                            req: string;
+                            res: string;
+                        };
+                        parts: string[];
+                    }[];
+                };
+            };
+            relations: {
+                ancestors: never[];
+            };
+        };
+        reading: {
+            fields: {
+                name: string;
+                type: string;
+            }[];
+            id: {
+                field: string;
+                name: string;
+            };
+            name: string;
+            op: {
+                load: {
+                    input: string;
+                    name: string;
+                    points: {
+                        args: {
+                            params: {
+                                example: string;
+                                kind: string;
+                                name: string;
+                                orig: string;
+                                reqd: boolean;
+                                type: string;
+                            }[];
+                        };
+                        kind: string;
+                        method: string;
+                        orig: string;
+                        rename: {
+                            param: {
+                                reading: string;
+                            };
+                        };
+                        segments: ({
+                            lit: string;
+                            var?: undefined;
+                        } | {
+                            var: string;
+                            lit?: undefined;
+                        })[];
+                        select: {
+                            exist: string[];
+                        };
+                        transform: {
+                            req: string;
+                            res: string;
+                        };
+                        parts: string[];
+                    }[];
+                };
+            };
+            relations: {
+                ancestors: never[];
+            };
+        };
+        word: {
+            fields: ({
+                name: string;
+                type: string;
+                short?: undefined;
+            } | {
+                name: string;
+                short: string;
+                type: string;
+            })[];
+            id: {
+                field: string;
+                name: string;
+            };
+            name: string;
+            op: {
+                load: {
+                    input: string;
+                    name: string;
+                    points: {
+                        args: {
+                            params: {
+                                example: string;
+                                kind: string;
+                                name: string;
+                                orig: string;
+                                reqd: boolean;
+                                type: string;
+                            }[];
+                        };
+                        kind: string;
+                        method: string;
+                        orig: string;
+                        rename: {
+                            param: {
+                                character: string;
+                            };
+                        };
+                        segments: ({
+                            lit: string;
+                            var?: undefined;
+                        } | {
+                            var: string;
+                            lit?: undefined;
+                        })[];
+                        select: {
+                            exist: string[];
+                        };
+                        transform: {
+                            req: string;
+                            res: string;
+                        };
+                        parts: string[];
+                    }[];
+                };
+            };
+            relations: {
+                ancestors: never[];
+            };
+        };
+    };
+}
+declare const config: Config;
+export { config, FEATURE_PLUGINS, };

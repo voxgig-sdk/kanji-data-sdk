@@ -114,6 +114,10 @@ class KanjiDataConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'kanji',
           'op' => [
             'load' => [
@@ -136,13 +140,17 @@ class KanjiDataConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/kanji/{character}',
-                  'parts' => [
-                    'kanji',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'character' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'kanji',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -153,6 +161,10 @@ class KanjiDataConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'kanji',
+                    '{id}',
                   ],
                 ],
               ],
@@ -168,6 +180,10 @@ class KanjiDataConfig
               'name' => 'id',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'reading',
           'op' => [
@@ -191,13 +207,17 @@ class KanjiDataConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/reading/{reading}',
-                  'parts' => [
-                    'reading',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'reading' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'reading',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -208,6 +228,10 @@ class KanjiDataConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'reading',
+                    '{id}',
                   ],
                 ],
               ],
@@ -234,6 +258,10 @@ class KanjiDataConfig
               'type' => '`$ARRAY`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'word',
           'op' => [
             'load' => [
@@ -256,13 +284,17 @@ class KanjiDataConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/words/{character}',
-                  'parts' => [
-                    'words',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'character' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'words',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -273,6 +305,10 @@ class KanjiDataConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'words',
+                    '{id}',
                   ],
                 ],
               ],

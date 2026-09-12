@@ -49,15 +49,19 @@ main: kit: entity: word: {
           }
           method: "GET"
           orig: "/words/{character}"
-          parts: [
-            "words"
-            "{id}"
-          ]
           rename: {
             param: {
               character: "id"
             }
           }
+          segments: [
+            {
+              lit: "words"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

@@ -88,6 +88,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "kanji",
         ["op"] = {
           ["load"] = {
@@ -110,13 +114,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/kanji/{character}",
-                ["parts"] = {
-                  "kanji",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["character"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "kanji",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -127,6 +135,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "kanji",
+                  "{id}",
                 },
               },
             },
@@ -142,6 +154,10 @@ local function make_config()
             ["name"] = "id",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "reading",
         ["op"] = {
@@ -165,13 +181,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/reading/{reading}",
-                ["parts"] = {
-                  "reading",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["reading"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "reading",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -182,6 +202,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "reading",
+                  "{id}",
                 },
               },
             },
@@ -208,6 +232,10 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "word",
         ["op"] = {
           ["load"] = {
@@ -230,13 +258,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/words/{character}",
-                ["parts"] = {
-                  "words",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["character"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "words",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -247,6 +279,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "words",
+                  "{id}",
                 },
               },
             },

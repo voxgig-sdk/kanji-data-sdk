@@ -37,15 +37,19 @@ main: kit: entity: reading: {
           }
           method: "GET"
           orig: "/reading/{reading}"
-          parts: [
-            "reading"
-            "{id}"
-          ]
           rename: {
             param: {
               reading: "id"
             }
           }
+          segments: [
+            {
+              lit: "reading"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

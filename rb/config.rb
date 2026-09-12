@@ -100,6 +100,10 @@ module KanjiDataConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "kanji",
           "op" => {
             "load" => {
@@ -122,15 +126,19 @@ module KanjiDataConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/kanji/{character}",
-                  "parts" => [
-                    "kanji",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "character" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "kanji",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -140,6 +148,10 @@ module KanjiDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "kanji",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -155,6 +167,10 @@ module KanjiDataConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "reading",
           "op" => {
             "load" => {
@@ -177,15 +193,19 @@ module KanjiDataConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/reading/{reading}",
-                  "parts" => [
-                    "reading",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "reading" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "reading",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -195,6 +215,10 @@ module KanjiDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "reading",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -220,6 +244,10 @@ module KanjiDataConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "word",
           "op" => {
             "load" => {
@@ -242,15 +270,19 @@ module KanjiDataConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/words/{character}",
-                  "parts" => [
-                    "words",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "character" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "words",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -260,6 +292,10 @@ module KanjiDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "words",
+                    "{id}",
+                  ],
                 },
               ],
             },
