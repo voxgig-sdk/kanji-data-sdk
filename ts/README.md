@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { KanjiDataSDK } from '@voxgig-sdk/kanji-data'
+import { KanjiDataSDK } from '@voxgig-sdk/kanji-data-sdk'
 
 const client = new KanjiDataSDK()
 ```
@@ -493,7 +493,7 @@ kanji-data/
 Import the SDK from the package root:
 
 ```ts
-import { KanjiDataSDK } from '@voxgig-sdk/kanji-data'
+import { KanjiDataSDK } from '@voxgig-sdk/kanji-data-sdk'
 ```
 
 ### Entity state

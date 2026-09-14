@@ -105,7 +105,7 @@ local result, err = client:Word():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
+| TypeScript | `@voxgig-sdk/kanji-data-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
 | Python | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
 | PHP | `voxgig-sdk/kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/kanji-data-sdk/go` | `go get github.com/voxgig-sdk/kanji-data-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Word():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { KanjiDataSDK } from '@voxgig-sdk/kanji-data'
+import { KanjiDataSDK } from '@voxgig-sdk/kanji-data-sdk'
 
 const client = new KanjiDataSDK()
 

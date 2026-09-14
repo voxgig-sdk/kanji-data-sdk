@@ -1101,7 +1101,7 @@
             "registry": {
               "active": false,
               "name": "npm",
-              "package": "",
+              "package": "@voxgig-sdk/kanji-data-sdk",
               "state": "pending",
               "url": "https://registry.npmjs.org",
               "vault": {
