@@ -35,6 +35,12 @@ main: kit: entity: reading: {
               }
             ]
           }
+          contract: {
+            id: "GET /reading/{reading}"
+            json: "{\"operationId\":\"getKanjiByReading\",\"parameters\":[{\"description\":\"The reading in hiragana or katakana to search for\",\"in\":\"path\",\"name\":\"reading\",\"required\":true,\"schema\":{\"example\":\"ねこ\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":[\"猫\"],\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of kanji\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"No kanji found for the specified reading\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/reading/{reading}"
           rename: {

@@ -1,12 +1,18 @@
 # KanjiData SDK feature factory
 
 from kanjidata_sdk.feature.base_feature import KanjiDataBaseFeature
+from kanjidata_sdk.feature.ratelimit_feature import KanjiDataRatelimitFeature
+from kanjidata_sdk.feature.retry_feature import KanjiDataRetryFeature
 from kanjidata_sdk.feature.test_feature import KanjiDataTestFeature
+from kanjidata_sdk.feature.timeout_feature import KanjiDataTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: KanjiDataBaseFeature(),
+    "ratelimit": lambda: KanjiDataRatelimitFeature(),
+    "retry": lambda: KanjiDataRetryFeature(),
     "test": lambda: KanjiDataTestFeature(),
+    "timeout": lambda: KanjiDataTimeoutFeature(),
 }
 
 

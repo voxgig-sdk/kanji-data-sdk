@@ -4,7 +4,10 @@ declare(strict_types=1);
 // KanjiData SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class KanjiDataFeatures
@@ -14,8 +17,14 @@ class KanjiDataFeatures
         switch ($name) {
             case "base":
                 return new KanjiDataBaseFeature();
+            case "ratelimit":
+                return new KanjiDataRatelimitFeature();
+            case "retry":
+                return new KanjiDataRetryFeature();
             case "test":
                 return new KanjiDataTestFeature();
+            case "timeout":
+                return new KanjiDataTimeoutFeature();
             default:
                 return new KanjiDataBaseFeature();
         }
@@ -31,7 +40,10 @@ class KanjiDataFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

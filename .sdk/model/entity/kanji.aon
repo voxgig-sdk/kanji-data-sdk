@@ -95,6 +95,12 @@ main: kit: entity: kanji: {
               }
             ]
           }
+          contract: {
+            id: "GET /kanji/{character}"
+            json: "{\"operationId\":\"getKanji\",\"parameters\":[{\"description\":\"The kanji character to retrieve information for\",\"in\":\"path\",\"name\":\"character\",\"required\":true,\"schema\":{\"example\":\"猫\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"grade\":8,\"heisig_en\":\"cat\",\"jlpt\":2,\"kanji\":\"猫\",\"kun_readings\":[\"ねこ\"],\"meanings\":[\"cat\"],\"name_readings\":[],\"on_readings\":[\"ビョウ\"],\"stroke_count\":11,\"unicode\":\"732b\"},\"schema\":{\"properties\":{\"grade\":{\"description\":\"School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)\",\"nullable\":true,\"type\":\"integer\"},\"heisig_en\":{\"description\":\"Heisig keyword in English\",\"nullable\":true,\"type\":\"string\"},\"jlpt\":{\"description\":\"JLPT (Japanese Language Proficiency Test) level (1-5)\",\"nullable\":true,\"type\":\"integer\"},\"kanji\":{\"description\":\"The kanji character\",\"type\":\"string\"},\"kun_readings\":{\"description\":\"Kun (Japanese) readings in hiragana\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"meanings\":{\"description\":\"English meanings of the kanji\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"name_readings\":{\"description\":\"Readings used in names\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"on_readings\":{\"description\":\"On (Chinese-derived) readings in katakana\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"stroke_count\":{\"description\":\"Number of strokes in the kanji\",\"type\":\"integer\"},\"unicode\":{\"description\":\"Unicode codepoint in hexadecimal\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with kanji data\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Kanji not found\"},\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Kanji character not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/kanji/{character}"
           rename: {

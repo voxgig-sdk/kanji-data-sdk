@@ -47,6 +47,12 @@ main: kit: entity: word: {
               }
             ]
           }
+          contract: {
+            id: "GET /words/{character}"
+            json: "{\"operationId\":\"getWordsByKanji\",\"parameters\":[{\"description\":\"The kanji character to find words for\",\"in\":\"path\",\"name\":\"character\",\"required\":true,\"schema\":{\"example\":\"猫\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":[{\"meanings\":[{\"glosses\":[\"cat\"]}],\"variants\":[{\"priorities\":[\"ichi1\",\"news1\",\"nf09\"],\"pronounced\":\"ねこ\",\"written\":\"猫\"}]}],\"schema\":{\"items\":{\"properties\":{\"meanings\":{\"description\":\"Meanings of the word\",\"items\":{\"properties\":{\"glosses\":{\"description\":\"English translations/meanings\",\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"},\"variants\":{\"description\":\"Different written and pronunciation variants\",\"items\":{\"properties\":{\"priorities\":{\"description\":\"Priority/frequency indicators\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"pronounced\":{\"description\":\"Pronunciation in hiragana/katakana\",\"type\":\"string\"},\"written\":{\"description\":\"Written form of the word\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of words\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"No words found for the specified kanji\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/words/{character}"
           rename: {
