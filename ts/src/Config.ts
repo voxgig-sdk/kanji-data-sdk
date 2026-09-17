@@ -127,15 +127,15 @@ class Config {
 
     entity: {
       
-      kanji: {
-      },
-
-      reading: {
-      },
-
-      word: {
-      },
-
+        kanji: {
+        },
+  
+        reading: {
+        },
+  
+        word: {
+        },
+  
     }
   }
 

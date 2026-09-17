@@ -1,5 +1,5 @@
 # Entity Models
 
-@"kanji.aon"
-@"reading.aon"
-@"word.aon"
+@"./kanji.aon"
+@"./reading.aon"
+@"./word.aon"

@@ -105,12 +105,12 @@ local result, err = client:Word():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/kanji-data-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
-| Python | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
-| PHP | `voxgig-sdk/kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
+| TypeScript | `@voxgig-sdk/kanji-data-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/tags) |
+| Python | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/tags) |
+| PHP | `voxgig-sdk/kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/kanji-data-sdk/go` | `go get github.com/voxgig-sdk/kanji-data-sdk/go@latest` |
-| Ruby | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
-| Lua | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/releases) |
+| Ruby | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/tags) |
+| Lua | `voxgig-sdk-kanji-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kanji-data-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/kanji-data-sdk/go-cli` | `go install github.com/voxgig-sdk/kanji-data-sdk/go-cli/cmd/kanji-data@latest` |
 | Go MCP server | `github.com/voxgig-sdk/kanji-data-sdk/go-mcp` | `go get github.com/voxgig-sdk/kanji-data-sdk/go-mcp@latest` |
 

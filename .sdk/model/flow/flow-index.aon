@@ -1,5 +1,5 @@
 # Flows
 
-@"BasicKanjiFlow.aon"
-@"BasicReadingFlow.aon"
-@"BasicWordFlow.aon"
+@"./BasicKanjiFlow.aon"
+@"./BasicReadingFlow.aon"
+@"./BasicWordFlow.aon"
