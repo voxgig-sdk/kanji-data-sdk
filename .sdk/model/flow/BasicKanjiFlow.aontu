@@ -1,0 +1,32 @@
+# BasicKanjiFlow
+
+main: kit: flow: BasicKanjiFlow:
+{
+  entity: "kanji",
+  kind: "basic",
+  name: "BasicKanjiFlow",
+  step: [
+    {
+      i: {
+        ref: "kanji_ref01",
+        srcdatavar: "kanji_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "kanji01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-kanji_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicKanjiFlow"
+}

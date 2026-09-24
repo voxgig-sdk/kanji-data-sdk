@@ -1,0 +1,32 @@
+# BasicWordFlow
+
+main: kit: flow: BasicWordFlow:
+{
+  entity: "word",
+  kind: "basic",
+  name: "BasicWordFlow",
+  step: [
+    {
+      i: {
+        ref: "word_ref01",
+        srcdatavar: "word_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "word01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-word_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWordFlow"
+}

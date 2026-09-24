@@ -1,0 +1,32 @@
+# BasicReadingFlow
+
+main: kit: flow: BasicReadingFlow:
+{
+  entity: "reading",
+  kind: "basic",
+  name: "BasicReadingFlow",
+  step: [
+    {
+      i: {
+        ref: "reading_ref01",
+        srcdatavar: "reading_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "reading01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-reading_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReadingFlow"
+}

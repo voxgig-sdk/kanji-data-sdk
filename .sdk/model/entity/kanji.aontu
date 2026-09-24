@@ -1,0 +1,145 @@
+# Entity: kanji
+
+main: kit: entity: kanji: {
+
+  alias: field: {}
+
+  fields: {
+    grade: {
+      h: "Grade"
+      n: "grade"
+      r: false
+      sh: "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)"
+      t: "`$INTEGER`"
+    }
+    heisig_en: {
+      h: "Heisig En"
+      n: "heisig_en"
+      r: false
+      sh: "Heisig keyword in English"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    jlpt: {
+      h: "Jlpt"
+      n: "jlpt"
+      r: false
+      sh: "JLPT (Japanese Language Proficiency Test) level (1-5)"
+      t: "`$INTEGER`"
+    }
+    kanji: {
+      h: "Kanji"
+      n: "kanji"
+      r: false
+      sh: "The kanji character"
+      t: "`$STRING`"
+    }
+    kun_readings: {
+      h: "Kun Readings"
+      n: "kun_readings"
+      r: false
+      sh: "Kun (Japanese) readings in hiragana"
+      t: "`$ARRAY`"
+    }
+    meanings: {
+      h: "Meanings"
+      n: "meanings"
+      r: false
+      sh: "English meanings of the kanji"
+      t: "`$ARRAY`"
+    }
+    name_readings: {
+      h: "Name Readings"
+      n: "name_readings"
+      r: false
+      sh: "Readings used in names"
+      t: "`$ARRAY`"
+    }
+    on_readings: {
+      h: "On Readings"
+      n: "on_readings"
+      r: false
+      sh: "On (Chinese-derived) readings in katakana"
+      t: "`$ARRAY`"
+    }
+    stroke_count: {
+      h: "Stroke Count"
+      n: "stroke_count"
+      r: false
+      sh: "Number of strokes in the kanji"
+      t: "`$INTEGER`"
+    }
+    unicode: {
+      h: "Unicode"
+      n: "unicode"
+      r: false
+      sh: "Unicode codepoint in hexadecimal"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "kanji"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /kanji/{character}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "猫"
+                k: "param"
+                n: "id"
+                or: "character"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/kanji/{character}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              character: "id"
+            }
+          }
+          s: [
+            {
+              lit: "kanji"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

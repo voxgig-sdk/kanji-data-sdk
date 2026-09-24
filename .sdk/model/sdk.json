@@ -24,90 +24,167 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "kanji": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "grade",
-              "req": false,
-              "short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
-              "type": "`$INTEGER`"
+          "fields": {
+            "grade": {
+              "a": true,
+              "h": "Grade",
+              "n": "grade",
+              "r": false,
+              "sh": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "heisig_en",
-              "req": false,
-              "short": "Heisig keyword in English",
-              "type": "`$STRING`"
+            "heisig_en": {
+              "a": true,
+              "h": "Heisig En",
+              "n": "heisig_en",
+              "r": false,
+              "sh": "Heisig keyword in English",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "jlpt",
-              "req": false,
-              "short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
-              "type": "`$INTEGER`"
+            "jlpt": {
+              "a": true,
+              "h": "Jlpt",
+              "n": "jlpt",
+              "r": false,
+              "sh": "JLPT (Japanese Language Proficiency Test) level (1-5)",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "kanji",
-              "req": false,
-              "short": "The kanji character",
-              "type": "`$STRING`"
+            "kanji": {
+              "a": true,
+              "h": "Kanji",
+              "n": "kanji",
+              "r": false,
+              "sh": "The kanji character",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "kun_readings",
-              "req": false,
-              "short": "Kun (Japanese) readings in hiragana",
-              "type": "`$ARRAY`"
+            "kun_readings": {
+              "a": true,
+              "h": "Kun Readings",
+              "n": "kun_readings",
+              "r": false,
+              "sh": "Kun (Japanese) readings in hiragana",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "meanings",
-              "req": false,
-              "short": "English meanings of the kanji",
-              "type": "`$ARRAY`"
+            "meanings": {
+              "a": true,
+              "h": "Meanings",
+              "n": "meanings",
+              "r": false,
+              "sh": "English meanings of the kanji",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "name_readings",
-              "req": false,
-              "short": "Readings used in names",
-              "type": "`$ARRAY`"
+            "name_readings": {
+              "a": true,
+              "h": "Name Readings",
+              "n": "name_readings",
+              "r": false,
+              "sh": "Readings used in names",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "on_readings",
-              "req": false,
-              "short": "On (Chinese-derived) readings in katakana",
-              "type": "`$ARRAY`"
+            "on_readings": {
+              "a": true,
+              "h": "On Readings",
+              "n": "on_readings",
+              "r": false,
+              "sh": "On (Chinese-derived) readings in katakana",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "stroke_count",
-              "req": false,
-              "short": "Number of strokes in the kanji",
-              "type": "`$INTEGER`"
+            "stroke_count": {
+              "a": true,
+              "h": "Stroke Count",
+              "n": "stroke_count",
+              "r": false,
+              "sh": "Number of strokes in the kanji",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "unicode",
-              "req": false,
-              "short": "Unicode codepoint in hexadecimal",
-              "type": "`$STRING`"
+            "unicode": {
+              "a": true,
+              "h": "Unicode",
+              "n": "unicode",
+              "r": false,
+              "sh": "Unicode codepoint in hexadecimal",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -119,35 +196,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /kanji/{character}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "猫",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "character",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "猫",
+                        "k": "param",
+                        "n": "id",
+                        "or": "character",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /kanji/{character}",
-                    "json": "{\"operationId\":\"getKanji\",\"parameters\":[{\"description\":\"The kanji character to retrieve information for\",\"in\":\"path\",\"name\":\"character\",\"required\":true,\"schema\":{\"example\":\"猫\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"grade\":8,\"heisig_en\":\"cat\",\"jlpt\":2,\"kanji\":\"猫\",\"kun_readings\":[\"ねこ\"],\"meanings\":[\"cat\"],\"name_readings\":[],\"on_readings\":[\"ビョウ\"],\"stroke_count\":11,\"unicode\":\"732b\"},\"schema\":{\"properties\":{\"grade\":{\"description\":\"School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)\",\"nullable\":true,\"type\":\"integer\"},\"heisig_en\":{\"description\":\"Heisig keyword in English\",\"nullable\":true,\"type\":\"string\"},\"jlpt\":{\"description\":\"JLPT (Japanese Language Proficiency Test) level (1-5)\",\"nullable\":true,\"type\":\"integer\"},\"kanji\":{\"description\":\"The kanji character\",\"type\":\"string\"},\"kun_readings\":{\"description\":\"Kun (Japanese) readings in hiragana\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"meanings\":{\"description\":\"English meanings of the kanji\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"name_readings\":{\"description\":\"Readings used in names\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"on_readings\":{\"description\":\"On (Chinese-derived) readings in katakana\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"stroke_count\":{\"description\":\"Number of strokes in the kanji\",\"type\":\"integer\"},\"unicode\":{\"description\":\"Unicode codepoint in hexadecimal\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with kanji data\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Kanji not found\"},\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Kanji character not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/kanji/{character}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/kanji/{character}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "character": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "kanji"
                     },
@@ -155,12 +236,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -177,14 +253,15 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -196,35 +273,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /reading/{reading}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "ねこ",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "reading",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "ねこ",
+                        "k": "param",
+                        "n": "id",
+                        "or": "reading",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /reading/{reading}",
-                    "json": "{\"operationId\":\"getKanjiByReading\",\"parameters\":[{\"description\":\"The reading in hiragana or katakana to search for\",\"in\":\"path\",\"name\":\"reading\",\"required\":true,\"schema\":{\"example\":\"ねこ\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":[\"猫\"],\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of kanji\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"No kanji found for the specified reading\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/reading/{reading}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/reading/{reading}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "reading": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "reading"
                     },
@@ -232,12 +313,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -254,28 +330,31 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "meanings",
-              "req": false,
-              "short": "Meanings of the word",
-              "type": "`$ARRAY`"
+            "meanings": {
+              "a": true,
+              "h": "Meanings",
+              "n": "meanings",
+              "r": false,
+              "sh": "Meanings of the word",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "variants",
-              "req": false,
-              "short": "Different written and pronunciation variants",
-              "type": "`$ARRAY`"
+            "variants": {
+              "a": true,
+              "h": "Variants",
+              "n": "variants",
+              "r": false,
+              "sh": "Different written and pronunciation variants",
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -287,35 +366,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /words/{character}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "猫",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "character",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "猫",
+                        "k": "param",
+                        "n": "id",
+                        "or": "character",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /words/{character}",
-                    "json": "{\"operationId\":\"getWordsByKanji\",\"parameters\":[{\"description\":\"The kanji character to find words for\",\"in\":\"path\",\"name\":\"character\",\"required\":true,\"schema\":{\"example\":\"猫\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":[{\"meanings\":[{\"glosses\":[\"cat\"]}],\"variants\":[{\"priorities\":[\"ichi1\",\"news1\",\"nf09\"],\"pronounced\":\"ねこ\",\"written\":\"猫\"}]}],\"schema\":{\"items\":{\"properties\":{\"meanings\":{\"description\":\"Meanings of the word\",\"items\":{\"properties\":{\"glosses\":{\"description\":\"English translations/meanings\",\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"},\"variants\":{\"description\":\"Different written and pronunciation variants\",\"items\":{\"properties\":{\"priorities\":{\"description\":\"Priority/frequency indicators\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"pronounced\":{\"description\":\"Pronunciation in hiragana/katakana\",\"type\":\"string\"},\"written\":{\"description\":\"Written form of the word\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of words\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"No words found for the specified kanji\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/words/{character}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/words/{character}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "character": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "words"
                     },
@@ -323,12 +406,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -757,19 +835,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "kanji_ref01",
                 "srcdatavar": "kanji_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "kanji01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -789,19 +867,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "reading_ref01",
                 "srcdatavar": "reading_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "reading01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -821,19 +899,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "word_ref01",
                 "srcdatavar": "word_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "word01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

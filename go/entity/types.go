@@ -1,7 +1,7 @@
 // Typed models for the KanjiData SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,17 +14,6 @@ import (
 
 // Kanji is the typed data model for the kanji entity.
 type Kanji struct {
-	Grade *int `json:"grade,omitempty"`
-	HeisigEn *string `json:"heisig_en,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Jlpt *int `json:"jlpt,omitempty"`
-	Kanji *string `json:"kanji,omitempty"`
-	KunReadings *[]any `json:"kun_readings,omitempty"`
-	Meanings *[]any `json:"meanings,omitempty"`
-	NameReadings *[]any `json:"name_readings,omitempty"`
-	OnReadings *[]any `json:"on_readings,omitempty"`
-	StrokeCount *int `json:"stroke_count,omitempty"`
-	Unicode *string `json:"unicode,omitempty"`
 }
 
 // KanjiLoadMatch is the typed request payload for Kanji.LoadTyped.
@@ -34,7 +23,6 @@ type KanjiLoadMatch struct {
 
 // Reading is the typed data model for the reading entity.
 type Reading struct {
-	Id *string `json:"id,omitempty"`
 }
 
 // ReadingLoadMatch is the typed request payload for Reading.LoadTyped.
@@ -44,9 +32,6 @@ type ReadingLoadMatch struct {
 
 // Word is the typed data model for the word entity.
 type Word struct {
-	Id *string `json:"id,omitempty"`
-	Meanings *[]any `json:"meanings,omitempty"`
-	Variants *[]any `json:"variants,omitempty"`
 }
 
 // WordLoadMatch is the typed request payload for Word.LoadTyped.

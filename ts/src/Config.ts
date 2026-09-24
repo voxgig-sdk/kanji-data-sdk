@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -145,57 +138,68 @@ class Config {
       "fields": [
         {
           "name": "grade",
-          "short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
-          "type": "`$INTEGER`"
+          "title": "Grade",
+          "type": "`$INTEGER`",
+          "short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)"
         },
         {
           "name": "heisig_en",
-          "short": "Heisig keyword in English",
-          "type": "`$STRING`"
+          "title": "Heisig En",
+          "type": "`$STRING`",
+          "short": "Heisig keyword in English"
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "jlpt",
-          "short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
-          "type": "`$INTEGER`"
+          "title": "Jlpt",
+          "type": "`$INTEGER`",
+          "short": "JLPT (Japanese Language Proficiency Test) level (1-5)"
         },
         {
           "name": "kanji",
-          "short": "The kanji character",
-          "type": "`$STRING`"
+          "title": "Kanji",
+          "type": "`$STRING`",
+          "short": "The kanji character"
         },
         {
           "name": "kun_readings",
-          "short": "Kun (Japanese) readings in hiragana",
-          "type": "`$ARRAY`"
+          "title": "Kun Readings",
+          "type": "`$ARRAY`",
+          "short": "Kun (Japanese) readings in hiragana"
         },
         {
           "name": "meanings",
-          "short": "English meanings of the kanji",
-          "type": "`$ARRAY`"
+          "title": "Meanings",
+          "type": "`$ARRAY`",
+          "short": "English meanings of the kanji"
         },
         {
           "name": "name_readings",
-          "short": "Readings used in names",
-          "type": "`$ARRAY`"
+          "title": "Name Readings",
+          "type": "`$ARRAY`",
+          "short": "Readings used in names"
         },
         {
           "name": "on_readings",
-          "short": "On (Chinese-derived) readings in katakana",
-          "type": "`$ARRAY`"
+          "title": "On Readings",
+          "type": "`$ARRAY`",
+          "short": "On (Chinese-derived) readings in katakana"
         },
         {
           "name": "stroke_count",
-          "short": "Number of strokes in the kanji",
-          "type": "`$INTEGER`"
+          "title": "Stroke Count",
+          "type": "`$INTEGER`",
+          "short": "Number of strokes in the kanji"
         },
         {
           "name": "unicode",
-          "short": "Unicode codepoint in hexadecimal",
-          "type": "`$STRING`"
+          "title": "Unicode",
+          "type": "`$STRING`",
+          "short": "Unicode codepoint in hexadecimal"
         }
       ],
       "id": {
@@ -209,26 +213,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "猫",
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "character",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/kanji/{character}",
-              "rename": {
-                "param": {
-                  "character": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "kanji"
@@ -237,19 +224,36 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "kanji",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "character": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "kanji",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "character",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "猫"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -262,6 +266,7 @@ class Config {
       "fields": [
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         }
       ],
@@ -276,26 +281,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "ねこ",
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "reading",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/reading/{reading}",
-              "rename": {
-                "param": {
-                  "reading": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "reading"
@@ -304,19 +292,36 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "reading",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "reading": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "reading",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "reading",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "ねこ"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -329,17 +334,20 @@ class Config {
       "fields": [
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "meanings",
-          "short": "Meanings of the word",
-          "type": "`$ARRAY`"
+          "title": "Meanings",
+          "type": "`$ARRAY`",
+          "short": "Meanings of the word"
         },
         {
           "name": "variants",
-          "short": "Different written and pronunciation variants",
-          "type": "`$ARRAY`"
+          "title": "Variants",
+          "type": "`$ARRAY`",
+          "short": "Different written and pronunciation variants"
         }
       ],
       "id": {
@@ -353,26 +361,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "猫",
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "character",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/words/{character}",
-              "rename": {
-                "param": {
-                  "character": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "words"
@@ -381,19 +372,36 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "words",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "character": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "words",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "character",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "猫"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }

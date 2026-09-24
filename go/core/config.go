@@ -93,57 +93,68 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "grade",
-						"short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
+						"title": "Grade",
 						"type": "`$INTEGER`",
+						"short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
 					},
 					map[string]any{
 						"name": "heisig_en",
-						"short": "Heisig keyword in English",
+						"title": "Heisig En",
 						"type": "`$STRING`",
+						"short": "Heisig keyword in English",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "jlpt",
-						"short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
+						"title": "Jlpt",
 						"type": "`$INTEGER`",
+						"short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
 					},
 					map[string]any{
 						"name": "kanji",
-						"short": "The kanji character",
+						"title": "Kanji",
 						"type": "`$STRING`",
+						"short": "The kanji character",
 					},
 					map[string]any{
 						"name": "kun_readings",
-						"short": "Kun (Japanese) readings in hiragana",
+						"title": "Kun Readings",
 						"type": "`$ARRAY`",
+						"short": "Kun (Japanese) readings in hiragana",
 					},
 					map[string]any{
 						"name": "meanings",
-						"short": "English meanings of the kanji",
+						"title": "Meanings",
 						"type": "`$ARRAY`",
+						"short": "English meanings of the kanji",
 					},
 					map[string]any{
 						"name": "name_readings",
-						"short": "Readings used in names",
+						"title": "Name Readings",
 						"type": "`$ARRAY`",
+						"short": "Readings used in names",
 					},
 					map[string]any{
 						"name": "on_readings",
-						"short": "On (Chinese-derived) readings in katakana",
+						"title": "On Readings",
 						"type": "`$ARRAY`",
+						"short": "On (Chinese-derived) readings in katakana",
 					},
 					map[string]any{
 						"name": "stroke_count",
-						"short": "Number of strokes in the kanji",
+						"title": "Stroke Count",
 						"type": "`$INTEGER`",
+						"short": "Number of strokes in the kanji",
 					},
 					map[string]any{
 						"name": "unicode",
-						"short": "Unicode codepoint in hexadecimal",
+						"title": "Unicode",
 						"type": "`$STRING`",
+						"short": "Unicode codepoint in hexadecimal",
 					},
 				},
 				"id": map[string]any{
@@ -157,26 +168,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "猫",
-											"kind": "param",
-											"name": "id",
-											"orig": "character",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/kanji/{character}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"character": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "kanji",
@@ -185,18 +179,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"kanji",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"character": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"kanji",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "character",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "猫",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -210,6 +221,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 				},
@@ -224,26 +236,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "ねこ",
-											"kind": "param",
-											"name": "id",
-											"orig": "reading",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/reading/{reading}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"reading": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "reading",
@@ -252,18 +247,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"reading",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"reading": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"reading",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "reading",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "ねこ",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -277,17 +289,20 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "meanings",
-						"short": "Meanings of the word",
+						"title": "Meanings",
 						"type": "`$ARRAY`",
+						"short": "Meanings of the word",
 					},
 					map[string]any{
 						"name": "variants",
-						"short": "Different written and pronunciation variants",
+						"title": "Variants",
 						"type": "`$ARRAY`",
+						"short": "Different written and pronunciation variants",
 					},
 				},
 				"id": map[string]any{
@@ -301,26 +316,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "猫",
-											"kind": "param",
-											"name": "id",
-											"orig": "character",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/words/{character}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"character": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "words",
@@ -329,18 +327,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"words",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"character": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"words",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "character",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "猫",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},

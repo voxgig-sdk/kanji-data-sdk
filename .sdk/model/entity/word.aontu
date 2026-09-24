@@ -1,0 +1,89 @@
+# Entity: word
+
+main: kit: entity: word: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    meanings: {
+      h: "Meanings"
+      n: "meanings"
+      r: false
+      sh: "Meanings of the word"
+      t: "`$ARRAY`"
+    }
+    variants: {
+      h: "Variants"
+      n: "variants"
+      r: false
+      sh: "Different written and pronunciation variants"
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "word"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /words/{character}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "猫"
+                k: "param"
+                n: "id"
+                or: "character"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/words/{character}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              character: "id"
+            }
+          }
+          s: [
+            {
+              lit: "words"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

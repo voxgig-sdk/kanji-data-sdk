@@ -118,57 +118,68 @@ def make_config():
         "fields": [
           {
             "name": "grade",
-            "short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
+            "title": "Grade",
             "type": "`$INTEGER`",
+            "short": "School grade level (1-6 for kyōiku kanji, 8 for remaining jōyō kanji)",
           },
           {
             "name": "heisig_en",
-            "short": "Heisig keyword in English",
+            "title": "Heisig En",
             "type": "`$STRING`",
+            "short": "Heisig keyword in English",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "jlpt",
-            "short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
+            "title": "Jlpt",
             "type": "`$INTEGER`",
+            "short": "JLPT (Japanese Language Proficiency Test) level (1-5)",
           },
           {
             "name": "kanji",
-            "short": "The kanji character",
+            "title": "Kanji",
             "type": "`$STRING`",
+            "short": "The kanji character",
           },
           {
             "name": "kun_readings",
-            "short": "Kun (Japanese) readings in hiragana",
+            "title": "Kun Readings",
             "type": "`$ARRAY`",
+            "short": "Kun (Japanese) readings in hiragana",
           },
           {
             "name": "meanings",
-            "short": "English meanings of the kanji",
+            "title": "Meanings",
             "type": "`$ARRAY`",
+            "short": "English meanings of the kanji",
           },
           {
             "name": "name_readings",
-            "short": "Readings used in names",
+            "title": "Name Readings",
             "type": "`$ARRAY`",
+            "short": "Readings used in names",
           },
           {
             "name": "on_readings",
-            "short": "On (Chinese-derived) readings in katakana",
+            "title": "On Readings",
             "type": "`$ARRAY`",
+            "short": "On (Chinese-derived) readings in katakana",
           },
           {
             "name": "stroke_count",
-            "short": "Number of strokes in the kanji",
+            "title": "Stroke Count",
             "type": "`$INTEGER`",
+            "short": "Number of strokes in the kanji",
           },
           {
             "name": "unicode",
-            "short": "Unicode codepoint in hexadecimal",
+            "title": "Unicode",
             "type": "`$STRING`",
+            "short": "Unicode codepoint in hexadecimal",
           },
         ],
         "id": {
@@ -182,26 +193,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "猫",
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "character",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/kanji/{character}",
-                "rename": {
-                  "param": {
-                    "character": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "kanji",
@@ -210,19 +204,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "kanji",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "character": "id",
+                  },
                 },
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "kanji",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "character",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "猫",
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -235,6 +246,7 @@ def make_config():
         "fields": [
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
         ],
@@ -249,26 +261,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "ねこ",
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "reading",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/reading/{reading}",
-                "rename": {
-                  "param": {
-                    "reading": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "reading",
@@ -277,19 +272,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "reading",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "reading": "id",
+                  },
                 },
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "reading",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "reading",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "ねこ",
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -302,17 +314,20 @@ def make_config():
         "fields": [
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "meanings",
-            "short": "Meanings of the word",
+            "title": "Meanings",
             "type": "`$ARRAY`",
+            "short": "Meanings of the word",
           },
           {
             "name": "variants",
-            "short": "Different written and pronunciation variants",
+            "title": "Variants",
             "type": "`$ARRAY`",
+            "short": "Different written and pronunciation variants",
           },
         ],
         "id": {
@@ -326,26 +341,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "猫",
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "character",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/words/{character}",
-                "rename": {
-                  "param": {
-                    "character": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "words",
@@ -354,19 +352,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "words",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "character": "id",
+                  },
                 },
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "words",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "character",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "猫",
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
