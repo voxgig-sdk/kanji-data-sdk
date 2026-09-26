@@ -1,5 +1,5 @@
 {
-  "name": "voxgig-sdk/kanji-data",
+  "name": "voxgig-sdk/kanji-data-sdk",
   "description": "Unofficial generated PHP SDK for the Kanji Data public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
   "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "kanji-data"],
