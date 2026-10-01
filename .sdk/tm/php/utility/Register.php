@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 KanjiDataUtility::setRegistrar(function (KanjiDataUtility $u): void {
     $u->clean = [KanjiDataClean::class, 'call'];
+    $u->clean_add = [KanjiDataClean::class, 'add'];
+    $u->clean_explain = [KanjiDataDone::class, 'clean_explain'];
     $u->done = [KanjiDataDone::class, 'call'];
     $u->make_error = [KanjiDataMakeError::class, 'call'];
     $u->feature_add = [KanjiDataFeatureAdd::class, 'call'];

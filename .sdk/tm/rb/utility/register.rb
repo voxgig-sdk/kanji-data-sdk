@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 KanjiDataUtility.registrar = ->(u) {
   u.clean = KanjiDataUtilities::Clean
+  u.clean_add = KanjiDataUtilities::CleanAdd
+  u.clean_explain = KanjiDataUtilities::CleanExplain
   u.done = KanjiDataUtilities::Done
   u.make_error = KanjiDataUtilities::MakeError
   u.feature_add = KanjiDataUtilities::FeatureAdd
