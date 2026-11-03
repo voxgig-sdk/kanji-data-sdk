@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Word();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.KanjiDataSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Word().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.KANJI_DATA_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "meanings": { "a": true, "h": "Meanings", "n": "meanings", "r": false, "sh": "Meanings of the word", "t": "`$ARRAY`", "key$": "meanings", "index$": 1 }, "variants": { "a": true, "h": "Variants", "n": "variants", "r": false, "sh": "Different written and pronunciation variants", "t": "`$ARRAY`", "key$": "variants", "index$": 2 } }, "id": { "field": "id", "name": "id" }, "name": "word", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /words/{character}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "猫", "k": "param", "n": "id", "or": "character", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/words/{character}", "q": { "exist": ["id"] }, "r": { "param": { "character": "id" } }, "s": [{ "lit": "words" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "word", "name__orig": "word", "Name": "Word", "name_": "word", "name-": "word", "NAME": "WORD", "index$": 2 }, { "active": true, "entity": "word", "key$": "BasicWordFlow", "kind": "basic", "name": "BasicWordFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "word_ref01", "srcdatavar": "word_ref01_data", "suffix": "_dt0" }, "m": { "id": "word01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-word_ref01" } }], "index$": 0 }] }, 'Word', { "GET /words/{character}": { "protocol": "http", "parameters": [{ "name": "character", "in": "path", "required": true, "description": "The kanji character to find words for", "schema": { "type": "string", "example": "猫" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "meanings": { "a": true, "h": "Meanings", "n": "meanings", "r": false, "sh": "Meanings of the word", "t": "`$ARRAY`", "key$": "meanings", "index$": 1 }, "variants": { "a": true, "h": "Variants", "n": "variants", "r": false, "sh": "Different written and pronunciation variants", "t": "`$ARRAY`", "key$": "variants", "index$": 2 } }, "id": { "field": "id", "name": "id" }, "name": "word", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /words/{character}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "猫", "k": "param", "n": "id", "or": "character", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/words/{character}", "q": { "exist": ["id"] }, "r": { "param": { "character": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "words" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "word", "name__orig": "word", "Name": "Word", "name_": "word", "name-": "word", "NAME": "WORD", "index$": 2 }, { "active": true, "entity": "word", "key$": "BasicWordFlow", "kind": "basic", "name": "BasicWordFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "word_ref01", "srcdatavar": "word_ref01_data", "suffix": "_dt0" }, "m": { "id": "word01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-word_ref01" } }], "index$": 0, "route": "GET /words/{character}", "record": {} }] }, 'Word', { "GET /words/{character}": { "protocol": "http", "parameters": [{ "name": "character", "in": "path", "required": true, "description": "The kanji character to find words for", "schema": { "type": "string", "example": "猫" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -77,6 +85,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(word_ref01_data_dt0.id === word_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

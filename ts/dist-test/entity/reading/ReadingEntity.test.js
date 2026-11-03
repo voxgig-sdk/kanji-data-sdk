@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Reading();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.KanjiDataSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Reading().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.KANJI_DATA_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 } }, "id": { "field": "id", "name": "id" }, "name": "reading", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /reading/{reading}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "ねこ", "k": "param", "n": "id", "or": "reading", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/reading/{reading}", "q": { "exist": ["id"] }, "r": { "param": { "reading": "id" } }, "s": [{ "lit": "reading" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "reading", "name__orig": "reading", "Name": "Reading", "name_": "reading", "name-": "reading", "NAME": "READING", "index$": 1 }, { "active": true, "entity": "reading", "key$": "BasicReadingFlow", "kind": "basic", "name": "BasicReadingFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "reading_ref01", "srcdatavar": "reading_ref01_data", "suffix": "_dt0" }, "m": { "id": "reading01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-reading_ref01" } }], "index$": 0 }] }, 'Reading', { "GET /reading/{reading}": { "protocol": "http", "parameters": [{ "name": "reading", "in": "path", "required": true, "description": "The reading in hiragana or katakana to search for", "schema": { "type": "string", "example": "ねこ" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 } }, "id": { "field": "id", "name": "id" }, "name": "reading", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /reading/{reading}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "ねこ", "k": "param", "n": "id", "or": "reading", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/reading/{reading}", "q": { "exist": ["id"] }, "r": { "param": { "reading": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "reading" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "reading", "name__orig": "reading", "Name": "Reading", "name_": "reading", "name-": "reading", "NAME": "READING", "index$": 1 }, { "active": true, "entity": "reading", "key$": "BasicReadingFlow", "kind": "basic", "name": "BasicReadingFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "reading_ref01", "srcdatavar": "reading_ref01_data", "suffix": "_dt0" }, "m": { "id": "reading01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-reading_ref01" } }], "index$": 0, "route": "GET /reading/{reading}", "record": {} }] }, 'Reading', { "GET /reading/{reading}": { "protocol": "http", "parameters": [{ "name": "reading", "in": "path", "required": true, "description": "The reading in hiragana or katakana to search for", "schema": { "type": "string", "example": "ねこ" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -77,6 +85,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(reading_ref01_data_dt0.id === reading_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

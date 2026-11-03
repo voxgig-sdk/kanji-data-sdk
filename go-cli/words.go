@@ -75,7 +75,7 @@ func runOp(client *sdk.KanjiDataSDK, op string, query *eng.Value, entityAtom eng
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.KanjiDataSDK, name string) (sdk.KanjiDataEntity, error) {
+func entityFor(client *sdk.KanjiDataSDK, name string) (sdk.KanjiDataEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "kanji":
 		return client.Kanji(nil), nil

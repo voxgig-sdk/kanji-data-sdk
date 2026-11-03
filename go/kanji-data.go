@@ -13,7 +13,12 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type KanjiDataEntity = core.KanjiDataEntity
+type KanjiDataEntityBase = core.KanjiDataEntityBase
+
+// Deprecated: use KanjiDataEntityBase.
+type KanjiDataEntity = core.KanjiDataEntityBase
+
+type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
 type Result = core.Result
@@ -41,13 +46,13 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewKanjiEntityFunc = func(client *core.KanjiDataSDK, entopts map[string]any) core.KanjiDataEntity {
+	core.NewKanjiEntityFunc = func(client *core.KanjiDataSDK, entopts map[string]any) core.KanjiDataEntityBase {
 		return entity.NewKanjiEntity(client, entopts)
 	}
-	core.NewReadingEntityFunc = func(client *core.KanjiDataSDK, entopts map[string]any) core.KanjiDataEntity {
+	core.NewReadingEntityFunc = func(client *core.KanjiDataSDK, entopts map[string]any) core.KanjiDataEntityBase {
 		return entity.NewReadingEntity(client, entopts)
 	}
-	core.NewWordEntityFunc = func(client *core.KanjiDataSDK, entopts map[string]any) core.KanjiDataEntity {
+	core.NewWordEntityFunc = func(client *core.KanjiDataSDK, entopts map[string]any) core.KanjiDataEntityBase {
 		return entity.NewWordEntity(client, entopts)
 	}
 }

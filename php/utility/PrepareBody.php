@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 // KanjiData SDK utility: prepare_body
 
+require_once __DIR__ . '/Media.php';
+
 class KanjiDataPrepareBody
 {
     public static function call(KanjiDataContext $ctx): mixed
     {
         if ($ctx->op->input === 'data') {
+            if (KanjiDataMedia::isRawRequest($ctx->point)) {
+                return KanjiDataMedia::rawBody($ctx->reqdata);
+            }
             $body = ($ctx->utility->transform_request)($ctx);
             // PHP cannot tell an empty map from an empty list, and this
             // vendored struct answers [] where the canonical transform

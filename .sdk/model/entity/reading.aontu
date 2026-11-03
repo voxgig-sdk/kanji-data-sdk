@@ -53,6 +53,10 @@ main: kit: entity: reading: {
               reading: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "reading"

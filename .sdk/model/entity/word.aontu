@@ -67,6 +67,10 @@ main: kit: entity: word: {
               character: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "words"
