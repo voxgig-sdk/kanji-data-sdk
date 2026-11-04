@@ -49,14 +49,13 @@ class ReadingLoadMatch
 /** Word entity data model. */
 class Word
 {
-    public ?string $id = null;
     public ?array $meanings = null;
     public ?array $variants = null;
 }
 
-/** Request payload for Word#load. */
-class WordLoadMatch
+/** Request payload for Word#list. */
+class WordListMatch
 {
-    public string $id;
+    public string $character;
 }
 

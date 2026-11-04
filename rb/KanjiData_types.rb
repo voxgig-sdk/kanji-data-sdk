@@ -86,27 +86,23 @@ ReadingLoadMatch = Struct.new(
 
 # Word entity data model.
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] meanings
 #   @return [Array, nil]
 #
 # @!attribute [rw] variants
 #   @return [Array, nil]
 Word = Struct.new(
-  :id,
   :meanings,
   :variants,
   keyword_init: true
 )
 
-# Request payload for Word#load.
+# Request payload for Word#list.
 #
-# @!attribute [rw] id
+# @!attribute [rw] character
 #   @return [String]
-WordLoadMatch = Struct.new(
-  :id,
+WordListMatch = Struct.new(
+  :character,
   keyword_init: true
 )
 

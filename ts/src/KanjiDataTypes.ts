@@ -32,12 +32,11 @@ export interface ReadingLoadMatch {
 }
 
 export interface Word {
-  id?: string
   meanings?: any[]
   variants?: any[]
 }
 
-export interface WordLoadMatch {
-  id: string
+export interface WordListMatch {
+  character: string
 }
 

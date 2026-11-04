@@ -62,7 +62,7 @@ class ReadingEntityTest extends TestCase
         $client = $setup["client"];
         if (!empty($setup["live"])) {
             Runner::live_existing($setup, self::LIVE_STRICT, "reading",
-                fn() => [["id" => $setup["idmap"]["reading01"] ?? null]]);
+                fn() => [["id" => $setup["idmap"]["reading01"] ?? null]], "id", $setup["idmap"]["reading01"] ?? null);
         }
 
         // Bootstrap entity data from existing test data.
@@ -73,6 +73,9 @@ class ReadingEntityTest extends TestCase
             $reading_ref01_data = Helpers::to_map($reading_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $reading_ref01_ent = $client->Reading(null);
         $reading_ref01_match_dt0 = [
@@ -81,7 +84,7 @@ class ReadingEntityTest extends TestCase
         $reading_ref01_data_dt0_loaded = $reading_ref01_ent->load($reading_ref01_match_dt0, null);
         $reading_ref01_data_dt0_load_result = Helpers::to_map(is_object($reading_ref01_data_dt0_loaded) && method_exists($reading_ref01_data_dt0_loaded, 'data_get') ? $reading_ref01_data_dt0_loaded->data_get() : $reading_ref01_data_dt0_loaded);
         $this->assertNotNull($reading_ref01_data_dt0_load_result);
-        $this->assertEquals($reading_ref01_data_dt0_load_result["id"], $reading_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($reading_ref01_data_dt0_load_result["id"] ?? null, $reading_ref01_data["id"]));
 
     }
 }

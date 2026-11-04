@@ -21,45 +21,56 @@ local function live_ok(result, err)
 end
 
 describe("WordDirect", function()
-  it("should direct-load-word", function()
-    local setup = word_direct_setup({ id = "direct01" })
-    local _should_skip, _reason = runner.is_control_skipped("direct", "direct-load-word", setup.live and "live" or "unit")
+  it("should direct-list-word", function()
+    local setup = word_direct_setup({
+      { id = "direct01" },
+      { id = "direct02" },
+    })
+    local _should_skip, _reason = runner.is_control_skipped("direct", "direct-list-word", setup.live and "live" or "unit")
     if _should_skip then
       pending(_reason or "skipped via sdk-test-control.json")
       return
+    end
+    if setup.live then
+      for _, _live_key in ipairs({"character01"}) do
+        if setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live test blocked: needs " .. _live_key .. " via KANJI_DATA_TEST_WORD_ENTID")
+        end
+      end
+    end
+    if setup.live then
+      runner.live_pace()
     end
     local client = setup.client
 
     local params = {}
     local query = {}
     if setup.live then
-      params["id"] = "猫"
+      params["character"] = setup.idmap["character01"]
     else
-      params["id"] = "direct01"
+      params["character"] = "direct01"
     end
 
     local result, err = client:direct({
-      path = "words/{id}",
+      path = "words/{character}",
       method = "GET",
       params = params,
       query = query,
     })
     if setup.live then
       if not live_ok(result, err) then
-        runner.live_miss(pending, LIVE_STRICT, "Live load failed: " .. runner.live_describe(result, err))
+        runner.live_miss(pending, LIVE_STRICT, "Live list failed: " .. runner.live_describe(result, err))
       end
-      if result["data"] == nil then
-        runner.live_miss(pending, LIVE_STRICT, "Live load returned no data: " .. runner.live_describe(result, err))
+      if runner.live_list(result["data"]) == nil then
+        runner.live_miss(pending, LIVE_STRICT, "Live list returned no list: " .. runner.live_describe(result, err))
       end
-      assert.is_not_nil(result["data"])
+      assert.is_table(runner.live_list(result["data"]))
     else
       assert.is_nil(err)
       assert.is_true(result["ok"])
       assert.are.equal(200, helpers.to_int(result["status"]))
-      assert.is_not_nil(result["data"])
-      if type(result["data"]) == "table" then
-        assert.are.equal("direct01", result["data"]["id"])
-      end
+      assert.is_table(result["data"])
+      assert.are.equal(2, #result["data"])
       assert.are.equal(1, #setup.calls)
     end
   end)
@@ -95,7 +106,7 @@ function word_direct_setup(mockres)
       idmap = {}
     end
     -- A path parameter's example stands in for an id *_ENTID does not give.
-    for _k, _v in pairs({["word01"] = "猫"}) do
+    for _k, _v in pairs({["character01"] = "猫"}) do
       if idmap[_k] == nil then
         idmap[_k] = _v
       end

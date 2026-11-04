@@ -72,9 +72,10 @@ func TestReadingEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 		if setup.live {
-			liveExisting(t, readingEntityLiveStrict, setup.data, "reading", func() (any, error) {
-				return []any{map[string]any{"id": setup.idmap["reading01"]}}, nil
-			})
+			liveExisting(t, readingEntityLiveStrict, setup.data, "reading", "id", setup.idmap["reading01"],
+				func() (any, error) {
+					return []any{map[string]any{"id": setup.idmap["reading01"]}}, nil
+				})
 		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
@@ -87,6 +88,9 @@ func TestReadingEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = readingRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		readingRef01Ent := client.Reading(nil)
 		readingRef01MatchDt0 := map[string]any{
@@ -100,7 +104,7 @@ func TestReadingEntity(t *testing.T) {
 		if readingRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if readingRef01DataDt0LoadResult["id"] != readingRef01Data["id"] {
+		if !liveSameId(readingRef01DataDt0LoadResult["id"], readingRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 

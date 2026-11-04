@@ -36,7 +36,7 @@ SDK operations: `load`.
 
 Results: Successful response with list of words.
 
-SDK operations: `load`.
+SDK operations: `list`.
 
 Key fields to recognise:
 
@@ -51,7 +51,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | --- | --- | --- | --- |
 | Kanji | `load` | `GET /kanji/{character}` | See reference |
 | Reading | `load` | `GET /reading/{reading}` | See reference |
-| Word | `load` | `GET /words/{character}` | See reference |
+| Word | `list` | `GET /words/{character}` | See reference |
 
 ## Connect to the API
 
@@ -99,8 +99,8 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `kanji-data_list`: List records for an entity. No active entity supports this operation.
-- `kanji-data_load`: Load one record for an entity. Supported entities: `kanji`, `reading`, `word`.
+- `kanji-data_list`: List records for an entity. Supported entities: `word`.
+- `kanji-data_load`: Load one record for an entity. Supported entities: `kanji`, `reading`.
 
 ## Operational features
 

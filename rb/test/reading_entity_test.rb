@@ -50,7 +50,7 @@ class ReadingEntityTest < Minitest::Test
     end
     client = setup[:client]
     if setup[:live]
-      Runner.live_existing(setup, LIVE_STRICT, "reading") do
+      Runner.live_existing(setup, LIVE_STRICT, "reading", "id", setup[:idmap]["reading01"]) do
         [{ "id" => setup[:idmap]["reading01"] }]
       end
     end
@@ -63,6 +63,7 @@ class ReadingEntityTest < Minitest::Test
       reading_ref01_data = Helpers.to_map(reading_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     reading_ref01_ent = client.Reading(nil)
     reading_ref01_match_dt0 = {
@@ -71,7 +72,7 @@ class ReadingEntityTest < Minitest::Test
     reading_ref01_data_dt0_loaded = reading_ref01_ent.load(reading_ref01_match_dt0, nil)
     reading_ref01_data_dt0_load_result = Helpers.to_map(reading_ref01_data_dt0_loaded.respond_to?(:data_get) ? reading_ref01_data_dt0_loaded.data_get : reading_ref01_data_dt0_loaded)
     assert !reading_ref01_data_dt0_load_result.nil?
-    assert_equal reading_ref01_data_dt0_load_result["id"], reading_ref01_data["id"]
+    assert Runner.live_same_id(reading_ref01_data_dt0_load_result["id"], reading_ref01_data["id"])
 
   end
 end

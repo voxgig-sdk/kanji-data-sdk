@@ -203,24 +203,15 @@ declare class Config {
             };
         };
         word: {
-            fields: ({
-                name: string;
-                title: string;
-                type: string;
-                short?: undefined;
-            } | {
+            fields: {
                 name: string;
                 title: string;
                 type: string;
                 short: string;
-            })[];
-            id: {
-                field: string;
-                name: string;
-            };
+            }[];
             name: string;
             op: {
-                load: {
+                list: {
                     input: string;
                     name: string;
                     points: {
@@ -235,11 +226,7 @@ declare class Config {
                             lit?: undefined;
                         })[];
                         parts: string[];
-                        rename: {
-                            param: {
-                                character: string;
-                            };
-                        };
+                        rename: {};
                         transform: {
                             req: string;
                             res: string;

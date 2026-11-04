@@ -4,7 +4,7 @@
 
 The PHP SDK for the KanjiData API — an entity-oriented client using PHP conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Kanji()` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Kanji()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -56,7 +56,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $word = $client->Word()->load(["id" => "example_id"]);
+    $kanji = $client->Kanji()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -128,13 +128,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = KanjiDataSDK::test([
-    "entity" => ["word" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["kanji" => ["test01" => ["id" => "test01"]]],
 ]);
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$word = $client->Word()->load(["id" => "test01"]);
-print_r($word->data_get());
+$kanji = $client->Kanji()->load(["id" => "test01"]);
+print_r($kanji->data_get());
 ```
 
 ### Use a custom fetch function
@@ -224,6 +224,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -285,11 +286,10 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 | `meanings` | Meanings of the word |
 | `variants` | Different written and pronunciation variants |
 
-Operations: Load.
+Operations: List.
 
 API path: `/words/{character}`
 
@@ -364,21 +364,20 @@ Create an instance: `$word = $client->Word();`
 
 | Method | Description |
 | --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
+| `list(match)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
 | `meanings` | `array` | Meanings of the word |
 | `variants` | `array` | Different written and pronunciation variants |
 
-#### Example: Load
+#### Example: List
 
 ```php
-// load() returns the ENTITY — call data_get() for the Word record (throws on error).
-$word = $client->Word()->load(["id" => "word_id"]);
+// list() returns an array of Word entities, one per record (throws on error).
+$words = $client->Word()->list(["character" => "example"]);
 ```
 
 ## Features
@@ -543,11 +542,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$word = $client->Word();
-$word->load(["id" => "example_id"]);
+$kanji = $client->Kanji();
+$kanji->load(["id" => "example_id"]);
 
-// $word->data_get() now returns the word data from the last load
-// $word->match_get() returns the last match criteria
+// $kanji->data_get() now returns the kanji data from the last load
+// $kanji->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

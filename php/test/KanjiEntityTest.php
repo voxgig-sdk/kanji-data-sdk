@@ -62,7 +62,7 @@ class KanjiEntityTest extends TestCase
         $client = $setup["client"];
         if (!empty($setup["live"])) {
             Runner::live_existing($setup, self::LIVE_STRICT, "kanji",
-                fn() => [["id" => $setup["idmap"]["kanji01"] ?? null]]);
+                fn() => [["id" => $setup["idmap"]["kanji01"] ?? null]], "id", $setup["idmap"]["kanji01"] ?? null);
         }
 
         // Bootstrap entity data from existing test data.
@@ -73,6 +73,9 @@ class KanjiEntityTest extends TestCase
             $kanji_ref01_data = Helpers::to_map($kanji_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $kanji_ref01_ent = $client->Kanji(null);
         $kanji_ref01_match_dt0 = [
@@ -81,7 +84,7 @@ class KanjiEntityTest extends TestCase
         $kanji_ref01_data_dt0_loaded = $kanji_ref01_ent->load($kanji_ref01_match_dt0, null);
         $kanji_ref01_data_dt0_load_result = Helpers::to_map(is_object($kanji_ref01_data_dt0_loaded) && method_exists($kanji_ref01_data_dt0_loaded, 'data_get') ? $kanji_ref01_data_dt0_loaded->data_get() : $kanji_ref01_data_dt0_loaded);
         $this->assertNotNull($kanji_ref01_data_dt0_load_result);
-        $this->assertEquals($kanji_ref01_data_dt0_load_result["id"], $kanji_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($kanji_ref01_data_dt0_load_result["id"] ?? null, $kanji_ref01_data["id"]));
 
     }
 }

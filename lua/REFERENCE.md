@@ -212,18 +212,17 @@ local word = client:Word(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
 | `meanings` | `table` | No | Meanings of the word |
 | `variants` | `table` | No | Different written and pronunciation variants |
 
 ### Operations
 
-#### `load(reqmatch, ctrl) -> any, err`
+#### `list(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:Word():load({ id = "word_id" })
+local results, err = client:Word():list({ character = "example" })
 ```
 
 ### Common Methods

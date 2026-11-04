@@ -24,8 +24,7 @@ guide: {
 
   entity: word: {
     path: "/words/{character}": {
-      rename: param: "character": *"id"
-      op: load: method: *GET
+      op: list: method: *GET
     }
   }
 

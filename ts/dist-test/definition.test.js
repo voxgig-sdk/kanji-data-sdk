@@ -82,12 +82,12 @@ const PLAN = [
     {
         "entity": "word",
         "accessor": "Word",
-        "op": "load",
+        "op": "list",
         "method": "GET",
         "path": "/words/{character}",
         "args": [
             {
-                "name": "id",
+                "name": "character",
                 "wire": "character",
                 "value": "猫"
             }

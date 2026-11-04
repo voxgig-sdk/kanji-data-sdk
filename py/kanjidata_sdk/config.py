@@ -322,11 +322,6 @@ def make_config():
       "word": {
         "fields": [
           {
-            "name": "id",
-            "title": "Id",
-            "type": "`$STRING`",
-          },
-          {
             "name": "meanings",
             "title": "Meanings",
             "type": "`$ARRAY`",
@@ -339,15 +334,11 @@ def make_config():
             "short": "Different written and pronunciation variants",
           },
         ],
-        "id": {
-          "field": "id",
-          "name": "id",
-        },
         "name": "word",
         "op": {
-          "load": {
+          "list": {
             "input": "data",
-            "name": "load",
+            "name": "list",
             "points": [
               {
                 "kind": "http",
@@ -358,18 +349,14 @@ def make_config():
                     "lit": "words",
                   },
                   {
-                    "var": "id",
+                    "var": "character",
                   },
                 ],
                 "parts": [
                   "words",
-                  "{id}",
+                  "{character}",
                 ],
-                "rename": {
-                  "param": {
-                    "character": "id",
-                  },
-                },
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
@@ -377,7 +364,7 @@ def make_config():
                 "args": {
                   "params": [
                     {
-                      "name": "id",
+                      "name": "character",
                       "orig": "character",
                       "type": "`$STRING`",
                       "kind": "param",
@@ -388,7 +375,7 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "id",
+                    "character",
                   ],
                 },
                 "response": {

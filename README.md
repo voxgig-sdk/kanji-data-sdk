@@ -23,7 +23,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 This SDK exposes the API as a small set of **semantic entities** — Kanji, Reading and Word — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
-support (`load`):
+support (`list`, `load`):
 
 ```ts
 const client = new KanjiDataSDK()
@@ -46,22 +46,22 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = KanjiDataSDK.test({
   entity: {
-    word: {
+    kanji: {
       test01: { id: 'test01' },
     },
   },
 })
-const word = await client.Word().load({ id: 'test01' })
-// word is the Word entity; .data() reads its mock record
-console.log(word.data())
+const kanji = await client.Kanji().load({ id: 'test01' })
+// kanji is the Kanji entity; .data() reads its mock record
+console.log(kanji.data())
 ```
 
 ### Python
 
 ```python
 client = KanjiDataSDK.test()
-word = client.Word().load({"id": "test01"})
-print(word.data_get())
+kanji = client.Kanji().load({"id": "test01"})
+print(kanji.data_get())
 ```
 
 ### PHP
@@ -69,16 +69,16 @@ print(word.data_get())
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = KanjiDataSDK::test([
-    "entity" => ["word" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["kanji" => ["test01" => ["id" => "test01"]]],
 ]);
-$word = $client->Word()->load(["id" => "test01"]);
+$kanji = $client->Kanji()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Word(nil).Load(
+result, err := client.Kanji(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 ```
@@ -88,16 +88,16 @@ result, err := client.Word(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = KanjiDataSDK.test({
-  "entity" => { "word" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "kanji" => { "test01" => { "id" => "test01" } } },
 })
-word = client.Word.load({ "id" => "test01" })
+kanji = client.Kanji.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Word():load({ id = "test01" })
+local result, err = client:Kanji():load({ id = "test01" })
 ```
 
 ## Packages
@@ -141,7 +141,7 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes this SDK's load operations as
+The generated MCP server exposes this SDK's list and load operations as
 [MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
 can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
 `main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
@@ -170,9 +170,9 @@ The API exposes 3 entities:
 | --- | --- | --- |
 | **Kanji** | The Kanji entity (load). | `/kanji/{character}` |
 | **Reading** | The Reading entity (load). | `/reading/{reading}` |
-| **Word** | The Word entity (load). | `/words/{character}` |
+| **Word** | The Word entity (list). | `/words/{character}` |
 
-The operations available across these entities are **load** — see each entity's
+The operations available across these entities are **load**, **list** — see each entity's
 own list above for exactly which it supports.
 
 ## Quickstart in other languages

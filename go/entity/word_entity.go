@@ -294,11 +294,16 @@ func (e *WordEntity) streamSteps(ctx *core.Context) error {
 	return nil
 }
 
+func (e *WordEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
+	return core.UnsupportedOp("load", e.name)
+}
 
-func (e *WordEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
+
+
+func (e *WordEntity) List(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
 	ctx := utility.MakeContext(map[string]any{
-		"opname":   "load",
+		"opname":   "list",
 		"ctrl":     ctrl,
 		"match":    e.match,
 		"data":     e.data,
@@ -310,32 +315,21 @@ func (e *WordEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, er
 			if ctx.Result.Resmatch != nil {
 				e.match = ctx.Result.Resmatch
 			}
-			if ctx.Result.Resdata != nil {
-				e.data = map[string]any{}
-				if data := core.ToMapAny(vs.Clone(ctx.Result.Resdata)); data != nil {
-					e.data = data
-				}
-			}
 		}
 	})
 }
 
-// LoadTyped is the statically-typed variant of Load: it takes an
-// WordLoadMatch and returns an Word. It delegates to the untyped
-// Load (identical runtime) and converts at the typed boundary.
-func (e *WordEntity) LoadTyped(reqmatch WordLoadMatch, ctrl map[string]any) (Word, error) {
-	res, err := e.Load(asMap(reqmatch), ctrl)
+// ListTyped is the statically-typed variant of List: it takes an
+// WordListMatch and returns []Word. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *WordEntity) ListTyped(reqmatch WordListMatch, ctrl map[string]any) ([]Word, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
 	if err != nil {
-		return Word{}, err
+		return nil, err
 	}
-	return typedFrom[Word](res), nil
+	return typedSliceFrom[Word](res), nil
 }
 
-
-
-func (e *WordEntity) List(_ map[string]any, _ map[string]any) (any, error) {
-	return core.UnsupportedOp("list", e.name)
-}
 
 
 func (e *WordEntity) Create(_ map[string]any, _ map[string]any) (any, error) {

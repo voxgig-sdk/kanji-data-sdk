@@ -24,40 +24,47 @@ def _live_ok(result):
 
 class TestWordDirect:
 
-    def test_should_direct_load_word(self):
-        setup = _word_direct_setup({"id": "direct01"})
-        _skip, _reason = runner.is_control_skipped("direct", "direct-load-word", "live" if setup["live"] else "unit")
+    def test_should_direct_list_word(self):
+        setup = _word_direct_setup([
+            {"id": "direct01"},
+            {"id": "direct02"},
+        ])
+        _skip, _reason = runner.is_control_skipped("direct", "direct-list-word", "live" if setup["live"] else "unit")
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            for _live_key in ["character01"]:
+                if setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via KANJI_DATA_TEST_WORD_ENTID")
+
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
         query = {}
         if setup["live"]:
-            params["id"] = "猫"
-            pass
+            params["character"] = setup["idmap"].get("character01")
         else:
-            params["id"] = "direct01"
-            pass
+            params["character"] = "direct01"
 
         result = client.direct({
-            "path": "words/{id}",
+            "path": "words/{character}",
             "method": "GET",
             "params": params,
             "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):
-                runner.live_miss(LIVE_STRICT, "Live load failed: " + runner.live_describe(result))
-            if result.get("data") is None:
-                runner.live_miss(LIVE_STRICT, "Live load returned no data: " + runner.live_describe(result))
+                runner.live_miss(LIVE_STRICT, "Live list failed: " + runner.live_describe(result))
+            if runner.live_list(result.get("data")) is None:
+                runner.live_miss(LIVE_STRICT, "Live list returned no list: " + runner.live_describe(result))
         else:
             assert result["ok"] is True
             assert helpers.to_int(result["status"]) == 200
-            assert result["data"] is not None
-            if isinstance(result["data"], dict):
-                assert result["data"]["id"] == "direct01"
+            assert isinstance(result["data"], list)
+            assert len(result["data"]) == 2
             assert len(setup["calls"]) == 1
 
 
@@ -83,7 +90,7 @@ def _word_direct_setup(mockres):
         client = KanjiDataSDK(merged_opts)
         idmap = env.get("KANJI_DATA_TEST_WORD_ENTID")
         # A path parameter's example stands in for an id *_ENTID does not give.
-        idmap = {"word01": "猫",
+        idmap = {"character01": "猫",
                  **(idmap if isinstance(idmap, dict) else {})}
         return {
             "client": client,

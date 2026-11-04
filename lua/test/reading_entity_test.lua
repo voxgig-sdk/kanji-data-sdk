@@ -55,7 +55,7 @@ describe("ReadingEntity", function()
     if setup.live then
       runner.live_existing(pending, setup, LIVE_STRICT, "reading", function()
         return { { id = setup.idmap["reading01"] } }
-      end)
+      end, "id", setup.idmap["reading01"])
     end
 
     -- Bootstrap entity data from existing test data.
@@ -66,6 +66,9 @@ describe("ReadingEntity", function()
       reading_ref01_data = helpers.to_map(reading_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local reading_ref01_ent = client:Reading(nil)
     local reading_ref01_match_dt0 = {
@@ -75,7 +78,7 @@ describe("ReadingEntity", function()
     assert.is_nil(err)
     local reading_ref01_data_dt0_load_result = helpers.to_map(type(reading_ref01_data_dt0_loaded) == 'table' and reading_ref01_data_dt0_loaded.data_get and reading_ref01_data_dt0_loaded:data_get() or reading_ref01_data_dt0_loaded)
     assert.is_not_nil(reading_ref01_data_dt0_load_result)
-    assert.are.equal(reading_ref01_data_dt0_load_result["id"], reading_ref01_data["id"])
+    assert.is_true(runner.live_same_id(reading_ref01_data_dt0_load_result["id"], reading_ref01_data["id"]))
 
   end)
 end)

@@ -29,7 +29,7 @@ describe("WordEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:Word(nil):load({ ["id"] = 1 }, nil)
+    local _, err = client:Word(nil):list({ ["character"] = 1 }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,7 +37,7 @@ describe("WordEntity", function()
     local setup = word_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"load"}) do
+    for _, _op in ipairs({"list"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "word." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -45,18 +45,13 @@ describe("WordEntity", function()
       end
     end
     if setup.live then
-      for _live_key, _live_ex in pairs({["word01"] = "猫"}) do
+      for _live_key, _live_ex in pairs({["character01"] = "猫"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
           setup.idmap[_live_key] = _live_ex
         end
       end
     end
     local client = setup.client
-    if setup.live then
-      runner.live_existing(pending, setup, LIVE_STRICT, "word", function()
-        return { { id = setup.idmap["word01"] } }
-      end)
-    end
 
     -- Bootstrap entity data from existing test data.
     local word_ref01_data_raw = vs.items(helpers.to_map(
@@ -66,16 +61,18 @@ describe("WordEntity", function()
       word_ref01_data = helpers.to_map(word_ref01_data_raw[1][2])
     end
 
-    -- LOAD
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
     local word_ref01_ent = client:Word(nil)
-    local word_ref01_match_dt0 = {
-      id = word_ref01_data["id"],
+    local word_ref01_match = {
+      ["character"] = setup.idmap["character01"],
     }
-    local word_ref01_data_dt0_loaded, err = word_ref01_ent:load(word_ref01_match_dt0, nil)
+
+    local word_ref01_list_result, err = word_ref01_ent:list(word_ref01_match, nil)
     assert.is_nil(err)
-    local word_ref01_data_dt0_load_result = helpers.to_map(type(word_ref01_data_dt0_loaded) == 'table' and word_ref01_data_dt0_loaded.data_get and word_ref01_data_dt0_loaded:data_get() or word_ref01_data_dt0_loaded)
-    assert.is_not_nil(word_ref01_data_dt0_load_result)
-    assert.are.equal(word_ref01_data_dt0_load_result["id"], word_ref01_data["id"])
+    assert.is_table(word_ref01_list_result)
 
   end)
 end)
@@ -100,7 +97,7 @@ function word_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "word01", "word02", "word03" },
+    { "word01", "word02", "word03", "character01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

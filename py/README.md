@@ -5,7 +5,7 @@
 The Python SDK for the KanjiData API — an entity-oriented client following Pythonic conventions.
 
 The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Kanji()` — each
-carrying a small, uniform set of operations (`load`) instead of raw URL
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
 paths and query strings. You work with named resources and verbs, which
 keeps the cognitive load low.
 
@@ -55,8 +55,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    word = client.Word().load({"id": "example_id"})
-    print(word.data_get())
+    kanji = client.Kanji().load({"id": "example_id"})
+    print(kanji.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -123,7 +123,7 @@ Create a mock client for unit testing — no server required:
 client = KanjiDataSDK.test()
 
 # Entity ops return the entity, and list one per record; they raise on error.
-word = client.Word().load({"id": "test01"})
+kanji = client.Kanji().load({"id": "test01"})
 # data_get() on an entity reads its mock response record
 ```
 
@@ -211,6 +211,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria, one per record. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -272,11 +273,10 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 | `meanings` | Meanings of the word |
 | `variants` | Different written and pronunciation variants |
 
-Operations: Load.
+Operations: List.
 
 API path: `/words/{character}`
 
@@ -349,20 +349,19 @@ Create an instance: `word = client.Word()`
 
 | Method | Description |
 | --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `str` |  |
 | `meanings` | `list` | Meanings of the word |
 | `variants` | `list` | Different written and pronunciation variants |
 
-#### Example: Load
+#### Example: List
 
 ```python
-word = client.Word().load({"id": "word_id"})
+words = client.Word().list({"character": "example"})
 ```
 
 ## Features
@@ -526,11 +525,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-word = client.Word()
-word.load({"id": "example_id"})
+kanji = client.Kanji()
+kanji.load({"id": "example_id"})
 
-# word.data_get() now returns the word data from the last load
-# word.match_get() returns the last match criteria
+# kanji.data_get() now returns the kanji data from the last load
+# kanji.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

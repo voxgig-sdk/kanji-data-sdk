@@ -4,7 +4,7 @@
 
 The Lua SDK for the KanjiData API — an entity-oriented client using Lua conventions.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client:Kanji()` — each with the same small set of operations (`load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Kanji()` — each with the same small set of operations (`list`, `load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -51,7 +51,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local word, err = client:Word():load({ id = "example_id" })
+local kanji, err = client:Kanji():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -109,7 +109,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Word():load({ id = "test01" })
+local result, err = client:Kanji():load({ id = "test01" })
 -- result is the entity; data_get() reads its mock record; err is set on failure
 ```
 
@@ -199,6 +199,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria, and return it. |
+| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria, one per record. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -214,6 +215,7 @@ itself — there is no wrapper:
 | Operation | `value` |
 | --- | --- |
 | `load` | the entity, whose `data_get()` reads its record (a `table`) |
+| `list` | an array (`table`) of entities, one per record |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
@@ -260,11 +262,10 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 | `meanings` | Meanings of the word |
 | `variants` | Different written and pronunciation variants |
 
-Operations: Load.
+Operations: List.
 
 API path: `/words/{character}`
 
@@ -337,20 +338,19 @@ Create an instance: `local word = client:Word(nil)`
 
 | Method | Description |
 | --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
+| `list(match)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
 | `meanings` | `table` | Meanings of the word |
 | `variants` | `table` | Different written and pronunciation variants |
 
-#### Example: Load
+#### Example: List
 
 ```lua
-local word, err = client:Word():load({ id = "word_id" })
+local words, err = client:Word():list({ character = "example" })
 ```
 
 ## Features
@@ -515,11 +515,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local word = client:Word()
-word:load({ id = "example_id" })
+local kanji = client:Kanji()
+kanji:load({ id = "example_id" })
 
--- word:data_get() now returns the word data from the last load
--- word:match_get() returns the last match criteria
+-- kanji:data_get() now returns the kanji data from the last load
+-- kanji:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

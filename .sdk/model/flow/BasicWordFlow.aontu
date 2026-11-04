@@ -7,22 +7,16 @@ main: kit: flow: BasicWordFlow:
   name: "BasicWordFlow",
   step: [
     {
-      i: {
-        ref: "word_ref01",
-        srcdatavar: "word_ref01_data",
-        suffix: "_dt0"
-      }
-
       m: {
-        id: "word01"
+        character: "character01"
       }
 
-      o: "load",
+      o: "list",
       v: [
         {
-          apply: "TextFieldMark",
+          apply: "ItemExists",
           def: {
-            mark: "Mark01-word_ref01"
+            ref: "word_ref01"
           }
         }
       ]

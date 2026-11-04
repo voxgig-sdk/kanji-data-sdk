@@ -214,18 +214,17 @@ $word = $client->Word();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
 | `meanings` | `array` | No | Meanings of the word |
 | `variants` | `array` | No | Different written and pronunciation variants |
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$result = $client->Word()->load(["id" => "word_id"]);
+$results = $client->Word()->list(["character" => "example"]);
 ```
 
 ### Common Methods

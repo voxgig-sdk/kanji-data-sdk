@@ -215,18 +215,18 @@ word = client.Word
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `String` | No |  |
 | `meanings` | `Array` | No | Meanings of the word |
 | `variants` | `Array` | No | Different written and pronunciation variants |
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-result = client.Word.load({ "id" => "word_id" })
+results = client.Word.list({ "character" => "example" })
+results.each { |item| puts item.data_get }
 ```
 
 ### Common Methods

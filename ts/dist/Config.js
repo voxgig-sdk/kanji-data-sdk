@@ -313,11 +313,6 @@ class Config {
         "word": {
             "fields": [
                 {
-                    "name": "id",
-                    "title": "Id",
-                    "type": "`$STRING`"
-                },
-                {
                     "name": "meanings",
                     "title": "Meanings",
                     "type": "`$ARRAY`",
@@ -330,15 +325,11 @@ class Config {
                     "short": "Different written and pronunciation variants"
                 }
             ],
-            "id": {
-                "field": "id",
-                "name": "id"
-            },
             "name": "word",
             "op": {
-                "load": {
+                "list": {
                     "input": "data",
-                    "name": "load",
+                    "name": "list",
                     "points": [
                         {
                             "kind": "http",
@@ -349,18 +340,14 @@ class Config {
                                     "lit": "words"
                                 },
                                 {
-                                    "var": "id"
+                                    "var": "character"
                                 }
                             ],
                             "parts": [
                                 "words",
-                                "{id}"
+                                "{character}"
                             ],
-                            "rename": {
-                                "param": {
-                                    "character": "id"
-                                }
-                            },
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
@@ -368,7 +355,7 @@ class Config {
                             "args": {
                                 "params": [
                                     {
-                                        "name": "id",
+                                        "name": "character",
                                         "orig": "character",
                                         "type": "`$STRING`",
                                         "kind": "param",
@@ -379,7 +366,7 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "id"
+                                    "character"
                                 ]
                             },
                             "response": {

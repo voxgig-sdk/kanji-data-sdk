@@ -297,11 +297,6 @@ func MakeConfig() map[string]any {
 			"word": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "id",
-						"title": "Id",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "meanings",
 						"title": "Meanings",
 						"type": "`$ARRAY`",
@@ -314,15 +309,11 @@ func MakeConfig() map[string]any {
 						"short": "Different written and pronunciation variants",
 					},
 				},
-				"id": map[string]any{
-					"field": "id",
-					"name": "id",
-				},
 				"name": "word",
 				"op": map[string]any{
-					"load": map[string]any{
+					"list": map[string]any{
 						"input": "data",
-						"name": "load",
+						"name": "list",
 						"points": []any{
 							map[string]any{
 								"kind": "http",
@@ -333,18 +324,14 @@ func MakeConfig() map[string]any {
 										"lit": "words",
 									},
 									map[string]any{
-										"var": "id",
+										"var": "character",
 									},
 								},
 								"parts": []any{
 									"words",
-									"{id}",
+									"{character}",
 								},
-								"rename": map[string]any{
-									"param": map[string]any{
-										"character": "id",
-									},
-								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
@@ -352,7 +339,7 @@ func MakeConfig() map[string]any {
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"name": "id",
+											"name": "character",
 											"orig": "character",
 											"type": "`$STRING`",
 											"kind": "param",
@@ -363,7 +350,7 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"id",
+										"character",
 									},
 								},
 								"response": map[string]any{

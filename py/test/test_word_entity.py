@@ -37,7 +37,7 @@ class TestWordEntity:
         client = KanjiDataSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.Word(None).load({"id": 1}, None)
+            client.Word(None).list({"character": 1}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,19 +46,16 @@ class TestWordEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["load"]:
+        for _op in ["list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "word." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
         if setup["live"]:
-            for _live_key, _live_ex in {"word01": "猫"}.items():
+            for _live_key, _live_ex in {"character01": "猫"}.items():
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     setup["idmap"][_live_key] = _live_ex
         client = setup["client"]
-        if setup["live"]:
-            runner.live_existing(setup, LIVE_STRICT, "word",
-                                 lambda: [{"id": setup["idmap"].get("word01")}])
 
         # Bootstrap entity data from existing test data.
         word_ref01_data_raw = vs.items(helpers.to_map(
@@ -67,15 +64,16 @@ class TestWordEntity:
         if len(word_ref01_data_raw) > 0:
             word_ref01_data = helpers.to_map(word_ref01_data_raw[0][1])
 
-        # LOAD
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
         word_ref01_ent = client.Word(None)
-        word_ref01_match_dt0 = {
-            "id": word_ref01_data["id"],
+        word_ref01_match = {
+            "character": setup["idmap"]["character01"],
         }
-        word_ref01_data_dt0_loaded = word_ref01_ent.load(word_ref01_match_dt0, None)
-        word_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(word_ref01_data_dt0_loaded))
-        assert word_ref01_data_dt0_load_result is not None
-        assert word_ref01_data_dt0_load_result["id"] == word_ref01_data["id"]
+
+        word_ref01_list_result = word_ref01_ent.list(word_ref01_match, None)
+        assert isinstance(word_ref01_list_result, list)
 
 
 
@@ -95,7 +93,7 @@ def _word_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["word01", "word02", "word03"],
+        ["word01", "word02", "word03", "character01"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

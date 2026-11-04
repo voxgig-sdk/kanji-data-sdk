@@ -21,42 +21,46 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)('function' === typeof sdk.direct);
         (0, node_assert_1.default)('function' === typeof sdk.prepare);
     });
-    (0, node_test_1.test)('direct-load-word', async (t) => {
+    (0, node_test_1.test)('direct-list-word', async (t) => {
         if (liveScenariosActive()) {
             t.skip('Covered by live operation scenarios');
             return;
         }
-        const setup = directSetup({ id: 'direct01' });
-        if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-word', setup.live))
+        const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }]);
+        if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-list-word', setup.live))
+            return;
+        if ((0, utility_1.skipIfMissingIds)(t, setup, ["character01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;
         const params = {};
         const query = {};
         if (setup.live) {
-            params.id = "猫";
+            params.character = setup.idmap['character01'];
         }
         else {
-            params.id = 'direct01';
+            params.character = 'direct01';
         }
         const result = await client.direct({
-            path: 'words/{id}',
+            path: 'words/{character}',
             method: 'GET',
             params,
             query,
         });
         if (setup.live) {
             if (!result.ok || result.status < 200 || result.status >= 300) {
-                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live load failed: ' + (0, utility_1.describeLive)(result));
+                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live list failed: ' + (0, utility_1.describeLive)(result));
             }
-            if (!(null != result.data)) {
-                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live load returned no data: ' + (0, utility_1.describeLive)(result));
+            if (!(Array.isArray(unwrapListData(result.data)))) {
+                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live list returned no list: ' + (0, utility_1.describeLive)(result));
             }
         }
         else {
             (0, node_assert_1.default)(result.ok === true);
             (0, node_assert_1.default)(result.status === 200);
             (0, node_assert_1.default)(null != result.data);
-            (0, node_assert_1.default)(result.data.id === 'direct01');
+            const listArr = unwrapListData(result.data);
+            (0, node_assert_1.default)(Array.isArray(listArr));
+            (0, node_assert_1.default)(listArr.length === 2);
             (0, node_assert_1.default)(calls.length === 1);
             (0, node_assert_1.default)(calls[0].init.method === 'GET');
             (0, node_assert_1.default)(calls[0].url.includes('direct01'));
@@ -87,7 +91,7 @@ function directSetup(mockres) {
             idmap = JSON.parse(idmap);
         }
         // A path parameter's example stands in for an id *_ENTID does not give.
-        idmap = Object.assign({ word01: '猫' }, 'object' === typeof idmap ? idmap : {});
+        idmap = Object.assign({ character01: '猫' }, 'object' === typeof idmap ? idmap : {});
         return { client, calls, live, idmap, transport };
     }
     const mockFetch = async (url, init) => {

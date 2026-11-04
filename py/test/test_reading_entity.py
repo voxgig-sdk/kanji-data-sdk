@@ -58,7 +58,7 @@ class TestReadingEntity:
         client = setup["client"]
         if setup["live"]:
             runner.live_existing(setup, LIVE_STRICT, "reading",
-                                 lambda: [{"id": setup["idmap"].get("reading01")}])
+                                 lambda: [{"id": setup["idmap"].get("reading01")}], "id", setup["idmap"].get("reading01"))
 
         # Bootstrap entity data from existing test data.
         reading_ref01_data_raw = vs.items(helpers.to_map(
@@ -67,6 +67,8 @@ class TestReadingEntity:
         if len(reading_ref01_data_raw) > 0:
             reading_ref01_data = helpers.to_map(reading_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         reading_ref01_ent = client.Reading(None)
         reading_ref01_match_dt0 = {
@@ -75,7 +77,7 @@ class TestReadingEntity:
         reading_ref01_data_dt0_loaded = reading_ref01_ent.load(reading_ref01_match_dt0, None)
         reading_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(reading_ref01_data_dt0_loaded))
         assert reading_ref01_data_dt0_load_result is not None
-        assert reading_ref01_data_dt0_load_result["id"] == reading_ref01_data["id"]
+        assert runner.live_same_id(reading_ref01_data_dt0_load_result.get("id"), reading_ref01_data["id"])
 
 
 

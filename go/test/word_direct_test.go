@@ -17,44 +17,58 @@ import (
 const wordDirectLiveStrict = true
 
 func TestWordDirect(t *testing.T) {
-	t.Run("direct-load-word", func(t *testing.T) {
-		setup := wordDirectSetup(map[string]any{"id": "direct01"})
+	t.Run("direct-list-word", func(t *testing.T) {
+		setup := wordDirectSetup([]any{
+			map[string]any{"id": "direct01"},
+			map[string]any{"id": "direct02"},
+		})
 		_mode := "unit"
 		if setup.live {
 			_mode = "live"
 		}
-		if _shouldSkip, _reason := isControlSkipped("direct", "direct-load-word", _mode); _shouldSkip {
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-list-word", _mode); _shouldSkip {
 			if _reason == "" {
 				_reason = "skipped via sdk-test-control.json"
 			}
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			for _, _liveKey := range []string{"character01"} {
+				if v := setup.idmap[_liveKey]; v == nil {
+					liveMiss(t, wordDirectLiveStrict, "Live test blocked: needs %s via KANJI_DATA_TEST_WORD_ENTID", _liveKey)
+					return
+				}
+			}
+		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
 		query := map[string]any{}
 		if setup.live {
-			params["id"] = "猫"
+			params["character"] = setup.idmap["character01"]
 		} else {
-			params["id"] = "direct01"
+			params["character"] = "direct01"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "words/{id}",
+			"path":   "words/{character}",
 			"method": "GET",
 			"params": params,
 			"query":  query,
 		})
 		if setup.live {
 			if err != nil {
-				liveMiss(t, wordDirectLiveStrict, "Live load failed: %v", err)
+				liveMiss(t, wordDirectLiveStrict, "Live list failed: %v", err)
 			}
 			if status := core.ToInt(result["status"]); result["ok"] != true || status < 200 || status >= 300 {
-				liveMiss(t, wordDirectLiveStrict, "Live load failed: %s", liveDescribe(result))
+				liveMiss(t, wordDirectLiveStrict, "Live list failed: %s", liveDescribe(result))
 			}
-			if result["data"] == nil {
-				liveMiss(t, wordDirectLiveStrict, "Live load returned no data: %s", liveDescribe(result))
+			if _, ok := liveList(result["data"]); !ok {
+				liveMiss(t, wordDirectLiveStrict, "Live list returned no list: %s", liveDescribe(result))
 			}
 		} else {
 			if err != nil {
@@ -66,16 +80,15 @@ func TestWordDirect(t *testing.T) {
 			if core.ToInt(result["status"]) != 200 {
 				t.Fatalf("expected status 200, got %v", result["status"])
 			}
-			if result["data"] == nil {
-				t.Fatal("expected data to be non-nil")
-			}
 		}
 
 		if !setup.live {
-			if dataMap, ok := result["data"].(map[string]any); ok {
-				if dataMap["id"] != "direct01" {
-					t.Fatalf("expected data.id to be direct01, got %v", dataMap["id"])
+			if dataList, ok := result["data"].([]any); ok {
+				if len(dataList) != 2 {
+					t.Fatalf("expected 2 items, got %d", len(dataList))
 				}
+			} else {
+				t.Fatalf("expected data to be an array, got %T", result["data"])
 			}
 
 			if len(*setup.calls) != 1 {
@@ -138,7 +151,7 @@ func wordDirectSetup(mockres any) *wordDirectSetupResult {
 			}
 		}
 		// A path parameter's example stands in for an id *_ENTID does not give.
-		for k, v := range map[string]any{"word01": "猫"} {
+		for k, v := range map[string]any{"character01": "猫"} {
 			if idmap[k] == nil {
 				idmap[k] = v
 			}

@@ -4,7 +4,7 @@
 
 The Golang SDK for the KanjiData API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client.Kanji(nil)` — each with the same small set of operations (`Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Kanji(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
@@ -67,12 +67,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-word, err := client.Word(nil).Load(map[string]any{"id": "example_id"}, nil)
+kanji, err := client.Kanji(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = word
+_ = kanji
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -136,13 +136,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-word, err := client.Word(nil).Load(
+kanji, err := client.Kanji(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(word.(sdk.Entity).Data()) // the entity's mock record
+fmt.Println(kanji.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -230,6 +230,7 @@ All entities implement the `KanjiDataEntityBase` interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -243,6 +244,7 @@ itself — there is no wrapper:
 | Operation | `value` |
 | --- | --- |
 | `Load` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
@@ -291,11 +293,10 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
 | `"meanings"` | Meanings of the word |
 | `"variants"` | Different written and pronunciation variants |
 
-Operations: Load.
+Operations: List.
 
 API path: `/words/{character}`
 
@@ -376,24 +377,26 @@ Create an instance: `word := client.Word(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `List(match, ctrl)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
 | `meanings` | `[]any` | Meanings of the word |
 | `variants` | `[]any` | Different written and pronunciation variants |
 
-#### Example: Load
+#### Example: List
 
 ```go
-word, err := client.Word(nil).Load(map[string]any{"id": "word_id"}, nil)
+words, err := client.Word(nil).List(map[string]any{"character": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(word.(sdk.Entity).Data()) // the loaded entity's record
+// A []any of entities, one per record.
+for _, item := range words.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ## Features
@@ -556,11 +559,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-word := client.Word(nil)
-word.Load(map[string]any{"id": "example_id"}, nil)
+kanji := client.Kanji(nil)
+kanji.Load(map[string]any{"id": "example_id"}, nil)
 
-// word.Data() now returns the word data from the last load
-// word.Match() returns the last match criteria
+// kanji.Data() now returns the kanji data from the last load
+// kanji.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

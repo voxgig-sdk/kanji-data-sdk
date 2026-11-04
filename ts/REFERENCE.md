@@ -261,18 +261,17 @@ const word = client.Word()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
 | `meanings` | `any[]` | No | Meanings of the word |
 | `variants` | `any[]` | No | Different written and pronunciation variants |
 
 ### Operations
 
-#### `load(match: object, ctrl?: object)`
+#### `list(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const result = await client.Word().load({ id: 'word_id' })
+const results = await client.Word().list({ character: "example" })
 ```
 
 ### Common Methods

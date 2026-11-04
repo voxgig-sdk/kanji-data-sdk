@@ -5,12 +5,6 @@ main: kit: entity: word: {
   alias: field: {}
 
   fields: {
-    id: {
-      h: "Id"
-      n: "id"
-      r: false
-      t: "`$STRING`"
-    }
     meanings: {
       h: "Meanings"
       n: "meanings"
@@ -27,15 +21,10 @@ main: kit: entity: word: {
     }
   }
 
-  id: {
-    field: "id"
-    name: "id"
-  }
-
   name: "word"
   op: {
-    load: {
-      name: "load"
+    list: {
+      name: "list"
       points: [
         {
           co: {
@@ -48,7 +37,7 @@ main: kit: entity: word: {
               {
                 ex: "猫"
                 k: "param"
-                n: "id"
+                n: "character"
                 or: "character"
                 r: true
                 t: "`$STRING`"
@@ -59,13 +48,8 @@ main: kit: entity: word: {
           o: "/words/{character}"
           q: {
             exist: [
-              "id"
+              "character"
             ]
-          }
-          r: {
-            param: {
-              character: "id"
-            }
           }
           rs: {
             kind: "json"
@@ -76,7 +60,7 @@ main: kit: entity: word: {
               lit: "words"
             }
             {
-              var: "id"
+              var: "character"
             }
           ]
           t: {

@@ -21,6 +21,7 @@ export KANJI_DATA_APIKEY=sk_live_xxx
 # 4. Each command line is ONE boru expression, run against the API:
 ./kanji-data-cli load 1 kanji            # {id:1} shorthand
 ./kanji-data-cli load '{id:1}' kanji       # explicit match map
+./kanji-data-cli list word
 
 # 5. Override the API base URL for a single call
 KANJI_DATA_BASE=https://api.example.com ./kanji-data-cli load 1 kanji
@@ -117,6 +118,7 @@ The CLI registers these boru words, each bound to the SDK:
 
 | Word     | Signatures                                    | Returns                        |
 |----------|-----------------------------------------------|--------------------------------|
+| `list`   | `list <entity>` · `list <query> <entity>`     | First page of records          |
 | `load`   | `load <entity>` · `load <query> <entity>`     | A single record                |
 
 - `<entity>` is a bareword, auto-quoted as an boru atom (e.g. `kanji`).

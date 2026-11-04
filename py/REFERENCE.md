@@ -207,18 +207,19 @@ word = client.Word()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `str` | No |  |
 | `meanings` | `list` | No | Meanings of the word |
 | `variants` | `list` | No | Different written and pronunciation variants |
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> WordEntity`
+#### `list(reqmatch=None, ctrl=None) -> list[WordEntity]`
 
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-result = client.Word().load({"id": "word_id"})
+results = client.Word().list({"character": "example"})
+for word in results:
+    print(word.data_get())
 ```
 
 ### Common Methods

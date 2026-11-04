@@ -58,7 +58,7 @@ class TestKanjiEntity:
         client = setup["client"]
         if setup["live"]:
             runner.live_existing(setup, LIVE_STRICT, "kanji",
-                                 lambda: [{"id": setup["idmap"].get("kanji01")}])
+                                 lambda: [{"id": setup["idmap"].get("kanji01")}], "id", setup["idmap"].get("kanji01"))
 
         # Bootstrap entity data from existing test data.
         kanji_ref01_data_raw = vs.items(helpers.to_map(
@@ -67,6 +67,8 @@ class TestKanjiEntity:
         if len(kanji_ref01_data_raw) > 0:
             kanji_ref01_data = helpers.to_map(kanji_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         kanji_ref01_ent = client.Kanji(None)
         kanji_ref01_match_dt0 = {
@@ -75,7 +77,7 @@ class TestKanjiEntity:
         kanji_ref01_data_dt0_loaded = kanji_ref01_ent.load(kanji_ref01_match_dt0, None)
         kanji_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(kanji_ref01_data_dt0_loaded))
         assert kanji_ref01_data_dt0_load_result is not None
-        assert kanji_ref01_data_dt0_load_result["id"] == kanji_ref01_data["id"]
+        assert runner.live_same_id(kanji_ref01_data_dt0_load_result.get("id"), kanji_ref01_data["id"])
 
 
 

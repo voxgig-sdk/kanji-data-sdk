@@ -4,7 +4,7 @@
 
 The Ruby SDK for the KanjiData API — an entity-oriented client using idiomatic Ruby conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Kanji` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Kanji` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -58,7 +58,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  word = client.Word.load({ "id" => "example_id" })
+  kanji = client.Kanji.load({ "id" => "example_id" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -126,13 +126,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = KanjiDataSDK.test({
-  "entity" => { "word" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "kanji" => { "test01" => { "id" => "test01" } } },
 })
 
 # Entity ops return the ENTITY (raises on error);
 # data_get reads its mock record.
-word = client.Word.load({ "id" => "test01" })
-puts word.data_get
+kanji = client.Kanji.load({ "id" => "test01" })
+puts kanji.data_get
 ```
 
 ### Use a custom fetch function
@@ -219,6 +219,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -280,11 +281,10 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 | `meanings` | Meanings of the word |
 | `variants` | Different written and pronunciation variants |
 
-Operations: Load.
+Operations: List.
 
 API path: `/words/{character}`
 
@@ -359,21 +359,21 @@ Create an instance: `word = client.Word`
 
 | Method | Description |
 | --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
+| `list(match)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `String` |  |
 | `meanings` | `Array` | Meanings of the word |
 | `variants` | `Array` | Different written and pronunciation variants |
 
-#### Example: Load
+#### Example: List
 
 ```ruby
-# load returns the ENTITY — call data_get for the Word record (raises on error).
-word = client.Word.load({ "id" => "word_id" })
+# list returns an Array of Word entities, one per record (raises on error).
+words = client.Word.list({ "character" => "example" })
+words.each { |item| puts item.data_get }
 ```
 
 ## Features
@@ -538,11 +538,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-word = client.Word
-word.load({ "id" => "example_id" })
+kanji = client.Kanji
+kanji.load({ "id" => "example_id" })
 
-# word.data_get now returns the word data from the last load
-# word.match_get returns the last match criteria
+# kanji.data_get now returns the kanji data from the last load
+# kanji.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

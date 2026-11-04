@@ -38,7 +38,7 @@ func TestWordEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.Word(nil).Load(map[string]any{"id": 1}, nil)
+		_, err := client.Word(nil).List(map[string]any{"character": 1}, nil)
 		if sdkerr, ok := err.(*core.KanjiDataError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestWordEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"load"} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "word." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -63,7 +63,7 @@ func TestWordEntity(t *testing.T) {
 			}
 		}
 		if setup.live {
-			for _liveKey, _liveEx := range map[string]any{"word01": "猫"} {
+			for _liveKey, _liveEx := range map[string]any{"character01": "猫"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
 					setup.idmap[_liveKey] = _liveEx
 				}
@@ -71,11 +71,6 @@ func TestWordEntity(t *testing.T) {
 		}
 		client := setup.client
 		_ = client
-		if setup.live {
-			liveExisting(t, wordEntityLiveStrict, setup.data, "word", func() (any, error) {
-				return []any{map[string]any{"id": setup.idmap["word01"]}}, nil
-			})
-		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
 		wordRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.word")))
@@ -87,21 +82,22 @@ func TestWordEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = wordRef01Data
 
-		// LOAD
+		if setup.live {
+			livePace()
+		}
+		// LIST
 		wordRef01Ent := client.Word(nil)
-		wordRef01MatchDt0 := map[string]any{
-			"id": wordRef01Data["id"],
+		wordRef01Match := map[string]any{
+			"character": setup.idmap["character01"],
 		}
-		wordRef01DataDt0Loaded, err := wordRef01Ent.Load(wordRef01MatchDt0, nil)
+
+		wordRef01ListResult, err := wordRef01Ent.List(wordRef01Match, nil)
 		if err != nil {
-			t.Fatalf("load failed: %v", err)
+			t.Fatalf("list failed: %v", err)
 		}
-		wordRef01DataDt0LoadResult := core.ToMapAny(entityData(wordRef01DataDt0Loaded))
-		if wordRef01DataDt0LoadResult == nil {
-			t.Fatal("expected load result to be a map")
-		}
-		if wordRef01DataDt0LoadResult["id"] != wordRef01Data["id"] {
-			t.Fatal("expected load result id to match")
+		_, wordRef01ListOk := wordRef01ListResult.([]any)
+		if !wordRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", wordRef01ListResult)
 		}
 
 	})
@@ -132,7 +128,7 @@ func wordBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"word01", "word02", "word03"},
+		[]any{"word01", "word02", "word03", "character01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

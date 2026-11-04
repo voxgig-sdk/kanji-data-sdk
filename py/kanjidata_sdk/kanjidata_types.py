@@ -43,10 +43,9 @@ class ReadingLoadMatch(TypedDict):
 
 
 class Word(TypedDict, total=False):
-    id: str
     meanings: list
     variants: list
 
 
-class WordLoadMatch(TypedDict):
-    id: str
+class WordListMatch(TypedDict):
+    character: str

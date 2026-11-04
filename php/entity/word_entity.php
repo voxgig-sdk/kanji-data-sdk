@@ -290,20 +290,22 @@ class WordEntity
     }
 
     
+
+    
     /**
-     * Load a single Word.
+     * List Word items matching the given filter.
      *
-     * @param WordLoadMatch|array|null $reqmatch Match criteria (id/query
-     *   fields) as an assoc-array; a typed WordLoadMatch names the shape.
+     * @param WordListMatch|array|null $reqmatch Match filter (any subset
+     *   of Word fields) as an assoc-array; WordListMatch names the shape.
      * @param mixed $ctrl Optional per-call control overrides.
-     * @return WordEntity The loaded Word entity, whose data_get() reads
-     *   its record; throws KanjiDataError on failure (item-5 convention).
+     * @return WordEntity[] The Word entities, one per record, each read
+     *   with data_get(); throws KanjiDataError on failure (item-5 convention).
      */
-    public function load(?array $reqmatch = null, $ctrl = null): mixed
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
-            "opname" => "load",
+            "opname" => "list",
             "ctrl" => $ctrl,
             "match" => $this->_match,
             "data" => $this->_data,
@@ -315,16 +317,11 @@ class WordEntity
                 if ($ctx->result->resmatch) {
                     $this->_match = $ctx->result->resmatch;
                 }
-                if ($ctx->result->resdata) {
-                    $this->_data = KanjiDataHelpers::to_map(Struct::clone($ctx->result->resdata)) ?? [];
-                }
             }
         });
     }
 
 
-
-    
 
     
 

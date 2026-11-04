@@ -39,22 +39,23 @@ describe('WordDirect', async () => {
   })
 
 
-  test('direct-load-word', async (t: any) => {
+  test('direct-list-word', async (t: any) => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
-    const setup = directSetup({ id: 'direct01' })
-    if (maybeSkipControl(t, 'direct', 'direct-load-word', setup.live)) return
+    const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
+    if (maybeSkipControl(t, 'direct', 'direct-list-word', setup.live)) return
+    if (skipIfMissingIds(t, setup, ["character01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.id = "猫"
+      params.character = setup.idmap['character01']
     } else {
-      params.id = 'direct01'
+      params.character = 'direct01'
     }
 
     const result: any = await client.direct({
-      path: 'words/{id}',
+      path: 'words/{character}',
       method: 'GET',
       params,
       query,
@@ -62,16 +63,18 @@ describe('WordDirect', async () => {
 
     if (setup.live) {
       if (!result.ok || result.status < 200 || result.status >= 300) {
-        return void liveMiss(t, LIVE_STRICT, 'Live load failed: ' + describeLive(result))
+        return void liveMiss(t, LIVE_STRICT, 'Live list failed: ' + describeLive(result))
       }
-      if (!(null != result.data)) {
-        return void liveMiss(t, LIVE_STRICT, 'Live load returned no data: ' + describeLive(result))
+      if (!(Array.isArray(unwrapListData(result.data)))) {
+        return void liveMiss(t, LIVE_STRICT, 'Live list returned no list: ' + describeLive(result))
       }
     } else {
       assert(result.ok === true)
       assert(result.status === 200)
       assert(null != result.data)
-      assert(result.data.id === 'direct01')
+      const listArr = unwrapListData(result.data)
+      assert(Array.isArray(listArr))
+      assert(listArr!.length === 2)
       assert(calls.length === 1)
       assert(calls[0].init.method === 'GET')
       assert(calls[0].url.includes('direct01'))
@@ -112,7 +115,7 @@ function directSetup(mockres?: any) {
       idmap = JSON.parse(idmap)
     }
     // A path parameter's example stands in for an id *_ENTID does not give.
-    idmap = Object.assign({ word01: '猫' },
+    idmap = Object.assign({ character01: '猫' },
       'object' === typeof idmap ? idmap : {})
 
     return { client, calls, live, idmap, transport }

@@ -72,9 +72,10 @@ func TestKanjiEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 		if setup.live {
-			liveExisting(t, kanjiEntityLiveStrict, setup.data, "kanji", func() (any, error) {
-				return []any{map[string]any{"id": setup.idmap["kanji01"]}}, nil
-			})
+			liveExisting(t, kanjiEntityLiveStrict, setup.data, "kanji", "id", setup.idmap["kanji01"],
+				func() (any, error) {
+					return []any{map[string]any{"id": setup.idmap["kanji01"]}}, nil
+				})
 		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
@@ -87,6 +88,9 @@ func TestKanjiEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = kanjiRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		kanjiRef01Ent := client.Kanji(nil)
 		kanjiRef01MatchDt0 := map[string]any{
@@ -100,7 +104,7 @@ func TestKanjiEntity(t *testing.T) {
 		if kanjiRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if kanjiRef01DataDt0LoadResult["id"] != kanjiRef01Data["id"] {
+		if !liveSameId(kanjiRef01DataDt0LoadResult["id"], kanjiRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 

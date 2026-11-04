@@ -50,7 +50,7 @@ class KanjiEntityTest < Minitest::Test
     end
     client = setup[:client]
     if setup[:live]
-      Runner.live_existing(setup, LIVE_STRICT, "kanji") do
+      Runner.live_existing(setup, LIVE_STRICT, "kanji", "id", setup[:idmap]["kanji01"]) do
         [{ "id" => setup[:idmap]["kanji01"] }]
       end
     end
@@ -63,6 +63,7 @@ class KanjiEntityTest < Minitest::Test
       kanji_ref01_data = Helpers.to_map(kanji_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     kanji_ref01_ent = client.Kanji(nil)
     kanji_ref01_match_dt0 = {
@@ -71,7 +72,7 @@ class KanjiEntityTest < Minitest::Test
     kanji_ref01_data_dt0_loaded = kanji_ref01_ent.load(kanji_ref01_match_dt0, nil)
     kanji_ref01_data_dt0_load_result = Helpers.to_map(kanji_ref01_data_dt0_loaded.respond_to?(:data_get) ? kanji_ref01_data_dt0_loaded.data_get : kanji_ref01_data_dt0_loaded)
     assert !kanji_ref01_data_dt0_load_result.nil?
-    assert_equal kanji_ref01_data_dt0_load_result["id"], kanji_ref01_data["id"]
+    assert Runner.live_same_id(kanji_ref01_data_dt0_load_result["id"], kanji_ref01_data["id"])
 
   end
 end

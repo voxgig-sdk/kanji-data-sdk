@@ -25,7 +25,7 @@ class WordEntityTest < Minitest::Test
     end
     client = KanjiDataSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.Word(nil).load({ "id" => 1 }, nil)
+      client.Word(nil).list({ "character" => 1 }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,7 +34,7 @@ class WordEntityTest < Minitest::Test
     setup = word_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["load"].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "word." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -42,18 +42,13 @@ class WordEntityTest < Minitest::Test
       end
     end
     if setup[:live]
-      { "word01" => "猫" }.each do |_live_key, _live_ex|
+      { "character01" => "猫" }.each do |_live_key, _live_ex|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
           setup[:idmap][_live_key] = _live_ex
         end
       end
     end
     client = setup[:client]
-    if setup[:live]
-      Runner.live_existing(setup, LIVE_STRICT, "word") do
-        [{ "id" => setup[:idmap]["word01"] }]
-      end
-    end
 
     # Bootstrap entity data from existing test data.
     word_ref01_data_raw = Vs.items(Helpers.to_map(
@@ -63,15 +58,15 @@ class WordEntityTest < Minitest::Test
       word_ref01_data = Helpers.to_map(word_ref01_data_raw[0][1])
     end
 
-    # LOAD
+    Runner.live_pace if setup[:live]
+    # LIST
     word_ref01_ent = client.Word(nil)
-    word_ref01_match_dt0 = {
-      "id" => word_ref01_data["id"],
+    word_ref01_match = {
+      "character" => setup[:idmap]["character01"],
     }
-    word_ref01_data_dt0_loaded = word_ref01_ent.load(word_ref01_match_dt0, nil)
-    word_ref01_data_dt0_load_result = Helpers.to_map(word_ref01_data_dt0_loaded.respond_to?(:data_get) ? word_ref01_data_dt0_loaded.data_get : word_ref01_data_dt0_loaded)
-    assert !word_ref01_data_dt0_load_result.nil?
-    assert_equal word_ref01_data_dt0_load_result["id"], word_ref01_data["id"]
+
+    word_ref01_list_result = word_ref01_ent.list(word_ref01_match, nil)
+    assert word_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -90,7 +85,7 @@ def word_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["word01", "word02", "word03"],
+    ["word01", "word02", "word03", "character01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

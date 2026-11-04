@@ -55,7 +55,7 @@ describe("KanjiEntity", function()
     if setup.live then
       runner.live_existing(pending, setup, LIVE_STRICT, "kanji", function()
         return { { id = setup.idmap["kanji01"] } }
-      end)
+      end, "id", setup.idmap["kanji01"])
     end
 
     -- Bootstrap entity data from existing test data.
@@ -66,6 +66,9 @@ describe("KanjiEntity", function()
       kanji_ref01_data = helpers.to_map(kanji_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local kanji_ref01_ent = client:Kanji(nil)
     local kanji_ref01_match_dt0 = {
@@ -75,7 +78,7 @@ describe("KanjiEntity", function()
     assert.is_nil(err)
     local kanji_ref01_data_dt0_load_result = helpers.to_map(type(kanji_ref01_data_dt0_loaded) == 'table' and kanji_ref01_data_dt0_loaded.data_get and kanji_ref01_data_dt0_loaded:data_get() or kanji_ref01_data_dt0_loaded)
     assert.is_not_nil(kanji_ref01_data_dt0_load_result)
-    assert.are.equal(kanji_ref01_data_dt0_load_result["id"], kanji_ref01_data["id"])
+    assert.is_true(runner.live_same_id(kanji_ref01_data_dt0_load_result["id"], kanji_ref01_data["id"]))
 
   end)
 end)

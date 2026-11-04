@@ -319,11 +319,6 @@ class KanjiDataConfig
         'word' => [
           'fields' => [
             [
-              'name' => 'id',
-              'title' => 'Id',
-              'type' => '`$STRING`',
-            ],
-            [
               'name' => 'meanings',
               'title' => 'Meanings',
               'type' => '`$ARRAY`',
@@ -336,15 +331,11 @@ class KanjiDataConfig
               'short' => 'Different written and pronunciation variants',
             ],
           ],
-          'id' => [
-            'field' => 'id',
-            'name' => 'id',
-          ],
           'name' => 'word',
           'op' => [
-            'load' => [
+            'list' => [
               'input' => 'data',
-              'name' => 'load',
+              'name' => 'list',
               'points' => [
                 [
                   'kind' => 'http',
@@ -355,18 +346,14 @@ class KanjiDataConfig
                       'lit' => 'words',
                     ],
                     [
-                      'var' => 'id',
+                      'var' => 'character',
                     ],
                   ],
                   'parts' => [
                     'words',
-                    '{id}',
+                    '{character}',
                   ],
-                  'rename' => [
-                    'param' => [
-                      'character' => 'id',
-                    ],
-                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
@@ -374,7 +361,7 @@ class KanjiDataConfig
                   'args' => [
                     'params' => [
                       [
-                        'name' => 'id',
+                        'name' => 'character',
                         'orig' => 'character',
                         'type' => '`$STRING`',
                         'kind' => 'param',
@@ -385,7 +372,7 @@ class KanjiDataConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'id',
+                      'character',
                     ],
                   ],
                   'response' => [

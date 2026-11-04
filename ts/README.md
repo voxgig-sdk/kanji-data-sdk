@@ -5,7 +5,7 @@
 The TypeScript SDK for the KanjiData API — a type-safe, entity-oriented client with full async/await support.
 
 The API is exposed as capitalised, semantic **Entities** — e.g.
-`client.Kanji()` — each with a small set of operations (`load`)
+`client.Kanji()` — each with a small set of operations (`list`, `load`)
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
@@ -57,8 +57,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const word = await client.Word().load({ id: "example_id" })
-  console.log(word.data())
+  const kanji = await client.Kanji().load({ id: "example_id" })
+  console.log(kanji.data())
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -122,9 +122,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = KanjiDataSDK.test()
 
-const word = await client.Word().load({ id: 'test01' })
-// word is the Word entity; .data() reads its mock record
-console.log(word.data())
+const kanji = await client.Kanji().load({ id: 'test01' })
+// kanji is the Kanji entity; .data() reads its mock record
+console.log(kanji.data())
 ```
 
 You can also use the instance method:
@@ -139,7 +139,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Word()
+const entity = client.Kanji()
 
 // First call runs the operation and stores its result
 await entity.load({ id: 'example' })
@@ -242,6 +242,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -254,6 +255,8 @@ Entity operations resolve to the entity itself — there is no result
 envelope, and an entity's `data()` reads its record:
 
 - `load` resolves to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -323,11 +326,10 @@ API path: `/reading/{reading}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 | `meanings` | Meanings of the word |
 | `variants` | Different written and pronunciation variants |
 
-Operations: load.
+Operations: list.
 
 API path: `/words/{character}`
 
@@ -400,20 +402,19 @@ Create an instance: `const word = client.Word()`
 
 | Method | Description |
 | --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
+| `list(match)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
 | `meanings` | `any[]` | Meanings of the word |
 | `variants` | `any[]` | Different written and pronunciation variants |
 
-#### Example: Load
+#### Example: List
 
 ```ts
-const word = await client.Word().load({ id: 'word_id' })
+const words = await client.Word().list({ character: "example" })
 ```
 
 ## Features
@@ -570,11 +571,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const word = client.Word()
-await word.load({ id: "example_id" })
+const kanji = client.Kanji()
+await kanji.load({ id: "example_id" })
 
-// word.data() now returns the word data from the last `load`
-// word.match() returns { id: "example_id" }
+// kanji.data() now returns the kanji data from the last `load`
+// kanji.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -34,9 +34,9 @@ type ReadingLoadMatch struct {
 type Word struct {
 }
 
-// WordLoadMatch is the typed request payload for Word.LoadTyped.
-type WordLoadMatch struct {
-	Id string `json:"id"`
+// WordListMatch is the typed request payload for Word.ListTyped.
+type WordListMatch struct {
+	Character string `json:"character"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

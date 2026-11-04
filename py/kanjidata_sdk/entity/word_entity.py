@@ -6,7 +6,7 @@ from kanjidata_sdk.utility.voxgig_struct import voxgig_struct as vs
 from kanjidata_sdk.core import helpers
 from kanjidata_sdk.kanjidata_types import (
     Word,
-    WordLoadMatch,
+    WordListMatch,
 )
 
 
@@ -200,15 +200,16 @@ class WordEntity:
         return None
 
     
-    def load(self, reqmatch=None, ctrl=None) -> WordEntity:
+
+    
+    def list(self, reqmatch=None, ctrl=None) -> list[WordEntity]:
         utility = self._utility
-        # reqmatch is optional: an entity with no id-like key loads with no
-        # match. Treat None as an empty match so client.Word().load()
-        # works with no args.
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Word().list() works with no args.
         if reqmatch is None:
             reqmatch = {}
         ctx = utility.make_context({
-            "opname": "load",
+            "opname": "list",
             "ctrl": ctrl,
             "match": self._match,
             "data": self._data,
@@ -219,14 +220,10 @@ class WordEntity:
             if ctx.result is not None:
                 if ctx.result.resmatch is not None:
                     self._match = ctx.result.resmatch
-                if ctx.result.resdata is not None:
-                    self._data = helpers.to_map(vs.clone(ctx.result.resdata)) or {}
 
         return self._run_op(ctx, post_done)
 
 
-
-    
 
     
 

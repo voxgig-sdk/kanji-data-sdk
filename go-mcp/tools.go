@@ -11,18 +11,32 @@ import (
 	sdk "github.com/voxgig-sdk/kanji-data-sdk/go"
 )
 
+// ListArgs is what an agent sends to kanji-data_list.
+type ListArgs struct {
+	Entity string         `json:"entity" jsonschema:"one of: word"`
+	Query  map[string]any `json:"query,omitempty" jsonschema:"optional filter map; omit it for the first page"`
+}
+
 // LoadArgs is what an agent sends to kanji-data_load.
 type LoadArgs struct {
-	Entity string         `json:"entity" jsonschema:"one of: kanji | reading | word"`
+	Entity string         `json:"entity" jsonschema:"one of: kanji | reading"`
 	Query  map[string]any `json:"query" jsonschema:"match map naming the record, such as {\"id\":1}"`
 }
 
 func registerTools(server *mcp.Server, client *sdk.KanjiDataSDK) {
 	mcp.AddTool(server, &mcp.Tool{
+		Name:        "kanji-data_list",
+		Description: "List records from KanjiData. Args: entity, query (optional filter map; omit it for the first page). Returns the first page of records as JSON.",
+		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
+		InputSchema: entitySchema[ListArgs]("word"),
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args ListArgs) (*mcp.CallToolResult, any, error) {
+		return runOp(ctx, client, "list", args.Entity, args.Query)
+	})
+	mcp.AddTool(server, &mcp.Tool{
 		Name:        "kanji-data_load",
 		Description: "Load one record from KanjiData. Args: entity, query (match map naming the record, such as {\"id\":1}). Returns the record as JSON.",
 		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
-		InputSchema: entitySchema[LoadArgs]("kanji", "reading", "word"),
+		InputSchema: entitySchema[LoadArgs]("kanji", "reading"),
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args LoadArgs) (*mcp.CallToolResult, any, error) {
 		return runOp(ctx, client, "load", args.Entity, args.Query)
 	})

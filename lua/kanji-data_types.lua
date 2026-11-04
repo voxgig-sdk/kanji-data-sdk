@@ -29,12 +29,11 @@
 ---@field id string
 
 ---@class Word
----@field id? string
 ---@field meanings? table
 ---@field variants? table
 
----@class WordLoadMatch
----@field id string
+---@class WordListMatch
+---@field character string
 
 local M = {}
 

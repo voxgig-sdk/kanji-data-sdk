@@ -33,7 +33,7 @@ class WordEntityTest extends TestCase
         $client = KanjiDataSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->Word(null)->load(["id" => 1], null);
+            $client->Word(null)->list(["character" => 1], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,7 +45,7 @@ class WordEntityTest extends TestCase
         $setup = word_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["load"] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "word." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -53,17 +53,13 @@ class WordEntityTest extends TestCase
             }
         }
         if (!empty($setup["live"])) {
-            foreach (["word01" => '猫'] as $_liveKey => $_liveEx) {
+            foreach (["character01" => '猫'] as $_liveKey => $_liveEx) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
                     $setup["idmap"][$_liveKey] = $_liveEx;
                 }
             }
         }
         $client = $setup["client"];
-        if (!empty($setup["live"])) {
-            Runner::live_existing($setup, self::LIVE_STRICT, "word",
-                fn() => [["id" => $setup["idmap"]["word01"] ?? null]]);
-        }
 
         // Bootstrap entity data from existing test data.
         $word_ref01_data_raw = Vs::items(Helpers::to_map(
@@ -73,15 +69,17 @@ class WordEntityTest extends TestCase
             $word_ref01_data = Helpers::to_map($word_ref01_data_raw[0][1]);
         }
 
-        // LOAD
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
         $word_ref01_ent = $client->Word(null);
-        $word_ref01_match_dt0 = [
-            "id" => $word_ref01_data["id"],
+        $word_ref01_match = [
+            "character" => $setup["idmap"]["character01"],
         ];
-        $word_ref01_data_dt0_loaded = $word_ref01_ent->load($word_ref01_match_dt0, null);
-        $word_ref01_data_dt0_load_result = Helpers::to_map(is_object($word_ref01_data_dt0_loaded) && method_exists($word_ref01_data_dt0_loaded, 'data_get') ? $word_ref01_data_dt0_loaded->data_get() : $word_ref01_data_dt0_loaded);
-        $this->assertNotNull($word_ref01_data_dt0_load_result);
-        $this->assertEquals($word_ref01_data_dt0_load_result["id"], $word_ref01_data["id"]);
+
+        $word_ref01_list_result = $word_ref01_ent->list($word_ref01_match, null);
+        $this->assertIsArray($word_ref01_list_result);
 
     }
 }
@@ -101,7 +99,7 @@ function word_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["word01", "word02", "word03"] as $k) {
+    foreach (["word01", "word02", "word03", "character01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

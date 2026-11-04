@@ -24,6 +24,7 @@
         "repr": "auto"
       },
       "contributor": {},
+      "copies": "merge",
       "doc": {
         "active": true,
         "assets": {
@@ -339,13 +340,6 @@
             "field": {}
           },
           "fields": {
-            "id": {
-              "a": true,
-              "h": "Id",
-              "n": "id",
-              "r": false,
-              "t": "`$STRING`"
-            },
             "meanings": {
               "a": true,
               "h": "Meanings",
@@ -363,15 +357,11 @@
               "t": "`$ARRAY`"
             }
           },
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
           "name": "word",
           "op": {
-            "load": {
+            "list": {
               "input": "data",
-              "name": "load",
+              "name": "list",
               "points": [
                 {
                   "a": true,
@@ -386,7 +376,7 @@
                         "a": true,
                         "ex": "猫",
                         "k": "param",
-                        "n": "id",
+                        "n": "character",
                         "or": "character",
                         "r": true,
                         "t": "`$STRING`"
@@ -398,14 +388,10 @@
                   "o": "/words/{character}",
                   "q": {
                     "exist": [
-                      "id"
+                      "character"
                     ]
                   },
-                  "r": {
-                    "param": {
-                      "character": "id"
-                    }
-                  },
+                  "r": {},
                   "rs": {
                     "kind": "json",
                     "media": "application/json"
@@ -415,7 +401,7 @@
                       "lit": "words"
                     },
                     {
-                      "var": "id"
+                      "var": "character"
                     }
                   ],
                   "t": {
@@ -918,21 +904,17 @@
             {
               "a": true,
               "d": {},
-              "i": {
-                "ref": "word_ref01",
-                "srcdatavar": "word_ref01_data",
-                "suffix": "_dt0"
-              },
+              "i": {},
               "m": {
-                "id": "word01"
+                "character": "character01"
               },
-              "o": "load",
+              "o": "list",
               "s": [],
               "v": [
                 {
-                  "apply": "TextFieldMark",
+                  "apply": "ItemExists",
                   "def": {
-                    "mark": "Mark01-word_ref01"
+                    "ref": "word_ref01"
                   }
                 }
               ]

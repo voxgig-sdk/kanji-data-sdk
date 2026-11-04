@@ -2,19 +2,19 @@
   "existing": {
     "word": {
       "WORD00": {
-        "id": "WORD00",
         "meanings": [],
-        "variants": []
+        "variants": [],
+        "character": "CHARACTER01"
       },
       "WORD01": {
-        "id": "WORD01",
         "meanings": [],
-        "variants": []
+        "variants": [],
+        "character": "CHARACTER01"
       },
       "WORD02": {
-        "id": "WORD02",
         "meanings": [],
-        "variants": []
+        "variants": [],
+        "character": "CHARACTER01"
       }
     }
   },

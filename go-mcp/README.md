@@ -1,7 +1,7 @@
 # kanji-data-mcp
 
 [MCP](https://modelcontextprotocol.io) server exposing the KanjiData SDK as
-1 agent tool, `kanji-data_load`, built on the
+2 agent tools, `kanji-data_list` and `kanji-data_load`, built on the
 [official Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) and the
 sibling Go SDK at `../go`. Runs over **stdio** (default, for spawnable installs)
 or **streamable HTTP** (one shared server for several agents).
@@ -30,6 +30,9 @@ claude mcp add --scope user kanji-data \
 Tool-call arguments (what an agent sends):
 
 ```jsonc
+// kanji-data_list: first page of records
+{ "entity": "word", "query": { "character": "example" } }
+
 // kanji-data_load: one record
 { "entity": "kanji", "query": { "id": "example_id" } }
 ```
@@ -59,9 +62,9 @@ Tool-call arguments (what an agent sends):
      -- "$PWD"/dist/*/kanji-data-mcp -transport stdio
    ```
 
-4. **Restart Claude Code.** The `kanji-data_load` tool now appear in new
-   sessions. Ask the agent to *"load kanji using kanji-data"*
-   and it calls `kanji-data_load` with `{"entity":"kanji","query":{"id":"example_id"}}`.
+4. **Restart Claude Code.** The `kanji-data_list` and `kanji-data_load` tools now appear in new
+   sessions. Ask the agent to *"list word using kanji-data"*
+   and it calls `kanji-data_list` with `{"entity":"word","query":{"character":"example"}}`.
 
 ## How-to guides
 
@@ -85,6 +88,15 @@ environment) so every tool call is authenticated.
 
 Streamable HTTP lets several agents share one running process; stdio (the
 default) spawns a fresh process per client.
+
+### Call the `kanji-data_list` tool
+
+Args: `entity` (required), `query` (optional: optional filter map; omit it for the first page).
+Returns the first page of records as JSON:
+
+```jsonc
+{ "entity": "word", "query": { "character": "example" } }
+```
 
 ### Call the `kanji-data_load` tool
 
@@ -116,6 +128,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 
 | Tool | Args | Returns | MCP hints |
 |------|------|---------|-----------|
+| `kanji-data_list` | `entity`, `query` (optional map) | The first page of records as JSON | read-only |
 | `kanji-data_load` | `entity`, `query` (required map) | The record as JSON | read-only |
 
 On error, a tool returns an MCP error result (`isError: true`) whose text is the
@@ -128,7 +141,8 @@ operation, of the 3 the SDK has:
 
 | Tool | Entities |
 |------|----------|
-| `kanji-data_load` | kanji, reading, word |
+| `kanji-data_list` | word |
+| `kanji-data_load` | kanji, reading |
 
 JSON schemas are emitted by the SDK from each tool's argument struct's
 `json` / `jsonschema` tags — no schema is hand-written. Each tool's
@@ -167,7 +181,7 @@ curl -sN -X POST http://localhost:18080 \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json, text/event-stream' \
   -H "Mcp-Session-Id: $SESSION" \
-  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"kanji-data_load","arguments":{"entity":"kanji","query":{"id":"example_id"}}}}'
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"kanji-data_list","arguments":{"entity":"word","query":{"character":"example"}}}}'
 ```
 
 ## Explanation
